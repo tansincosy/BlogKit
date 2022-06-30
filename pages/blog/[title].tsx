@@ -4,7 +4,7 @@ import { join } from "path";
 import { marked } from "marked";
 import matter from "gray-matter";
 
-const PostDetail: NextPage = ({ content }) => {
+const PostDetail: NextPage<any> = ({ content }) => {
   return (
     <div>
       <main>

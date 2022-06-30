@@ -5,7 +5,6 @@ import { NavBar } from "../components/header";
 import { readdirSync, readFileSync } from "fs";
 import matter from "gray-matter";
 import { Post } from "../types/post";
-import Image from "next/image";
 import Link from "next/link";
 const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
   return (
@@ -25,12 +24,12 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
                   <div className="title">{post.title}</div>
                   <div>
                     {post.thumbnail && (
-                      <Image
+                      <img
                         src={post.thumbnail}
                         alt={post.title}
                         height={200}
                         width={200}
-                      ></Image>
+                      ></img>
                     )}
                     <div>{post.abstract}</div>
                     <div>
