@@ -15,7 +15,7 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar></NavBar>
-      <main>
+      <main className="container">
         {posts.map((post) => {
           return (
             <div key={post.title}>
@@ -65,7 +65,6 @@ export const getStaticProps: GetStaticProps<any, any, Post[]> = async () => {
       pathName,
     };
   }) as Post[];
-  console.log("posts", posts);
   return {
     props: {
       posts: posts,
