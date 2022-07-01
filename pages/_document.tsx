@@ -1,8 +1,3 @@
-import {
-  argbFromHex,
-  themeFromSourceColor,
-  applyTheme,
-} from "@material/material-color-utilities";
 import Document, {
   Html,
   Head,
@@ -12,11 +7,6 @@ import Document, {
   DocumentInitialProps,
 } from "next/document";
 
-const theme = themeFromSourceColor(argbFromHex("#f82506"));
-const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-// Apply the theme to the body by updating custom properties for material tokens
-applyTheme(theme, { target: document.body, dark: systemDark });
 class MyDocument extends Document {
   static async getInitialProps(
     ctx: DocumentContext
@@ -24,12 +14,7 @@ class MyDocument extends Document {
     const initialProps = await Document.getInitialProps(ctx);
     return {
       ...initialProps,
-      styles: (
-        <>
-          <style key="md-theme-val">{`${theme.schemes}`}</style>
-          {initialProps.styles}
-        </>
-      ),
+      styles: <>{initialProps.styles}</>,
     };
   }
 
