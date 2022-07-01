@@ -7,15 +7,25 @@ toc: true
 tags:
   - JAVA
   - properties
+  - JAVA
+  - properties
+  - JAVA
+  - properties
+  - JAVA
+  - properties
+  - JAVA
+  - properties
 categories:
   - 后端
 ---
 
 # 前言
-通过@value读取properties注意点
+
+通过@value 读取 properties 注意点
+
 <!-- more -->
 
-- applicationContext文件读取文件需要配置成为多文件读取方式
+- applicationContext 文件读取文件需要配置成为多文件读取方式
 
   ```xml
   <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -31,7 +41,7 @@ categories:
 
   ```
 
-- 需要将java配置到service.impl中，就是需要spring service层级能够扫描到
+- 需要将 java 配置到 service.impl 中，就是需要 spring service 层级能够扫描到
 
   ```java
   @Component("commonConfig")

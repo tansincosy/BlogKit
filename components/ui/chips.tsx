@@ -12,7 +12,7 @@ interface ChipsProps {
 }
 
 const chipsClasses: Record<ChipType, string> = {
-  assist: `border border-outline bg-surface text-on-surface label-large`,
+  assist: `hover:bg-on-surface`,
   filter: ``,
   input: ``,
   suggestion: ``,
@@ -28,11 +28,16 @@ export const Chips: React.FC<ChipsProps> = ({
     <div
       className={singleLineClass(
         chipsClasses[type],
-        "border border-outline bg-surface text-on-surface label-large",
+        "border border-outline bg-surface text-on-surface label-large cursor-pointer z-10 box-border px-4 h-8 rounded-md inline-flex items-center",
         className
       )}
     >
-      {icon && <Icon name={icon} className="text-primary"></Icon>}
+      {icon && (
+        <Icon
+          name={icon}
+          className="text-primary text-[1.125rem] mr-2 -ml-2"
+        ></Icon>
+      )}
       {children}
     </div>
   );

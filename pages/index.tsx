@@ -10,7 +10,7 @@ import {
   argbFromHex,
   themeFromSourceColor,
 } from "@material/material-color-utilities/dist";
-import { Button, Card, Layout } from "@/components";
+import { Button, Card, Chips, Layout } from "@/components";
 import { Post } from "@/types/post";
 
 const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
@@ -36,27 +36,48 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
               <Card
                 key={post.title}
                 type="filled"
-                className="flex basis-80 m-5 z-10 overflow-hidden flex-col shrink"
+                className="flex basis-80 m-4 z-10 overflow-hidden flex-col shrink pb-5 cursor-pointer"
               >
-                <Link href={`/blog/${post.pathName}`}>
+                <Link href={`/blog/${post.pathName}`} passHref>
                   <a>
-                    <div className="title">{post.title}</div>
-                    <div>
-                      {post.thumbnail && (
-                        <img
-                          src={post.thumbnail}
-                          alt={post.title}
-                          height={200}
-                          width={200}
-                        ></img>
-                      )}
-                      <div>{post.abstract}</div>
-                      <div>
+                    {post.thumbnail && (
+                      <img
+                        src={post.thumbnail}
+                        alt={post.title}
+                        className="w-full rounded-xl h-48 "
+                      ></img>
+                    )}
+                    <div className="box-border px-6">
+                      <h1 className="headline-medium text-primary mt-5">
+                        {post.title}
+                      </h1>
+                      <h2 className="label-large text-secondary mt-2">
+                        {post.abstract}
+                      </h2>
+                      <div className="mt-2 ">
                         {Array.isArray(post.tags) &&
                           post.tags.map((tag) => {
-                            return <div key={tag}>{tag}</div>;
+                            return (
+                              <Chips
+                                className="m-1"
+                                icon="price-tag-3"
+                                key={tag}
+                                type="suggestion"
+                              >
+                                {tag}
+                              </Chips>
+                            );
                           })}
                       </div>
+                      <Button
+                        className="w-full"
+                        type="elevated"
+                        onClick={() => {
+                          console.log("ssss");
+                        }}
+                      >
+                        点击查看
+                      </Button>
                     </div>
                   </a>
                 </Link>
