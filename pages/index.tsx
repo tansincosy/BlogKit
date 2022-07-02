@@ -4,24 +4,10 @@ import Head from "next/head";
 import { readdirSync, readFileSync } from "fs";
 import matter from "gray-matter";
 import Link from "next/link";
-import { useEffect } from "react";
-import {
-  applyTheme,
-  argbFromHex,
-  themeFromSourceColor,
-} from "@material/material-color-utilities/dist";
 import { Button, Card, Chips, Layout } from "@/components";
 import { Post } from "@/types/post";
 
 const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
-  useEffect(() => {
-    const theme = themeFromSourceColor(argbFromHex("#f82506"));
-    const systemDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    applyTheme(theme, { target: document.body, dark: systemDark });
-  }, []);
-
   return (
     <>
       <Head>
@@ -69,15 +55,6 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
                             );
                           })}
                       </div>
-                      <Button
-                        className="w-full"
-                        type="elevated"
-                        onClick={() => {
-                          console.log("ssss");
-                        }}
-                      >
-                        点击查看
-                      </Button>
                     </div>
                   </a>
                 </Link>

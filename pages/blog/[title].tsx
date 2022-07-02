@@ -3,18 +3,21 @@ import type { GetStaticProps, NextPage } from "next";
 import { join } from "path";
 import { marked } from "marked";
 import matter from "gray-matter";
+import { Layout } from "@/components";
+import hljs from "highlight.js";
+import Markdown from "markdown-it";
 
 const PostDetail: NextPage<any> = ({ content }) => {
   return (
-    <div>
-      <main>
+    <Layout>
+      <main className="container body-large text-on-surface">
         <div
           dangerouslySetInnerHTML={{
             __html: content,
           }}
         ></div>
       </main>
-    </div>
+    </Layout>
   );
 };
 
@@ -40,7 +43,25 @@ export const getStaticProps: GetStaticProps<any, any, any> = async ({
   const fileContent = readFileSync(join("posts", filename));
   const contentStr = fileContent.toString("utf-8");
   const { content } = matter(contentStr);
-  const htmlContent = marked.parse(content);
+  //   marked.setOptions({
+  //     highlight: function (code, lang) {
+  //       const language = hljs.getLanguage(lang) ? lang : "plaintext";
+  //       return hljs.highlight(code, { language }).value;
+  //     },
+  //     langPrefix: "hljs language-",
+  //   });
+  const htmlContent = Markdown({
+    highlight: function (str, lang) {
+      if (lang && hljs.getLanguage(lang)) {
+        try {
+          return hljs.highlight(str, { language: lang }).value;
+        } catch (__) {}
+      }
+
+      return ""; // use external default escaping
+    },
+    langPrefix: "hljs language-",
+  }).render(content);
 
   return {
     props: {

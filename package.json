@@ -11,12 +11,15 @@
   "dependencies": {
     "@material/material-color-utilities": "^0.1.2",
     "gray-matter": "^4.0.3",
+    "highlight.js": "^11.5.1",
+    "markdown-it": "^13.0.1",
     "marked": "^4.0.17",
     "next": "12.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@types/markdown-it": "^12.2.3",
     "@types/marked": "^4.0.3",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
