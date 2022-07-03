@@ -152,7 +152,66 @@ module.exports = {
       colors: {
         ...themeColors(),
       },
+      typography(theme) {
+        return {
+          DEFAULT: {
+            css: {
+              h1: {
+                color: theme("colors.on-surface"),
+                "&:hover": {
+                  color: theme("colors.on-surface"),
+                },
+              },
+              h2: {
+                color: theme("colors.on-surface"),
+                "&:hover": {
+                  color: theme("colors.on-surface"),
+                },
+              },
+              h3: {
+                color: theme("colors.on-surface"),
+                "&:hover": {
+                  color: theme("colors.on-surface"),
+                },
+              },
+              h4: {
+                color: theme("colors.on-surface"),
+                "&:hover": {
+                  color: theme("colors.on-surface"),
+                },
+              },
+              a: {
+                color: theme("colors.on-secondary-container"),
+              },
+              strong: {
+                color: theme("colors.on-surface"),
+              },
+              blockquote: {
+                color: theme("colors.on-surface"),
+              },
+              th: {
+                color: theme("colors.on-surface"),
+              },
+              code: {
+                padding: "0 5px",
+                color: theme("colors.on-surface"),
+                "&::before": {
+                  content: '" " !important',
+                },
+                "&::after": {
+                  content: '"" !important',
+                },
+                backgroundColor: theme("colors.primary-container"),
+                borderRadius: "6px",
+              },
+              pre: {
+                color: "red",
+              },
+            },
+          },
+        };
+      },
     },
   },
-  plugins: [typography],
+  plugins: [typography, require("@tailwindcss/typography")],
 };

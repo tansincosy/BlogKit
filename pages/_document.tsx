@@ -6,7 +6,6 @@ import Document, {
   DocumentContext,
   DocumentInitialProps,
 } from "next/document";
-import Script from "next/script";
 
 class MyDocument extends Document {
   static async getInitialProps(

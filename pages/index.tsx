@@ -21,7 +21,7 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
             return (
               <Card
                 key={post.title}
-                type="filled"
+                type="elevated"
                 className="flex basis-80 m-4 z-10 overflow-hidden flex-col shrink pb-5 cursor-pointer"
               >
                 <Link href={`/blog/${post.pathName}`} passHref>
@@ -70,18 +70,20 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
 
 export const getStaticProps: GetStaticProps<any, any, Post[]> = async () => {
   const fileNames = readdirSync("posts");
-  const posts = fileNames.map((filename) => {
-    const fileContent = readFileSync(`posts/${filename}`).toString();
-    let pathName = filename.replace(".md", "");
-    const { data } = matter(fileContent) || {};
-    return {
-      title: data.title || "",
-      thumbnail: data.thumbnail || "",
-      abstract: data.abstract || "",
-      tags: data.tags || [],
-      pathName,
-    };
-  }) as Post[];
+  const posts = fileNames
+    .filter((filename) => filename.includes(".md"))
+    .map((filename) => {
+      const fileContent = readFileSync(`posts/${filename}`).toString();
+      let pathName = filename.replace(".md", "");
+      const { data } = matter(fileContent) || {};
+      return {
+        title: data.title || "",
+        thumbnail: data.thumbnail || "",
+        abstract: data.abstract || "",
+        tags: data.tags || [],
+        pathName,
+      };
+    }) as Post[];
   return {
     props: {
       posts: posts,
