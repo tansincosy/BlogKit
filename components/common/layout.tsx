@@ -22,7 +22,7 @@ export const Layout = ({
   return (
     <div className="absolute flex left-0 right-0 bottom-0 top-0 flex-col">
       <TopAppBar />
-      <section className="bg-background flex-1 mt-16">{children}</section>
+      <section className="bg-background flex-1">{children}</section>
     </div>
   );
 };

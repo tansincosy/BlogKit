@@ -17,16 +17,24 @@ import mark from "markdown-it-mark";
 import sub from "markdown-it-sub";
 import sup from "markdown-it-sup";
 
-const PostDetail: NextPage<any> = ({ content }) => {
+const PostDetail: NextPage<any> = ({ content, thumbnail, title }) => {
   return (
     <Layout>
-      <main className="container text-on-surface mx-auto prose lg:prose-xl px-4">
-        <div
+      <div className="overflow-hidden w-full h-72 md:h-96">
+        <img src={thumbnail} alt={title} className="w-full" />
+      </div>
+      <div className="text-on-surface mx-auto prose lg:prose-xl px-4 md:px-0 relative">
+        <div className="w-16 h-16 leading-none absolute -mt-9">
+          <span className="text-[64px]">😎</span>
+        </div>
+        <hr></hr>
+        <h1 className="display-large text-on-surface mx-auto mt-6">{title}</h1>
+        <article
           dangerouslySetInnerHTML={{
             __html: content,
           }}
-        ></div>
-      </main>
+        ></article>
+      </div>
     </Layout>
   );
 };
@@ -52,7 +60,7 @@ export const getStaticProps: GetStaticProps<any, any, any> = async ({
   const filename = title + ".md";
   const fileContent = readFileSync(join("posts", filename));
   const contentStr = fileContent.toString("utf-8");
-  const { content } = matter(contentStr);
+  const { content, data } = matter(contentStr);
   const md = new MarkdownIt();
   md.set({
     highlight(str, lang) {
@@ -81,6 +89,10 @@ export const getStaticProps: GetStaticProps<any, any, any> = async ({
   return {
     props: {
       content: md.render(content),
+      title: data.title || "",
+      thumbnail: data.thumbnail || "",
+      abstract: data.abstract || "",
+      tags: data.tags || [],
     },
   };
 };

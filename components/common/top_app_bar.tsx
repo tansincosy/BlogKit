@@ -46,7 +46,7 @@ export const TopAppBar = ({ appTitle }: TopAppBarProps) => {
       <Icon
         name="search"
         type="line"
-        className="w-12 h-12 text-[1.5rem] leading-[3rem]"
+        className="w-12 h-12 text-[1.5rem] leading-[3rem] text-on-surface"
       ></Icon>
     </div>
   );

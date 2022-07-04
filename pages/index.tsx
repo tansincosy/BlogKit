@@ -4,7 +4,7 @@ import Head from "next/head";
 import { readdirSync, readFileSync } from "fs";
 import matter from "gray-matter";
 import Link from "next/link";
-import { Button, Card, Chips, Layout } from "@/components";
+import { Card, Chips, Layout } from "@/components";
 import { Post } from "@/types/post";
 
 const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
