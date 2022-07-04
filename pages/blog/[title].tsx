@@ -23,11 +23,10 @@ const PostDetail: NextPage<any> = ({ content, thumbnail, title }) => {
       <div className="overflow-hidden w-full h-72 md:h-96">
         <img src={thumbnail} alt={title} className="w-full" />
       </div>
-      <div className="text-on-surface mx-auto prose lg:prose-xl px-4 md:px-0 relative">
-        <div className="w-16 h-16 leading-none absolute -mt-9">
+      <div className="text-on-surface mx-auto prose lg:prose-xl px-4 md:px-0 relative mt-8">
+        <div className="w-16 h-16 leading-none absolute -top-16">
           <span className="text-[64px]">😎</span>
         </div>
-        <hr></hr>
         <h1 className="display-large text-on-surface mx-auto mt-6">{title}</h1>
         <article
           dangerouslySetInnerHTML={{
