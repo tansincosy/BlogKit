@@ -4,13 +4,23 @@ import { join } from "path";
 import matter from "gray-matter";
 import { Layout } from "@/components";
 import hljs from "highlight.js";
-import Markdown from "markdown-it";
+import MarkdownIt from "markdown-it";
 import "highlight.js/styles/atom-one-dark.css";
+import emoji from "markdown-it-emoji";
+import taskList from "markdown-it-task-lists";
+import footnote from "markdown-it-footnote";
+import abbr from "markdown-it-abbr";
+import container from "markdown-it-container";
+import deflist from "markdown-it-deflist";
+import ins from "markdown-it-ins";
+import mark from "markdown-it-mark";
+import sub from "markdown-it-sub";
+import sup from "markdown-it-sup";
 
 const PostDetail: NextPage<any> = ({ content }) => {
   return (
     <Layout>
-      <main className="container text-on-surface mx-auto prose lg:prose-xl">
+      <main className="container text-on-surface mx-auto prose lg:prose-xl px-4">
         <div
           dangerouslySetInnerHTML={{
             __html: content,
@@ -43,26 +53,34 @@ export const getStaticProps: GetStaticProps<any, any, any> = async ({
   const fileContent = readFileSync(join("posts", filename));
   const contentStr = fileContent.toString("utf-8");
   const { content } = matter(contentStr);
-  const md = Markdown({
-    highlight: function (str, lang) {
+  const md = new MarkdownIt();
+  md.set({
+    highlight(str, lang) {
       if (lang && hljs.getLanguage(lang)) {
         try {
           return hljs.highlight(str, { language: lang }).value;
         } catch (__) {}
       }
-      const mkit = new Markdown();
       return (
-        '<pre class="hljs"><code>' +
-        mkit.utils.escapeHtml(str) +
-        "</code></pre>"
-      ); // use external default escaping
+        '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + "</code></pre>"
+      );
     },
-    langPrefix: "hljs language-",
-  }).render(content);
+  })
+    .use(emoji)
+    .use(taskList)
+    .use(footnote)
+    .use(abbr)
+    .use(container)
+    .use(deflist)
+    .use(ins)
+    .use(mark)
+    .use(sub)
+    .use(sup)
+    .render(content);
 
   return {
     props: {
-      content: md,
+      content: md.render(content),
     },
   };
 };

@@ -206,6 +206,11 @@ Duplicated footnote reference[^second].
 
 ### [Definition lists](https://github.com/markdown-it/markdown-it-deflist)
 
+task list
+
+- [ ] item1
+- [ ] item2
+
 Term 1
 
 : Definition 1
