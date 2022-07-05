@@ -38,7 +38,7 @@ export const TopAppBar = ({ appTitle }: TopAppBarProps) => {
         onClick={onClickHandle}
         type="line"
         name={router.query.source ? "arrow-left-s" : "menu"}
-        className="w-12 h-12 text-[1.5rem] leading-[3rem] cursor-pointer"
+        className="w-12 h-12 text-[1.5rem] leading-[3rem] cursor-pointer text-on-surface"
       ></Icon>
       <div className="text-on-surface title-large ml-6 mr-6 w-full text-center">
         {appTitle || "InkanTV"}

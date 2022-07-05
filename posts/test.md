@@ -5,6 +5,7 @@ abstract: 使用github action 发布hexo 博客
 tags:
   - Sample
 date: 2019-11-13 22:09:22
+emoji: 😎
 ---
 
 **Advertisement :)**
@@ -243,4 +244,8 @@ It converts "HTML", but keep intact partial entries like "xxxHTMLyyy" and so on.
 
 ::: warning
 _here be dragons_
+:::
+
+::: spoiler click me
+_content_
 :::

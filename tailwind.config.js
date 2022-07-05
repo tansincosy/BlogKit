@@ -156,6 +156,9 @@ module.exports = {
         return {
           DEFAULT: {
             css: {
+              img: {
+                borderRadius: "8px",
+              },
               h1: {
                 color: theme("colors.on-surface"),
                 "&:hover": {
@@ -203,9 +206,6 @@ module.exports = {
                 },
                 backgroundColor: theme("colors.primary-container"),
                 borderRadius: "6px",
-              },
-              pre: {
-                color: "red",
               },
             },
           },

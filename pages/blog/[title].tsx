@@ -17,16 +17,18 @@ import mark from "markdown-it-mark";
 import sub from "markdown-it-sub";
 import sup from "markdown-it-sup";
 
-const PostDetail: NextPage<any> = ({ content, thumbnail, title }) => {
+const PostDetail: NextPage<any> = ({ content, thumbnail, title, emoji }) => {
   return (
     <Layout>
-      <div className="overflow-hidden w-full h-72 md:h-96">
+      <div className="overflow-hidden w-full h-72 md:h-96  rounded-xl md:rounded-2xl">
         <img src={thumbnail} alt={title} className="w-full" />
       </div>
       <div className="text-on-surface mx-auto prose lg:prose-xl px-4 md:px-0 relative mt-8">
-        <div className="w-16 h-16 leading-none absolute -top-16">
-          <span className="text-[64px]">😎</span>
-        </div>
+        {emoji && (
+          <div className="w-16 h-16 leading-none absolute -top-16">
+            <span className="text-[64px]">{emoji}</span>
+          </div>
+        )}
         <h1 className="display-large text-on-surface mx-auto mt-6">{title}</h1>
         <article
           dangerouslySetInnerHTML={{
@@ -62,6 +64,7 @@ export const getStaticProps: GetStaticProps<any, any, any> = async ({
   const { content, data } = matter(contentStr);
   const md = new MarkdownIt();
   md.set({
+    typographer: true,
     highlight(str, lang) {
       if (lang && hljs.getLanguage(lang)) {
         try {
@@ -77,7 +80,30 @@ export const getStaticProps: GetStaticProps<any, any, any> = async ({
     .use(taskList)
     .use(footnote)
     .use(abbr)
-    .use(container)
+    .use(container, "warning", {
+      validate: function (params: string) {
+        console.log("validate", params);
+        return params.trim().match(/^warning/);
+      },
+    })
+    .use(container, "spoiler", {
+      validate: function (params: string) {
+        return params.trim().match(/^spoiler\s+(.*)$/);
+      },
+      render: function (tokens: any, idx: any) {
+        var m = tokens[idx].info.trim().match(/^spoiler\s+(.*)$/);
+
+        if (tokens[idx].nesting === 1) {
+          // opening tag
+          return (
+            "<details><summary>" + md.utils.escapeHtml(m[1]) + "</summary>\n"
+          );
+        } else {
+          // closing tag
+          return "</details>\n";
+        }
+      },
+    })
     .use(deflist)
     .use(ins)
     .use(mark)
@@ -92,6 +118,7 @@ export const getStaticProps: GetStaticProps<any, any, any> = async ({
       thumbnail: data.thumbnail || "",
       abstract: data.abstract || "",
       tags: data.tags || [],
+      emoji: data.emoji || "",
     },
   };
 };
