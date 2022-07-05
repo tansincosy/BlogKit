@@ -20,7 +20,7 @@ import sup from "markdown-it-sup";
 const PostDetail: NextPage<any> = ({ content, thumbnail, title, emoji }) => {
   return (
     <Layout>
-      <div className="overflow-hidden w-full h-72 md:h-96  rounded-xl md:rounded-2xl">
+      <div className="overflow-hidden w-full h-72 md:h-96 rounded-b-xl md:rounded-b-2xl">
         <img src={thumbnail} alt={title} className="w-full" />
       </div>
       <div className="text-on-surface mx-auto prose lg:prose-xl px-4 md:px-0 relative mt-8">
@@ -82,7 +82,6 @@ export const getStaticProps: GetStaticProps<any, any, any> = async ({
     .use(abbr)
     .use(container, "warning", {
       validate: function (params: string) {
-        console.log("validate", params);
         return params.trim().match(/^warning/);
       },
     })
