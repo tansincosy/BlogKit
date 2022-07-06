@@ -5,9 +5,12 @@ import { readdirSync, readFileSync } from "fs";
 import matter from "gray-matter";
 import Link from "next/link";
 import { Card, Chips, Layout } from "@/components";
-import { Post } from "@/types/post";
+import { Post, BasicInfo } from "@/types/post";
 
-const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
+const Home: NextPage<{ posts: Post[]; basicInfo: BasicInfo }> = ({
+  posts,
+  basicInfo,
+}) => {
   return (
     <>
       <Head>
@@ -16,7 +19,22 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <main className="container mx-auto flex flex-wrap justify-center items-stretch mt-16">
+        <div className="overflow-hidden w-full h-80 md:h-96 rounded-b-xl md:rounded-b-2xl relative">
+          <img
+            className="w-full"
+            alt="hero-img"
+            src="https://images.unsplash.com/photo-1656425311485-3c10dbcc9758?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60"
+          ></img>
+          <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center">
+            <h1 className="text-inverse-on-surface display-small md:display-large">
+              {basicInfo.title}
+            </h1>
+            <h4 className="text-inverse-on-surface title-large md:headline-medium mt-2">
+              {basicInfo.introduce}
+            </h4>
+          </div>
+        </div>
+        <main className="container mx-auto flex flex-wrap justify-center items-stretch">
           {posts.map((post) => {
             return (
               <Card
@@ -25,7 +43,7 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
                 className="flex w-full md:w-auto md:basis-80 m-4 z-10 overflow-hidden flex-col shrink md:pb-5 cursor-pointer"
               >
                 <Link href={`/blog/${post.pathName}`} passHref>
-                  <a className="flex md:block ">
+                  <a className="flex md:block">
                     {post.thumbnail && (
                       <div className="h-24 w-24 overflow-hidden rounded-xl md:w-full md:h-48">
                         <img
@@ -35,8 +53,8 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
                         ></img>
                       </div>
                     )}
-                    <div className="box-border px-6">
-                      <h1 className="headline-small md:headline-medium text-primary mt-1 md:mt-5">
+                    <div className="box-border px-6 flex flex-col justify-center">
+                      <h1 className="title-medium md:headline-medium text-primary mt-1 md:mt-5">
                         {post.title}
                       </h1>
                       <h2 className="label-medium md:label-large text-secondary md:mt-2">
@@ -65,7 +83,6 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
           })}
         </main>
       </Layout>
-      <footer>footer</footer>
     </>
   );
 };
@@ -73,7 +90,11 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
 export const getStaticProps: GetStaticProps<any, any, Post[]> = async () => {
   const fileNames = readdirSync("posts");
   const posts = fileNames
-    .filter((filename) => filename.includes(".md"))
+    .filter((filename) => {
+      const fileContent = readFileSync(`posts/${filename}`).toString();
+      const { data } = matter(fileContent) || {};
+      return data.visible !== false && filename.includes(".md");
+    })
     .map((filename) => {
       const fileContent = readFileSync(`posts/${filename}`).toString();
       let pathName = filename.replace(".md", "");
@@ -86,9 +107,15 @@ export const getStaticProps: GetStaticProps<any, any, Post[]> = async () => {
         pathName,
       };
     }) as Post[];
+
+  const basicInfo = {
+    title: "SPD Blog",
+    introduce: "life working with SPD",
+  };
   return {
     props: {
       posts: posts,
+      basicInfo,
     },
   };
 };

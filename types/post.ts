@@ -5,3 +5,8 @@ export interface Post {
   tags: string[];
   pathName: string;
 }
+
+export interface BasicInfo {
+  title: string;
+  introduce: string;
+}
