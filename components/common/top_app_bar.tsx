@@ -2,6 +2,7 @@ import { singleLineClass } from "@/utils";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Icon } from "../index";
+import { SideMenu } from "./side_menu";
 
 export interface TopAppBarProps {
   appTitle?: string;
@@ -48,6 +49,7 @@ export const TopAppBar = ({ appTitle }: TopAppBarProps) => {
         type="line"
         className="w-12 h-12 text-[1.5rem] leading-[3rem] text-on-surface"
       ></Icon>
+      <SideMenu isVisible={isShowSideBar} onClose={closeSlideBar}></SideMenu>
     </div>
   );
 };
