@@ -18,7 +18,7 @@ export const Layout = ({
     const systemDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
-    applyTheme(theme, { target: document.body, dark: false });
+    applyTheme(theme, { target: document.body, dark: true });
   }, []);
   return (
     <div className="absolute flex left-0 right-0 bottom-0 top-0 flex-col">
