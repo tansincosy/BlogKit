@@ -39,7 +39,7 @@ const MenuItem = forwardRef<HTMLAnchorElement, MenuProps>(
         <Icon
           name={icon}
           type="line"
-          className="on-secondary-container text-2xl mr-3"
+          className="on-secondary-container text-2xl mr-3 text-primary"
         ></Icon>
         <div className="label-large text-on-secondary-container flex-1">
           {name}

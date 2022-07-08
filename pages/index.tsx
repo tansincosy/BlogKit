@@ -19,22 +19,22 @@ const Home: NextPage<{ posts: Post[]; basicInfo: BasicInfo }> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <div className="overflow-hidden w-full h-80 md:h-96 rounded-b-xl md:rounded-b-2xl relative">
+        <div className="overflow-hidden w-full h-80 md:h-96 rounded-xl md:rounded-b-2xl relative mt-16">
           <img
             className="w-full"
             alt="hero-img"
             src="https://images.unsplash.com/photo-1656425311485-3c10dbcc9758?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60"
           ></img>
-          <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center">
-            <h1 className="text-inverse-on-surface display-small md:display-large">
+          <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center text-primary">
+            <h1 className="display-small md:display-large">
               {basicInfo.title}
             </h1>
-            <h4 className="text-inverse-on-surface title-large md:headline-medium mt-2">
+            <h4 className="title-large md:headline-medium mt-2">
               {basicInfo.introduce}
             </h4>
           </div>
         </div>
-        <main className="container mx-auto flex flex-wrap justify-center items-stretch">
+        <main className="container mx-auto flex flex-wrap items-stretch">
           {posts.map((post) => {
             return (
               <Card

@@ -17,19 +17,17 @@ import mark from "markdown-it-mark";
 import sub from "markdown-it-sub";
 import sup from "markdown-it-sup";
 
-const PostDetail: NextPage<any> = ({ content, thumbnail, title, emoji }) => {
+const PostDetail: NextPage<any> = ({ content, thumbnail, title }) => {
   return (
     <Layout>
-      <div className="overflow-hidden w-full h-72 md:h-96 rounded-b-xl md:rounded-b-2xl">
+      <div className="overflow-hidden w-full h-72 md:h-96 rounded-xl md:rounded-2xl relative mt-16 before:contents">
         <img src={thumbnail} alt={title} className="w-full" />
+        <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center text-secondary">
+          <h1 className="display-small md:display-large">{title}</h1>
+          <h4 className="title-large md:headline-medium mt-2">dss</h4>
+        </div>
       </div>
       <div className="text-on-surface mx-auto prose lg:prose-xl px-4 md:px-0 relative mt-8">
-        {emoji && (
-          <div className="w-16 h-16 leading-none absolute -top-16">
-            <span className="text-[64px]">{emoji}</span>
-          </div>
-        )}
-        <h1 className="display-large text-on-surface mx-auto mt-6">{title}</h1>
         <article
           dangerouslySetInnerHTML={{
             __html: content,
