@@ -1,0 +1,13 @@
+profile:
+  name: "default"
+  description: "Default profile"
+  github: ''
+  email: ''
+gitalk:
+  accessToken: ''
+  clientID: ''
+  clientSecret: ''
+  repo: ''
+  owner: 'Juexro'
+  admin: 
+    - Juexro

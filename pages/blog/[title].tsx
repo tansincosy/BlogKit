@@ -16,8 +16,23 @@ import ins from "markdown-it-ins";
 import mark from "markdown-it-mark";
 import sub from "markdown-it-sub";
 import sup from "markdown-it-sup";
+import dynamic from "next/dynamic";
+import Gitalk from "gitalk";
+const GitalkComponent = dynamic<{ options: Gitalk.GitalkOptions }>(
+  () => import("gitalk/dist/gitalk-component"),
+  {
+    ssr: false,
+  }
+);
+import YAML from "yaml";
+import { AppConfig } from "@/types/config";
 
-const PostDetail: NextPage<any> = ({ content, thumbnail, title }) => {
+const PostDetail: NextPage<{
+  content: string;
+  thumbnail: string;
+  title: string;
+  appConfig: AppConfig;
+}> = ({ content, thumbnail, title, appConfig }) => {
   return (
     <Layout>
       <div className="overflow-hidden w-full h-72 md:h-96 rounded-xl md:rounded-2xl relative mt-16 before:contents">
@@ -33,6 +48,9 @@ const PostDetail: NextPage<any> = ({ content, thumbnail, title }) => {
             __html: content,
           }}
         ></article>
+      </div>
+      <div className="text-on-surface mx-auto prose lg:prose-xl px-4 md:px-0">
+        {typeof window && <GitalkComponent options={appConfig.gitalk} />}
       </div>
     </Layout>
   );
@@ -56,6 +74,8 @@ export const getStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<any, any, any> = async ({
   params: { title },
 }) => {
+  const yamlFiles = readFileSync("app.yaml", "utf8");
+  const appConfig = YAML.parse(yamlFiles) as AppConfig;
   const filename = title + ".md";
   const fileContent = readFileSync(join("posts", filename));
   const contentStr = fileContent.toString("utf-8");
@@ -116,6 +136,7 @@ export const getStaticProps: GetStaticProps<any, any, any> = async ({
       abstract: data.abstract || "",
       tags: data.tags || [],
       emoji: data.emoji || "",
+      appConfig,
     },
   };
 };
