@@ -26,16 +26,19 @@ const GitalkComponent = dynamic<{ options: Gitalk.GitalkOptions }>(
 );
 import YAML from "yaml";
 import { AppConfig } from "@/types/config";
+import { createHash } from "crypto";
 
 const PostDetail: NextPage<{
+  id: string;
   content: string;
   thumbnail: string;
   title: string;
   appConfig: AppConfig;
-}> = ({ content, thumbnail, title, appConfig }) => {
+}> = ({ content, thumbnail, title, appConfig, id }) => {
+  appConfig.gitalk.id = id;
   return (
     <Layout>
-      <div className="overflow-hidden w-full h-72 md:h-96 rounded-xl md:rounded-2xl relative mt-16 before:contents">
+      <div className="overflow-hidden w-full h-72 md:h-96 relative mt-16 before:contents">
         <img src={thumbnail} alt={title} className="w-full" />
         <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center text-secondary">
           <h1 className="display-small md:display-large">{title}</h1>
@@ -128,8 +131,16 @@ export const getStaticProps: GetStaticProps<any, any, any> = async ({
     .use(sup)
     .render(content);
 
+  function md5(defaultStr = "", salt = ""): string {
+    const saltStr = `${defaultStr}:${salt}`;
+    const md5 = createHash("md5");
+    return md5.update(saltStr).digest("hex");
+  }
+
+  const mdId = md5(filename, "md5");
   return {
     props: {
+      id: mdId,
       content: md.render(content),
       title: data.title || "",
       thumbnail: data.thumbnail || "",

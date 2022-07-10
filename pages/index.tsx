@@ -5,11 +5,13 @@ import { readdirSync, readFileSync } from "fs";
 import matter from "gray-matter";
 import Link from "next/link";
 import { Card, Chips, Layout } from "@/components";
-import { Post, BasicInfo } from "@/types/post";
+import { Post } from "@/types/post";
+import { parse } from "yaml";
+import { AppConfig, Profile } from "@/types/config";
 
-const Home: NextPage<{ posts: Post[]; basicInfo: BasicInfo }> = ({
+const Home: NextPage<{ posts: Post[]; profile: Profile }> = ({
   posts,
-  basicInfo,
+  profile,
 }) => {
   return (
     <>
@@ -19,18 +21,12 @@ const Home: NextPage<{ posts: Post[]; basicInfo: BasicInfo }> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <div className="overflow-hidden w-full h-80 md:h-96 rounded-xl md:rounded-b-2xl relative mt-16">
-          <img
-            className="w-full"
-            alt="hero-img"
-            src="https://images.unsplash.com/photo-1656425311485-3c10dbcc9758?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60"
-          ></img>
+        <div className="overflow-hidden w-full h-80 md:h-96 relative mt-16">
+          <img className="w-full" alt="hero-img" src={profile.cover}></img>
           <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center text-primary">
-            <h1 className="display-small md:display-large">
-              {basicInfo.title}
-            </h1>
+            <h1 className="display-small md:display-large">{profile.name}</h1>
             <h4 className="title-large md:headline-medium mt-2">
-              {basicInfo.introduce}
+              {profile.description}
             </h4>
           </div>
         </div>
@@ -89,6 +85,11 @@ const Home: NextPage<{ posts: Post[]; basicInfo: BasicInfo }> = ({
 
 export const getStaticProps: GetStaticProps<any, any, Post[]> = async () => {
   const fileNames = readdirSync("posts");
+  const appConfigYaml = readFileSync("app.yaml", {
+    encoding: "utf-8",
+  });
+  const appConfig = parse(appConfigYaml) as AppConfig;
+
   const posts = fileNames
     .filter((filename) => {
       const fileContent = readFileSync(`posts/${filename}`).toString();
@@ -107,15 +108,10 @@ export const getStaticProps: GetStaticProps<any, any, Post[]> = async () => {
         pathName,
       };
     }) as Post[];
-
-  const basicInfo = {
-    title: "SPD Blog",
-    introduce: "life working with SPD",
-  };
   return {
     props: {
       posts: posts,
-      basicInfo,
+      profile: appConfig.profile,
     },
   };
 };
