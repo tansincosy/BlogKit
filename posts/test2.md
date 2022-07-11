@@ -4,8 +4,9 @@ title: "Sample Sample "
 abstract: 使用github action 发布hexo 博客
 tags:
   - Sample
+  - java
 date: 2019-11-13 22:09:22
-category: 生活
+category: 有机化学
 emoji: 😎
 visible: true
 ---

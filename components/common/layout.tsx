@@ -18,7 +18,7 @@ export const Layout = ({
     const systemDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
-    applyTheme(theme, { target: document.body, dark: systemDark });
+    applyTheme(theme, { target: document.body, dark: false });
   }, []);
 
   return (
@@ -34,8 +34,8 @@ export const Layout = ({
             path: "/catalog/life",
           },
           {
-            name: "所有",
-            path: "/categories",
+            name: "所有标签",
+            path: "/tags",
           },
           {
             name: "关于",

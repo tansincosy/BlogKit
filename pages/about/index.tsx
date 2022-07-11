@@ -18,7 +18,7 @@ const Tag: NextPage<{ content: string }> = ({ content }) => {
             <h1 className="display-small md:display-large">关于</h1>
           </div>
         </div>
-        <main className="container mx-auto flex flex-wrap items-stretch mt-8 md:md-16 text-on-surface">
+        <main className="container mx-auto flex flex-wrap items-stretch mt-8 md:md-16 text-on-surface prose lg:prose-xl">
           {content ? (
             <article
               dangerouslySetInnerHTML={{
