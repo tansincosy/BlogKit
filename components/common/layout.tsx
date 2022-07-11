@@ -14,7 +14,7 @@ export const Layout = ({
   isShowNav?: boolean;
 }) => {
   useEffect(() => {
-    const theme = themeFromSourceColor(argbFromHex("#0632f8"));
+    const theme = themeFromSourceColor(argbFromHex("#9b06f8"));
     const systemDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
@@ -35,7 +35,11 @@ export const Layout = ({
           },
           {
             name: "所有",
-            path: "/catalog/all",
+            path: "/categories",
+          },
+          {
+            name: "关于",
+            path: "/about",
           },
         ]}
       />

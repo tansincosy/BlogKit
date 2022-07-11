@@ -61,7 +61,7 @@ export const TopAppBar = ({ appTitle, menus }: TopAppBarProps) => {
         <div className="flex space-x-9 justify-end mr-8">
           {Array.isArray(menus) &&
             menus.map((menu) => (
-              <Link href={`${menu}`} passHref key={menu.name}>
+              <Link href={`${menu.path}`} passHref key={menu.name}>
                 <a className="text-on-surface-variant">{menu.name}</a>
               </Link>
             ))}

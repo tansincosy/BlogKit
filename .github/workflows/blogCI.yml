@@ -1,0 +1,36 @@
+
+
+name: build and auto publish github pages
+on:
+  push:
+    branches:
+      - master
+jobs:
+  builds:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: begin setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+
+      - name: setup blog env
+        env:
+          ACTION_DEPLOY_KEY: ${{secrets.BLOG_ACTION}}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global user.name 'tansincosy'
+          git config --global user.email '805841483@qq.com'
+          yarn
+          yarn run build
+      - name: blog publish
+        run: |
+          hexo g -d

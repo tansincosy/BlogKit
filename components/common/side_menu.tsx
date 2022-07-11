@@ -64,7 +64,7 @@ export const SideMenu: React.FC<SideMenuProps> = ({ isVisible, onClose }) => {
     {
       name: "关于",
       icon: "skull",
-      href: "/blog/about",
+      href: "/about",
       id: "about",
       exact: false,
       top: true,

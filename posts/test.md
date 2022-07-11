@@ -5,6 +5,7 @@ abstract: 使用github action 发布hexo 博客
 tags:
   - Sample
 date: 2019-11-13 22:09:22
+category: Sample
 emoji: 😎
 visible: true
 ---
