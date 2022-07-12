@@ -4,16 +4,18 @@ import { readdirSync, readFileSync } from "fs";
 import matter from "gray-matter";
 import Link from "next/link";
 import { Chips, Layout } from "@/components";
-import { Post } from "@/types/post";
+import { Category, Post } from "@/types/post";
 import { NextSeo } from "next-seo";
+import { getAllCategory, getCategoryPosts } from "@/utils/read_file";
 
 const Tag: NextPage<{
   postTags: Record<string, Post[]>;
-}> = ({ postTags }) => {
+  categories: Category[];
+}> = ({ postTags, categories }) => {
   return (
     <>
       <NextSeo title="标签" description="标签"></NextSeo>
-      <Layout>
+      <Layout categories={categories}>
         <div className="overflow-hidden w-full h-40 md:h-60 relative mt-16">
           <div className="w-full h-full bg-center bg-cover bg-inverse-on-surface"></div>
           <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center text-primary">
@@ -54,13 +56,7 @@ export const getStaticProps: GetStaticProps<any, any, Post[]> = async () => {
   const fileNames = readdirSync("posts");
   const postTags = fileNames
     .filter((filename) => {
-      const fileContent = readFileSync(`posts/${filename}`).toString();
-      const { data } = matter(fileContent) || {};
-      return (
-        data.visible !== false &&
-        filename.includes(".md") &&
-        !filename.startsWith("_")
-      );
+      return filename.includes(".md") && !filename.startsWith("_");
     })
     .reduce((total: Record<string, Post[]>, filename) => {
       const fileContent = readFileSync(`posts/${filename}`).toString();
@@ -82,9 +78,12 @@ export const getStaticProps: GetStaticProps<any, any, Post[]> = async () => {
       }
       return total;
     }, {});
+
+  const allPostCategory = await getCategoryPosts();
   return {
     props: {
       postTags,
+      categories: getAllCategory(allPostCategory),
     },
   };
 };

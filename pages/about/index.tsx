@@ -2,16 +2,20 @@ import type { NextPage } from "next";
 import { GetStaticProps } from "next";
 import { readFileSync } from "fs";
 import { Layout } from "@/components";
-import { Post } from "@/types/post";
+import { Category, Post } from "@/types/post";
 import { NextSeo } from "next-seo";
 import { renderMarkdown } from "@/utils/md";
 import { existsSync } from "fs";
+import { getAllCategory, getCategoryPosts } from "@/utils/read_file";
 
-const Tag: NextPage<{ content: string }> = ({ content }) => {
+const Tag: NextPage<{ content: string; categories: Category[] }> = ({
+  content,
+  categories,
+}) => {
   return (
     <>
       <NextSeo title="关于" description="关于"></NextSeo>
-      <Layout>
+      <Layout categories={categories}>
         <div className="overflow-hidden w-full h-40 md:h-60 relative mt-16">
           <div className="w-full h-full bg-center bg-cover bg-inverse-on-surface"></div>
           <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center text-primary">
@@ -41,9 +45,11 @@ export const getStaticProps: GetStaticProps<any, any, Post[]> = async () => {
       encoding: "utf8",
     });
   }
+  const allPostCategory = await getCategoryPosts();
   return {
     props: {
       content: aboutContentMd ? renderMarkdown(aboutContentMd) : "",
+      categories: getAllCategory(allPostCategory),
     },
   };
 };

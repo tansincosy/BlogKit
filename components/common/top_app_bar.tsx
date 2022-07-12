@@ -1,3 +1,4 @@
+import { Category } from "@/types/post";
 import { singleLineClass } from "@/utils";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -5,15 +6,11 @@ import { useState } from "react";
 import { Icon } from "../index";
 import { SideMenu } from "./side_menu";
 
-export interface MenuProps {
-  name: string;
-  path: string;
-}
 export interface TopAppBarProps {
   appTitle?: string;
-  menus: MenuProps[];
+  categories: Category[];
 }
-export const TopAppBar = ({ appTitle, menus }: TopAppBarProps) => {
+export const TopAppBar = ({ appTitle, categories }: TopAppBarProps) => {
   const [isShowSideBar, setShowSideBar] = useState<boolean>(false);
   const router = useRouter();
   const { query } = router;
@@ -59,10 +56,10 @@ export const TopAppBar = ({ appTitle, menus }: TopAppBarProps) => {
       </div>
       <div className="title-medium text-on-surface w-full hidden md:block">
         <div className="flex space-x-9 justify-end mr-8">
-          {Array.isArray(menus) &&
-            menus.map((menu) => (
-              <Link href={`${menu.path}`} passHref key={menu.name}>
-                <a className="text-on-surface-variant">{menu.name}</a>
+          {categories.length > 0 &&
+            categories.map((cate) => (
+              <Link href={`${cate.path}`} passHref key={cate.title}>
+                <a className="text-on-surface-variant">{cate.title}</a>
               </Link>
             ))}
         </div>
@@ -72,7 +69,11 @@ export const TopAppBar = ({ appTitle, menus }: TopAppBarProps) => {
         type="line"
         className="w-12 h-12 text-[1.5rem] leading-[3rem] text-on-surface"
       ></Icon>
-      <SideMenu isVisible={isShowSideBar} onClose={closeSlideBar}></SideMenu>
+      <SideMenu
+        isVisible={isShowSideBar}
+        onClose={closeSlideBar}
+        categories={categories}
+      ></SideMenu>
     </div>
   );
 };

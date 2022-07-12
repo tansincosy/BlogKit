@@ -1,27 +1,29 @@
 import { singleLineClass } from "@/utils";
 import { useRouter } from "next/router";
 import Drawer from "rc-drawer";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useMemo } from "react";
 import { Icon } from "../ui/icon";
 import Link from "next/link";
+import { Category } from "@/types/post";
 interface SideMenuProps {
   isVisible: boolean;
+  appTitle?: string;
   onClose: () => void;
+  categories: Category[];
 }
 
 interface MenuProps {
-  name: string;
+  title: string;
   icon: string;
   href: string;
   badge?: number;
-  id: string;
   exact?: boolean;
   top: boolean;
   onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
 const MenuItem = forwardRef<HTMLAnchorElement, MenuProps>(
-  ({ name, icon, href, onClick, badge, exact }, ref) => {
+  ({ title, icon, href, onClick, badge, exact }, ref) => {
     const { asPath, pathname } = useRouter();
     const isActive = exact ? pathname === href : asPath.startsWith(href);
     return (
@@ -42,7 +44,7 @@ const MenuItem = forwardRef<HTMLAnchorElement, MenuProps>(
           className="on-secondary-container text-2xl mr-3 text-primary"
         ></Icon>
         <div className="label-large text-on-secondary-container flex-1">
-          {name}
+          {title}
         </div>
         {badge && <span className="label-large">{badge}</span>}
       </a>
@@ -51,25 +53,49 @@ const MenuItem = forwardRef<HTMLAnchorElement, MenuProps>(
 );
 MenuItem.displayName = "MenuItem";
 
-export const SideMenu: React.FC<SideMenuProps> = ({ isVisible, onClose }) => {
-  const data: MenuProps[] = [
-    {
-      name: "Home",
-      icon: "home-smile",
-      href: "/",
-      id: "home",
+export const SideMenu: React.FC<SideMenuProps> = ({
+  isVisible,
+  onClose,
+  appTitle,
+  categories,
+}) => {
+  const newCates = categories.map((cate) => {
+    return {
+      title: cate.title,
+      icon: "home",
+      href: cate.path,
       exact: true,
       top: true,
-    },
-    {
-      name: "关于",
-      icon: "skull",
-      href: "/about",
-      id: "about",
-      exact: false,
-      top: true,
-    },
-  ];
+      badge: cate.badge || 0,
+    };
+  });
+
+  const slideMenus = useMemo(() => {
+    return [
+      {
+        title: "首页",
+        icon: "home",
+        href: "/",
+        exact: true,
+        top: true,
+      },
+      ...newCates,
+      {
+        title: "关于",
+        icon: "skull",
+        href: "/about",
+        exact: true,
+        top: true,
+      },
+    ].map((item) => {
+      return (
+        <Link key={item.title} passHref href={item.href}>
+          <MenuItem {...item}></MenuItem>
+        </Link>
+      );
+    });
+  }, [newCates]);
+
   return (
     <Drawer
       open={isVisible}
@@ -80,16 +106,9 @@ export const SideMenu: React.FC<SideMenuProps> = ({ isVisible, onClose }) => {
       width="22.5rem"
     >
       <div className="text-on-surface-variant title-small box-border px-4 h-14 leading-[3.5rem]">
-        IKan.TV
+        {appTitle || "Blog"}
       </div>
-      {data &&
-        data.map((menu) => {
-          return (
-            <Link key={menu.id} passHref href={menu.href}>
-              <MenuItem {...menu}></MenuItem>
-            </Link>
-          );
-        })}
+      {slideMenus}
       <div className="border-solid border-t-[0.0625rem] border-outline px-2 box-border "></div>
     </Drawer>
   );

@@ -4,19 +4,25 @@ import { readdirSync, readFileSync } from "fs";
 import matter from "gray-matter";
 import Link from "next/link";
 import { Card, Chips, Layout } from "@/components";
-import { Post } from "@/types/post";
+import { Category, Post } from "@/types/post";
 import { parse } from "yaml";
 import { AppConfig, Profile } from "@/types/config";
 import { NextSeo } from "next-seo";
+import {
+  getAllCategory,
+  getAllPosts,
+  getCategoryPosts,
+} from "@/utils/read_file";
 
-const Home: NextPage<{ posts: Post[]; profile: Profile }> = ({
-  posts,
-  profile,
-}) => {
+const Home: NextPage<{
+  posts: Post[];
+  profile: Profile;
+  categories: Category[];
+}> = ({ posts, profile, categories }) => {
   return (
     <>
       <NextSeo title={profile.name} description={profile.description}></NextSeo>
-      <Layout>
+      <Layout categories={categories}>
         <div className="overflow-hidden w-full h-80 md:h-96 relative mt-16">
           <div
             className="w-full h-full bg-center bg-cover"
@@ -90,33 +96,29 @@ export const getStaticProps: GetStaticProps<any, any, Post[]> = async () => {
     encoding: "utf-8",
   });
   const appConfig = parse(appConfigYaml) as AppConfig;
+  const allPosts = await getAllPosts();
+  const posts = allPosts.map((filename) => {
+    const fileContent = readFileSync(`posts/${filename}`).toString();
+    let pathName = filename.replace(".md", "");
+    const { data } = matter(fileContent) || {};
+    return {
+      title: data.title || "",
+      thumbnail: data.thumbnail || "",
+      abstract: data.abstract || "",
+      tags: data.tags || [],
+      pathName,
+    };
+  }) as Post[];
 
-  const posts = fileNames
-    .filter((filename) => {
-      const fileContent = readFileSync(`posts/${filename}`).toString();
-      const { data } = matter(fileContent) || {};
-      return (
-        data.visible !== false &&
-        filename.includes(".md") &&
-        !filename.startsWith("_")
-      );
-    })
-    .map((filename) => {
-      const fileContent = readFileSync(`posts/${filename}`).toString();
-      let pathName = filename.replace(".md", "");
-      const { data } = matter(fileContent) || {};
-      return {
-        title: data.title || "",
-        thumbnail: data.thumbnail || "",
-        abstract: data.abstract || "",
-        tags: data.tags || [],
-        pathName,
-      };
-    }) as Post[];
+  const allPostCategory = await getCategoryPosts();
+
+  console.log("allPostCategory>>>>", allPostCategory);
+
   return {
     props: {
       posts: posts,
       profile: appConfig.profile,
+      categories: getAllCategory(allPostCategory),
     },
   };
 };

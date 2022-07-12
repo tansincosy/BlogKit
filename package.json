@@ -24,7 +24,6 @@
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
     "markdown-it-task-lists": "^2.1.1",
-    "marked": "^4.0.17",
     "next": "12.2.0",
     "next-seo": "^5.4.0",
     "rc-drawer": "^4.4.3",

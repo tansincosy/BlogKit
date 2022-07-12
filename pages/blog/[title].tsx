@@ -17,6 +17,8 @@ import YAML from "yaml";
 import { AppConfig } from "@/types/config";
 import { createHash } from "crypto";
 import { NextSeo } from "next-seo";
+import { getAllCategory, getCategoryPosts } from "@/utils/read_file";
+import { Category } from "@/types/post";
 
 const PostDetail: NextPage<{
   id: string;
@@ -25,12 +27,13 @@ const PostDetail: NextPage<{
   title: string;
   appConfig: AppConfig;
   abstract: string;
-}> = ({ content, thumbnail, title, appConfig, id, abstract }) => {
+  categories: Category[];
+}> = ({ content, thumbnail, title, appConfig, id, abstract, categories }) => {
   appConfig.gitalk.id = id;
   return (
     <>
       <NextSeo title={title} description={abstract}></NextSeo>
-      <Layout>
+      <Layout categories={categories}>
         <div className="overflow-hidden w-full h-72 md:h-96 relative mt-16 before:contents">
           <div
             className="w-full h-full bg-center bg-cover"
@@ -90,6 +93,9 @@ export const getStaticProps: GetStaticProps<any, any, any> = async ({
   }
 
   const mdId = md5(filename, "md5");
+
+  const allPostCategory = await getCategoryPosts();
+
   return {
     props: {
       id: mdId,
@@ -100,6 +106,7 @@ export const getStaticProps: GetStaticProps<any, any, any> = async ({
       tags: data.tags || [],
       emoji: data.emoji || "",
       appConfig,
+      categories: getAllCategory(allPostCategory),
     },
   };
 };
