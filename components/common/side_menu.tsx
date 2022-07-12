@@ -46,7 +46,7 @@ const MenuItem = forwardRef<HTMLAnchorElement, MenuProps>(
         <div className="label-large text-on-secondary-container flex-1">
           {title}
         </div>
-        {badge && <span className="label-large">{badge}</span>}
+        {badge && <div className="label-large text-primary">{badge}</div>}
       </a>
     );
   }

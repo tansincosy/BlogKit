@@ -1,3 +1,4 @@
+import { isEmpty } from "./index";
 import { readdir, readFile, readFileSync } from "fs";
 import { promisify } from "util";
 import { Category, CateGoryPost, Post } from "@/types/post";
@@ -6,7 +7,7 @@ import matter from "gray-matter";
 const readDirAsync = promisify(readdir);
 let categoryPostCache: CateGoryPost = {};
 export const getCategoryPosts = async (): Promise<CateGoryPost> => {
-  if (categoryPostCache) {
+  if (!isEmpty(categoryPostCache)) {
     return categoryPostCache;
   }
   const posts = await getAllPosts();
@@ -16,18 +17,17 @@ export const getCategoryPosts = async (): Promise<CateGoryPost> => {
       const fileContent = readFileSync(`posts/${posts}`).toString();
       let pathName = posts.replace(".md", "");
       const { data } = matter(fileContent) || {};
-      if (data.category) {
-        data.category.forEach((cate: any) => {
-          if (!total[cate]) {
-            total[cate] = [];
-          }
-          total[cate].push({
-            title: data.title,
-            pathName: "blog/" + pathName,
-            abstract: data.abstract,
-            tags: data.tags,
-            thumbnail: data.thumbnail,
-          });
+      if (!isEmpty(data.category)) {
+        const category = data.category;
+        if (!total[category]) {
+          total[category] = [];
+        }
+        total[category].push({
+          title: data.title,
+          pathName: "blog/" + pathName,
+          abstract: data.abstract,
+          tags: data.tags,
+          thumbnail: data.thumbnail,
         });
       }
       return total;

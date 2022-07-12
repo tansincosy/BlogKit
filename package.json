@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev ",
-    "build": "rm ./**/.DS_Store && next build && next export",
+    "clear": "rm ./**/.DS_Store ",
+    "build": "next build && next export",
     "start": "next start",
     "lint": "next lint"
   },

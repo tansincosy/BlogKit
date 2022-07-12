@@ -2,7 +2,7 @@ import { Category } from "@/types/post";
 import { singleLineClass } from "@/utils";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Icon } from "../index";
 import { SideMenu } from "./side_menu";
 
@@ -10,6 +10,7 @@ export interface TopAppBarProps {
   appTitle?: string;
   categories: Category[];
 }
+
 export const TopAppBar = ({ appTitle, categories }: TopAppBarProps) => {
   const [isShowSideBar, setShowSideBar] = useState<boolean>(false);
   const router = useRouter();
@@ -30,6 +31,21 @@ export const TopAppBar = ({ appTitle, categories }: TopAppBarProps) => {
   const targetHomePage = () => {
     router.push("/");
   };
+
+  const mainNavs = useMemo(() => {
+    const staticMenu = [
+      {
+        title: "主页",
+        path: "/",
+      },
+      ...categories,
+      {
+        title: "关于",
+        path: "/about",
+      },
+    ];
+    return staticMenu;
+  }, [categories]);
 
   return (
     <div
@@ -56,8 +72,8 @@ export const TopAppBar = ({ appTitle, categories }: TopAppBarProps) => {
       </div>
       <div className="title-medium text-on-surface w-full hidden md:block">
         <div className="flex space-x-9 justify-end mr-8">
-          {categories.length > 0 &&
-            categories.map((cate) => (
+          {mainNavs.length > 0 &&
+            mainNavs.map((cate) => (
               <Link href={`${cate.path}`} passHref key={cate.title}>
                 <a className="text-on-surface-variant">{cate.title}</a>
               </Link>
