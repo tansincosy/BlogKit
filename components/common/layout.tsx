@@ -26,7 +26,7 @@ export const Layout = ({
     <div className="absolute flex left-0 right-0 bottom-0 top-0 flex-col">
       <TopAppBar categories={categories} appTitle={"ssss"} />
       <section className="bg-background flex-1">{children}</section>
-      <footer className="w-full flex flex-col items-center p-9 bg-surface-variant text-on-surface-variant">
+      <footer className="w-full flex flex-col justify-center items-center p-9 bg-surface-variant text-on-surface-variant flex-none h-72">
         <ul className="flex space-x-8">
           <li>
             <Icon

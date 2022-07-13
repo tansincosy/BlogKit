@@ -54,41 +54,47 @@ export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
   return (
     <div
       className={singleLineClass(
-        `flex items-center justify-between fixed 
-        top-0 left-0 w-full box-border pl-4 pr-4 h-16 
-        z-30 backdrop-filter backdrop-blur backdrop-saturate-50`
+        `flex-none 
+         flex
+        item-center justify-center
+        fixed
+        h-16
+        top-0 left-0 w-full box-border px-4 md:px-0
+        z-30 
+        bg-surface
+        backdrop-filter backdrop-blur backdrop-saturate-50
+        `
       )}
-      style={{
-        backgroundColor: `rgba(var(--md-sys-color-surface),0.1)`,
-      }}
     >
-      <Icon
-        onClick={onClickHandle}
-        type="line"
-        name={router.query.source ? "arrow-left-s" : "menu"}
-        className="w-12 h-12 text-[1.5rem] leading-[3rem] cursor-pointer text-on-surface md:hidden"
-      ></Icon>
-      <div
-        className="text-on-surface title-large ml-6 mr-6 w-full md:w-auto text-center"
-        onClick={targetHomePage}
-      >
-        {appTitle || "InkanTV"}
-      </div>
-      <div className="title-medium text-on-surface w-full hidden md:block">
-        <div className="flex space-x-9 justify-end mr-8">
-          {mainNavs.length > 0 &&
-            mainNavs.map((cate) => (
-              <Link href={`${cate.path}`} passHref key={cate.title}>
-                <a className="text-on-surface-variant">{cate.title}</a>
-              </Link>
-            ))}
+      <div className="container flex items-center justify-between fixed mx-auto h-full overflow-hidden flex-none">
+        <Icon
+          onClick={onClickHandle}
+          type="line"
+          name={router.query.source ? "arrow-left-s" : "menu"}
+          className="w-12 h-12 text-[1.5rem] leading-[3rem] cursor-pointer text-on-surface md:hidden"
+        ></Icon>
+        <div
+          className="text-on-surface title-large ml-6 mr-6 w-full md:w-auto text-center"
+          onClick={targetHomePage}
+        >
+          {appTitle || "InkanTV"}
         </div>
+        <div className="title-medium text-on-surface w-full hidden md:block">
+          <div className="flex space-x-9 justify-end mr-8">
+            {mainNavs.length > 0 &&
+              mainNavs.map((cate) => (
+                <Link href={`${cate.path}`} passHref key={cate.title}>
+                  <a className="text-on-surface-variant">{cate.title}</a>
+                </Link>
+              ))}
+          </div>
+        </div>
+        <Icon
+          name="search"
+          type="line"
+          className="w-12 h-12 text-[1.5rem] leading-[3rem] text-on-surface"
+        ></Icon>
       </div>
-      <Icon
-        name="search"
-        type="line"
-        className="w-12 h-12 text-[1.5rem] leading-[3rem] text-on-surface"
-      ></Icon>
       <SideMenu
         isVisible={isShowSideBar}
         onClose={closeSlideBar}

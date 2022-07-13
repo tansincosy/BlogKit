@@ -42,7 +42,7 @@ const Home: NextPage<{
             return (
               <Card
                 key={post.title}
-                type="elevated"
+                type="filled"
                 className="flex w-full md:w-auto md:basis-80 m-4 z-10 overflow-hidden flex-col shrink md:pb-5 cursor-pointer"
               >
                 <Link href={`/blog/${post.pathName}`} passHref>

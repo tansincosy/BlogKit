@@ -5,7 +5,6 @@ export const Comment = () => {
   const commentBoxRef = useRef<HTMLDivElement>(null);
   useScript({
     url: "https://utteranc.es/client.js",
-    theme: "github-dark",
     issueTerm: "url",
     repo: "tansincosy/Blog-Comment",
     ref: commentBoxRef,

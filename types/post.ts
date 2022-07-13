@@ -22,3 +22,5 @@ export type CateGoryPost = {
 };
 
 export type Tag = {};
+
+export type Theme = "light" | "dark";

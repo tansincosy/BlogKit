@@ -9,7 +9,8 @@ import { AppConfig } from "@/types/config";
 import { createHash } from "crypto";
 import { NextSeo } from "next-seo";
 import { getAllCategory, getCategoryPosts } from "@/utils/read_file";
-import { Category } from "@/types/post";
+import { Category, Theme } from "@/types/post";
+import { useEffect, useState } from "react";
 
 const PostDetail: NextPage<{
   id: string;

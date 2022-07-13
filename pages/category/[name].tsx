@@ -18,7 +18,7 @@ const Category: NextPage<{
           <div
             className="w-full h-full bg-center bg-cover"
             style={{
-              backgroundImage: `url(${"/imgs/life.jpg"})`,
+              backgroundImage: `url(${"/imgs/work.jpg"})`,
             }}
           ></div>
           <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center text-primary">

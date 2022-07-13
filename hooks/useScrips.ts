@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 // we need a function that accepts the script src and couple of other parameters
 
 const useScript = (params: any) => {
-  const { url, theme, issueTerm, repo, ref } = params;
+  const { url, issueTerm, repo, ref } = params;
 
   const [status, setStatus] = useState(url ? "loading" : "idle");
+  const booleanRef = useRef(false);
 
   // run the useEffect when the url of the script changes
   useEffect(() => {
@@ -13,20 +14,24 @@ const useScript = (params: any) => {
       setStatus("idle");
       return;
     }
+    const systemDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
 
     let script = document.createElement("script");
     script.src = url;
     script.async = true;
     script.crossOrigin = "anonymous";
-    script.setAttribute("theme", theme);
+    script.setAttribute("theme", systemDark ? "github-dark" : "github-light");
     script.setAttribute("issue-term", issueTerm);
     script.setAttribute("repo", repo);
 
-    // Add script to document body
-    const hasUtter = document.querySelector(".utterances");
-    if (!hasUtter) {
+    if (!booleanRef.current) {
       ref.current.appendChild(script);
+      booleanRef.current = true;
     }
+
+    // Add script to document body
 
     // store status of the script
 
