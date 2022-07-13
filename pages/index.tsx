@@ -91,7 +91,6 @@ const Home: NextPage<{
 };
 
 export const getStaticProps: GetStaticProps<any, any, Post[]> = async () => {
-  const fileNames = readdirSync("posts");
   const appConfigYaml = readFileSync("app.yaml", {
     encoding: "utf-8",
   });

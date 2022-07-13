@@ -2,17 +2,8 @@ import { readdirSync, readFileSync } from "fs";
 import type { GetStaticProps, NextPage } from "next";
 import { join } from "path";
 import matter from "gray-matter";
-import { Layout } from "@/components";
+import { Layout, Comment } from "@/components";
 import { renderMarkdown } from "@/utils/md";
-
-import dynamic from "next/dynamic";
-import Gitalk from "gitalk";
-const GitalkComponent = dynamic<{ options: Gitalk.GitalkOptions }>(
-  () => import("gitalk/dist/gitalk-component"),
-  {
-    ssr: false,
-  }
-);
 import YAML from "yaml";
 import { AppConfig } from "@/types/config";
 import { createHash } from "crypto";
@@ -28,8 +19,7 @@ const PostDetail: NextPage<{
   appConfig: AppConfig;
   abstract: string;
   categories: Category[];
-}> = ({ content, thumbnail, title, appConfig, id, abstract, categories }) => {
-  appConfig.gitalk.id = id;
+}> = ({ content, thumbnail, title, id, abstract, categories }) => {
   return (
     <>
       <NextSeo title={title} description={abstract}></NextSeo>
@@ -53,9 +43,7 @@ const PostDetail: NextPage<{
             }}
           ></article>
         </div>
-        <div className="text-on-surface mx-auto prose lg:prose-xl px-4 md:px-0">
-          {typeof window && <GitalkComponent options={appConfig.gitalk} />}
-        </div>
+        <Comment />
       </Layout>
     </>
   );

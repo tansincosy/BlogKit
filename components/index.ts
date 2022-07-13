@@ -5,3 +5,4 @@ export * from "./ui/card";
 export * from "./ui/chips";
 export * from "./common/layout";
 export * from "./common/navigation_bar";
+export * from "./common/comment";

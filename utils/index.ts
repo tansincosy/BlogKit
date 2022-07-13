@@ -46,3 +46,10 @@ export const isEmpty = (value: any): boolean => {
   }
   return false;
 };
+
+export const arrayIsEmpty = (value: any): boolean => {
+  if (value === null || value === undefined || !Array.isArray(value)) {
+    return true;
+  }
+  return Array.isArray(value) && value.length === 0;
+};

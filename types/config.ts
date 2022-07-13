@@ -1,5 +1,3 @@
-import Gitalk from "gitalk";
-
 export interface Profile {
   name: string;
   description: string;
@@ -9,6 +7,5 @@ export interface Profile {
 }
 
 export interface AppConfig {
-  gitalk: Gitalk.GitalkOptions;
   profile: Profile;
 }

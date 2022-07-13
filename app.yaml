@@ -1,13 +1,6 @@
 profile:
   name: "default"
   description: "Default profile"
-  github: ''
-  email: ''
-gitalk:
-  accessToken: ''
-  clientID: ''
-  clientSecret: ''
-  repo: ''
-  owner: 'Juexro'
-  admin: 
-    - Juexro
+  github: /imgs/index.jpg
+  # 封面图
+  cover: /imgs/index.jpg

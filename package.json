@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@material/material-color-utilities": "^0.1.2",
-    "gitalk": "^1.7.2",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.5.1",
     "markdown-it": "^13.0.1",

@@ -24,7 +24,7 @@ export const getCategoryPosts = async (): Promise<CateGoryPost> => {
         }
         total[category].push({
           title: data.title,
-          pathName: "blog/" + pathName,
+          pathName: pathName,
           abstract: data.abstract,
           tags: data.tags,
           thumbnail: data.thumbnail,

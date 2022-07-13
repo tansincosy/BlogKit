@@ -48,8 +48,8 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           <link
-            rel="stylesheet"
             href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/styles/default.min.css"
+            rel="stylesheet"
           />
         </Head>
         <body>

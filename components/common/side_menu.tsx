@@ -81,6 +81,13 @@ export const SideMenu: React.FC<SideMenuProps> = ({
       },
       ...newCates,
       {
+        title: "所有标签",
+        href: "/tags",
+        icon: "tag",
+        exact: true,
+        top: true,
+      },
+      {
         title: "关于",
         icon: "skull",
         href: "/about",

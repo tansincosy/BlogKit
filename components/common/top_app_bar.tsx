@@ -11,7 +11,7 @@ export interface TopAppBarProps {
   categories: Category[];
 }
 
-export const TopAppBar = ({ appTitle, categories }: TopAppBarProps) => {
+export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
   const [isShowSideBar, setShowSideBar] = useState<boolean>(false);
   const router = useRouter();
   const { query } = router;
@@ -39,6 +39,10 @@ export const TopAppBar = ({ appTitle, categories }: TopAppBarProps) => {
         path: "/",
       },
       ...categories,
+      {
+        title: "所有标签",
+        path: "/tags",
+      },
       {
         title: "关于",
         path: "/about",
