@@ -31,7 +31,7 @@ const Category: NextPage<{
               return (
                 <Card
                   key={post.title}
-                  type="elevated"
+                  type="filled"
                   className="flex w-full md:w-auto md:basis-80 m-4 z-10 overflow-hidden flex-col shrink md:pb-5 cursor-pointer"
                 >
                   <Link href={`/blog/${post.pathName}`} passHref>
@@ -98,12 +98,13 @@ export const getStaticProps: GetStaticProps<any, any, Post[]> = async ({
   params: { name },
 }) => {
   const allPostCategory = await getCategoryPosts();
+  console.log("allPostCategory", allPostCategory);
   const posts = allPostCategory[name];
   return {
     props: {
       posts: posts,
       categoryTitle: name,
-      categories: getAllCategory(allPostCategory),
+      categories: getAllCategory(allPostCategory) || [],
     },
   };
 };

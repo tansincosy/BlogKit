@@ -54,11 +54,7 @@ export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
   return (
     <div
       className={singleLineClass(
-        `flex-none 
-         flex
-        item-center justify-center
-        fixed
-        h-16
+        `flex fixed h-16
         top-0 left-0 w-full box-border px-4 md:px-0
         z-30 
         bg-surface
@@ -66,7 +62,7 @@ export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
         `
       )}
     >
-      <div className="container flex items-center justify-between fixed mx-auto h-full overflow-hidden flex-none">
+      <div className="container flex items-center justify-between mx-auto h-full">
         <Icon
           onClick={onClickHandle}
           type="line"
@@ -89,11 +85,11 @@ export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
               ))}
           </div>
         </div>
-        <Icon
+        {/* <Icon
           name="search"
           type="line"
           className="w-12 h-12 text-[1.5rem] leading-[3rem] text-on-surface"
-        ></Icon>
+        ></Icon> */}
       </div>
       <SideMenu
         isVisible={isShowSideBar}

@@ -41,7 +41,9 @@ export const Layout = ({
   return (
     <div className="absolute flex left-0 right-0 bottom-0 top-0 flex-col">
       <TopAppBar categories={categories} appTitle={"ssss"} />
-      <section className="bg-background flex-1">{children}</section>
+      <section className="bg-background flex-1 pb-20 box-border">
+        {children}
+      </section>
       <Footer footers={footers}></Footer>
     </div>
   );

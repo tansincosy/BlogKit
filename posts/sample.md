@@ -1,12 +1,12 @@
 ---
 thumbnail: https://images.unsplash.com/photo-1656425311485-3c10dbcc9758?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60
-title: "Sample 4 "
-abstract: 使用github action 发布hexo 博客
+title: "Sample"
+abstract: "This is a sample post."
 tags:
   - Sample
   - java
 date: 2019-11-13 22:09:22
-category: 有机化学
+category: 例子
 emoji: 😎
 visible: true
 ---
