@@ -98,11 +98,10 @@ export const getStaticProps: GetStaticProps<any, any, Post[]> = async ({
   params: { name },
 }) => {
   const allPostCategory = await getCategoryPosts();
-  console.log("allPostCategory", allPostCategory);
   const posts = allPostCategory[name];
   return {
     props: {
-      posts: posts,
+      posts: posts || [],
       categoryTitle: name,
       categories: getAllCategory(allPostCategory) || [],
     },
