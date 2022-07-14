@@ -1,0 +1,37 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "default",
+    "home_page_url": "http://localhost:3000",
+    "feed_url": "http://localhost:3000/rss/feed.json",
+    "description": "Default profile",
+    "icon": "http://localhost:3000/favicon.ico",
+    "author": {
+        "name": "spd"
+    },
+    "items": [
+        {
+            "id": "Sample 4 ",
+            "content_html": "使用github action 发布hexo 博客",
+            "url": "http://localhost:3000/blog/sample",
+            "title": "Sample 4 ",
+            "summary": "使用github action 发布hexo 博客",
+            "date_modified": "2019-11-13T22:09:22.000Z"
+        },
+        {
+            "id": "Sample Sample ",
+            "content_html": "使用github action 发布hexo 博客",
+            "url": "http://localhost:3000/blog/test",
+            "title": "Sample Sample ",
+            "summary": "使用github action 发布hexo 博客",
+            "date_modified": "2019-11-13T22:09:22.000Z"
+        },
+        {
+            "id": "Sample ",
+            "content_html": "使用github action 发布hexo 博客",
+            "url": "http://localhost:3000/blog/test2",
+            "title": "Sample ",
+            "summary": "使用github action 发布hexo 博客",
+            "date_modified": "2019-11-13T22:09:22.000Z"
+        }
+    ]
+}

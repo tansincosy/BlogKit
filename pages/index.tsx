@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { GetStaticProps } from "next";
-import { readdirSync, readFileSync } from "fs";
+import { readFileSync } from "fs";
 import matter from "gray-matter";
 import Link from "next/link";
 import { Card, Chips, Layout } from "@/components";
@@ -13,6 +13,7 @@ import {
   getAllPosts,
   getCategoryPosts,
 } from "@/utils/read_file";
+import { generateRss } from "@/utils/generta_rss";
 
 const Home: NextPage<{
   posts: Post[];
@@ -110,7 +111,7 @@ export const getStaticProps: GetStaticProps<any, any, Post[]> = async () => {
   }) as Post[];
 
   const allPostCategory = await getCategoryPosts();
-
+  await generateRss();
   return {
     props: {
       posts: posts,

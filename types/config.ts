@@ -8,4 +8,7 @@ export interface Profile {
 
 export interface AppConfig {
   profile: Profile;
+  rss: {
+    path: string;
+  };
 }

@@ -1,3 +1,5 @@
+rss:
+  path: http://localhost:3000
 profile:
   name: "default"
   description: "Default profile"

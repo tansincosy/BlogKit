@@ -3,15 +3,17 @@ import { readdir, readFile, readFileSync } from "fs";
 import { promisify } from "util";
 import { Category, CateGoryPost, Post } from "@/types/post";
 import matter from "gray-matter";
+import Cache from "./cache";
+import { AppConfig } from "@/types/config";
+import { parse } from "yaml";
 
 const readDirAsync = promisify(readdir);
-let categoryPostCache: CateGoryPost = {};
 export const getCategoryPosts = async (): Promise<CateGoryPost> => {
-  if (!isEmpty(categoryPostCache)) {
-    return categoryPostCache;
+  if (!isEmpty(Cache.get("categoryPosts"))) {
+    return Cache.get("categoryPosts");
   }
   const posts = await getAllPosts();
-  categoryPostCache = {};
+  let categoryPostCache = {};
   if (posts.length > 0) {
     categoryPostCache = posts.reduce((total: Record<string, Post[]>, posts) => {
       const fileContent = readFileSync(`posts/${posts}`).toString();
@@ -32,6 +34,8 @@ export const getCategoryPosts = async (): Promise<CateGoryPost> => {
       }
       return total;
     }, {});
+    Cache.set("categoryPosts", {});
+    Cache.set("categoryPosts", categoryPostCache);
   }
   return categoryPostCache;
 };
@@ -46,17 +50,30 @@ export const getAllCategory = (cateGoryPost: CateGoryPost): Category[] => {
   }) as Category[];
 };
 
-let allPostCache: string[] = [];
 export const getAllPosts = async (): Promise<string[]> => {
-  if (allPostCache.length > 0) {
-    return allPostCache;
+  if (!isEmpty(Cache.get("allPosts"))) {
+    return Cache.get("allPosts");
   }
-  allPostCache = [];
+
+  let allPostCache: string[] = [];
   const files = (await readDirAsync("posts", "utf8")) || [];
   if (files.length > 0) {
     allPostCache = files.filter((filename) => {
       return filename.includes(".md") && !filename.startsWith("_");
     });
+    Cache.set("allPosts", allPostCache);
   }
   return allPostCache;
+};
+
+export const getAppConfig = (): AppConfig => {
+  if (!isEmpty(Cache.get("appConfig"))) {
+    return Cache.get("appConfig") as AppConfig;
+  }
+  const appConfigYaml = readFileSync("app.yaml", {
+    encoding: "utf-8",
+  });
+  const appConfig = parse(appConfigYaml) as AppConfig;
+  Cache.set("appConfig", appConfig);
+  return appConfig;
 };

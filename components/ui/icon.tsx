@@ -7,7 +7,7 @@ type IconProps = {
   onClick?: React.MouseEventHandler<HTMLElement>;
 };
 
-export const Icon: React.VFC<IconProps> = ({
+export const Icon: React.FC<IconProps> = ({
   name,
   type,
   className,

@@ -24,3 +24,10 @@ export type CateGoryPost = {
 export type Tag = {};
 
 export type Theme = "light" | "dark";
+
+export type FootLink = {
+  name: string;
+  id: string;
+  url: string;
+  icon: string;
+};
