@@ -26,12 +26,14 @@ const footers: FootLink[] = [
 export const Layout = ({
   children,
   categories,
+  themeColor,
 }: {
   children: ReactNode;
   categories: Category[];
+  themeColor?: string;
 }) => {
   useEffect(() => {
-    const theme = themeFromSourceColor(argbFromHex("#9b06f8"));
+    const theme = themeFromSourceColor(argbFromHex(themeColor || "#9b06f8"));
     const systemDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;

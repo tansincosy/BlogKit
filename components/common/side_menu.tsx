@@ -24,8 +24,8 @@ interface MenuProps {
 
 const MenuItem = forwardRef<HTMLAnchorElement, MenuProps>(
   ({ title, icon, href, onClick, badge, exact }, ref) => {
-    const { asPath, pathname } = useRouter();
-    const isActive = exact ? pathname === href : asPath.startsWith(href);
+    const { asPath } = useRouter();
+    const isActive = exact ? asPath === href : asPath.startsWith(href);
     return (
       <a
         ref={ref}
@@ -83,7 +83,7 @@ export const SideMenu: React.FC<SideMenuProps> = ({
       {
         title: "所有标签",
         href: "/tags",
-        icon: "tag",
+        icon: "hashtag",
         exact: true,
         top: true,
       },

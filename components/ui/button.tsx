@@ -1,5 +1,5 @@
 import { singleLineClass } from "@/utils";
-import React from "react";
+import React, { forwardRef } from "react";
 import { Icon } from "./icon";
 
 type ButtonType = "elevated" | "filled" | "outlined" | "text" | "tonal";
@@ -59,31 +59,31 @@ const disableClass = (disabled?: boolean, type?: ButtonType): string => {
   return "";
 };
 
-export const Button: React.FC<ButtonProps> = ({
-  icon,
-  children,
-  type = "elevated",
-  onClick,
-  disabled,
-  className = "",
-}) => {
-  return (
-    <button
-      onClick={onClick}
-      className={singleLineClass(
-        className,
-        icon ? "pl-4 pr-6" : "pl-6 pr-6",
-        `inline-flex justify-center items-center relative overflow-hidden cursor-pointer leading-none appearance-none box-border outline-none m-0 rounded-full h-10
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    { icon, children, type = "elevated", onClick, disabled, className = "" },
+    ref
+  ) => {
+    return (
+      <button
+        onClick={onClick}
+        className={singleLineClass(
+          className,
+          icon ? "pl-4 pr-6" : "pl-6 pr-6",
+          `inline-flex justify-center items-center relative overflow-hidden cursor-pointer leading-none appearance-none box-border outline-none m-0 rounded-full h-10
        ${disableClass(disabled, type)} ${buttonStyleMap[type]}
       `
-      )}
-    >
-      {icon && (
-        <span className="mr-2 text-[1.125rem] flex w-[1.125rem] h-[1.125rem]">
-          <Icon name={icon}></Icon>
-        </span>
-      )}
-      {children}
-    </button>
-  );
-};
+        )}
+      >
+        {icon && (
+          <span className="mr-2 text-[1.125rem] flex w-[1.125rem] h-[1.125rem]">
+            <Icon name={icon}></Icon>
+          </span>
+        )}
+        {children}
+      </button>
+    );
+  }
+);
+
+Button.displayName = "Button";

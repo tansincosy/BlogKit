@@ -53,3 +53,8 @@ export const arrayIsEmpty = (value: any): boolean => {
   }
   return Array.isArray(value) && value.length === 0;
 };
+
+//rgb to hex
+export const rgbToHex = ([r, g, b]: [r: number, g: number, g: number]) => {
+  return `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`;
+};

@@ -183,6 +183,9 @@ module.exports = {
                   color: theme("colors.on-surface"),
                 },
               },
+              mark: {
+                backgroundColor: theme("colors.on-primary-container:"),
+              },
               a: {
                 color: theme("colors.on-secondary-container"),
               },

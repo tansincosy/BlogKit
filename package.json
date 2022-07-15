@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@material/material-color-utilities": "^0.1.2",
+    "colorthief": "^2.3.2",
     "feed": "^4.2.2",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.5.1",

@@ -10,8 +10,8 @@ import { createHash } from "crypto";
 import { NextSeo } from "next-seo";
 import { getAllCategory, getCategoryPosts } from "@/utils/read_file";
 import { Category, Theme } from "@/types/post";
-import { useEffect, useState } from "react";
-
+import { getColor } from "colorthief";
+import { rgbToHex } from "@/utils";
 const PostDetail: NextPage<{
   id: string;
   content: string;
@@ -20,11 +20,12 @@ const PostDetail: NextPage<{
   appConfig: AppConfig;
   abstract: string;
   categories: Category[];
-}> = ({ content, thumbnail, title, id, abstract, categories }) => {
+  themeColor: string;
+}> = ({ content, thumbnail, title, id, abstract, categories, themeColor }) => {
   return (
     <>
       <NextSeo title={title} description={abstract}></NextSeo>
-      <Layout categories={categories}>
+      <Layout categories={categories} themeColor={themeColor}>
         <div className="overflow-hidden w-full h-72 md:h-96 relative mt-16 before:contents">
           <div
             className="w-full h-full bg-center bg-cover"
@@ -80,11 +81,9 @@ export const getStaticProps: GetStaticProps<any, any, any> = async ({
     const md5 = createHash("md5");
     return md5.update(saltStr).digest("hex");
   }
-
   const mdId = md5(filename, "md5");
-
   const allPostCategory = await getCategoryPosts();
-
+  const color = await getColor(data.thumbnail);
   return {
     props: {
       id: mdId,
@@ -96,6 +95,7 @@ export const getStaticProps: GetStaticProps<any, any, any> = async ({
       emoji: data.emoji || "",
       appConfig,
       categories: getAllCategory(allPostCategory),
+      themeColor: rgbToHex(color),
     },
   };
 };

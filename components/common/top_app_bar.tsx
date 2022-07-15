@@ -2,8 +2,8 @@ import { Category } from "@/types/post";
 import { singleLineClass } from "@/utils";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useMemo, useState } from "react";
-import { Icon } from "../index";
+import { useEffect, useMemo, useState } from "react";
+import { Button, Icon } from "../index";
 import { SideMenu } from "./side_menu";
 
 export interface TopAppBarProps {
@@ -13,10 +13,10 @@ export interface TopAppBarProps {
 
 export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
   const [isShowSideBar, setShowSideBar] = useState<boolean>(false);
-  const router = useRouter();
-  const { query } = router;
+  const [activeClass, setActiveClass] = useState("active");
+  const { asPath, isReady, push, query } = useRouter();
   const onClickHandle = () => {
-    if (router.query.source) {
+    if (query.source) {
       onRequestClose();
     } else {
       setShowSideBar(true);
@@ -25,12 +25,19 @@ export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
   const closeSlideBar = () => setShowSideBar(false);
 
   const onRequestClose = () => {
-    router.push(`/genre/${query.genreId}`);
+    push(`/genre/${query.genreId}`);
   };
 
   const targetHomePage = () => {
-    router.push("/");
+    push("/");
   };
+
+  useEffect(() => {
+    if (isReady) {
+      const activePathname = new URL(asPath, location.href).pathname;
+      setActiveClass(decodeURI(activePathname));
+    }
+  }, [asPath, isReady]);
 
   const mainNavs = useMemo(() => {
     const staticMenu = [
@@ -66,7 +73,7 @@ export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
         <Icon
           onClick={onClickHandle}
           type="line"
-          name={router.query.source ? "arrow-left-s" : "menu"}
+          name={query.source ? "arrow-left-s" : "menu"}
           className="w-12 h-12 text-[1.5rem] leading-[3rem] cursor-pointer text-on-surface md:hidden"
         ></Icon>
         <div
@@ -76,11 +83,16 @@ export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
           {appTitle || "InkanTV"}
         </div>
         <div className="title-medium text-on-surface w-full hidden md:block">
-          <div className="flex space-x-9 justify-end mr-8">
+          <div className="flex space-x-2 justify-end mr-8">
             {mainNavs.length > 0 &&
               mainNavs.map((cate) => (
                 <Link href={`${cate.path}`} passHref key={cate.title}>
-                  <a className="text-on-surface-variant">{cate.title}</a>
+                  <Button
+                    className="text-on-surface-variant"
+                    type={cate.path === activeClass ? "filled" : "text"}
+                  >
+                    {cate.title}
+                  </Button>
                 </Link>
               ))}
           </div>

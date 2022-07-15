@@ -1,5 +1,5 @@
 import { isEmpty } from "./index";
-import { readdir, readFile, readFileSync } from "fs";
+import { readdir, readFileSync } from "fs";
 import { promisify } from "util";
 import { Category, CateGoryPost, Post } from "@/types/post";
 import matter from "gray-matter";
