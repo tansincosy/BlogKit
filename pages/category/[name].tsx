@@ -5,15 +5,17 @@ import { Card, Chips, Layout } from "@/components";
 import { Category, Post } from "@/types/post";
 import { getAllCategory, getCategoryPosts } from "@/utils/read_file";
 import { arrayIsEmpty } from "@/utils";
+import { getThemeColor } from "@/utils/getThemeColor";
 
 const Category: NextPage<{
   posts: Post[];
   categories: Category[];
   categoryTitle: string;
-}> = ({ posts, categories, categoryTitle }) => {
+  themeColor: string;
+}> = ({ posts, categories, categoryTitle, themeColor }) => {
   return (
     <>
-      <Layout categories={categories}>
+      <Layout categories={categories} themeColor={themeColor}>
         <div className="overflow-hidden w-full h-80 md:h-96 relative mt-16">
           <div
             className="w-full h-full bg-center bg-cover"
@@ -104,6 +106,7 @@ export const getStaticProps: GetStaticProps<any, any, Post[]> = async ({
       posts: posts || [],
       categoryTitle: name,
       categories: getAllCategory(allPostCategory) || [],
+      themeColor: await getThemeColor("public/imgs/work.jpg"),
     },
   };
 };

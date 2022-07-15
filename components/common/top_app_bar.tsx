@@ -88,7 +88,7 @@ export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
               mainNavs.map((cate) => (
                 <Link href={`${cate.path}`} passHref key={cate.title}>
                   <Button
-                    className="text-on-surface-variant"
+                    className="text-on-surface-variant title-medium"
                     type={cate.path === activeClass ? "filled" : "text"}
                   >
                     {cate.title}

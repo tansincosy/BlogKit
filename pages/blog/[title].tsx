@@ -9,9 +9,8 @@ import { AppConfig } from "@/types/config";
 import { createHash } from "crypto";
 import { NextSeo } from "next-seo";
 import { getAllCategory, getCategoryPosts } from "@/utils/read_file";
-import { Category, Theme } from "@/types/post";
-import { getColor } from "colorthief";
-import { rgbToHex } from "@/utils";
+import { Category } from "@/types/post";
+import { getThemeColor } from "@/utils/getThemeColor";
 const PostDetail: NextPage<{
   id: string;
   content: string;
@@ -83,7 +82,6 @@ export const getStaticProps: GetStaticProps<any, any, any> = async ({
   }
   const mdId = md5(filename, "md5");
   const allPostCategory = await getCategoryPosts();
-  const color = await getColor(data.thumbnail);
   return {
     props: {
       id: mdId,
@@ -95,7 +93,7 @@ export const getStaticProps: GetStaticProps<any, any, any> = async ({
       emoji: data.emoji || "",
       appConfig,
       categories: getAllCategory(allPostCategory),
-      themeColor: rgbToHex(color),
+      themeColor: await getThemeColor(data.thumbnail),
     },
   };
 };

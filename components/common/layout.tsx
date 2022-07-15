@@ -33,11 +33,11 @@ export const Layout = ({
   themeColor?: string;
 }) => {
   useEffect(() => {
-    const theme = themeFromSourceColor(argbFromHex(themeColor || "#9b06f8"));
+    const theme = themeFromSourceColor(argbFromHex(themeColor || "#066bf8"));
     const systemDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
-    applyTheme(theme, { target: document.body, dark: systemDark });
+    applyTheme(theme, { target: document.body, dark: false });
   }, []);
 
   return (

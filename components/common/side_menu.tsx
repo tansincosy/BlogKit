@@ -52,7 +52,6 @@ const MenuItem = forwardRef<HTMLAnchorElement, MenuProps>(
   }
 );
 MenuItem.displayName = "MenuItem";
-
 export const SideMenu: React.FC<SideMenuProps> = ({
   isVisible,
   onClose,
