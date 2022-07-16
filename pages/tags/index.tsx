@@ -7,11 +7,13 @@ import { Chips, Layout } from "@/components";
 import { Category, Post } from "@/types/post";
 import { NextSeo } from "next-seo";
 import { getAllCategory, getCategoryPosts } from "@/utils/read_file";
+import { useRouter } from "next/router";
 
 const Tag: NextPage<{
   postTags: Record<string, Post[]>;
   categories: Category[];
 }> = ({ postTags, categories }) => {
+  const { push } = useRouter();
   return (
     <>
       <NextSeo title="标签" description="标签"></NextSeo>
@@ -28,7 +30,14 @@ const Tag: NextPage<{
             const currentPosts = postTags[tag];
             return (
               <div key={tag}>
-                <Chips type={"input"}>{tag}</Chips>
+                <Chips
+                  type={"input"}
+                  onClick={() => {
+                    push(`/tags/${tag}`);
+                  }}
+                >
+                  {tag}
+                </Chips>
                 <div className="mt-4 md:mt-8">
                   {currentPosts.map((post) => {
                     return (

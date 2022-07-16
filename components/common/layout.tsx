@@ -1,4 +1,5 @@
-import { Category, FootLink } from "@/types/post";
+import { contact } from "@/appConfig";
+import { Category } from "@/types/post";
 import {
   applyTheme,
   argbFromHex,
@@ -7,21 +8,6 @@ import {
 import React, { ReactNode, useEffect } from "react";
 import Footer from "./footer";
 import { TopAppBar } from "./top_app_bar";
-
-const footers: FootLink[] = [
-  {
-    id: "github",
-    name: "GitHub",
-    icon: "github",
-    url: "https://github.com/tansincosy",
-  },
-  {
-    id: "rss",
-    name: "RSS 订阅",
-    icon: "rss",
-    url: "/rss/feed.xml",
-  },
-];
 
 export const Layout = ({
   children,
@@ -37,8 +23,17 @@ export const Layout = ({
     const systemDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
-    applyTheme(theme, { target: document.body, dark: false });
+    applyTheme(theme, { target: document.body, dark: systemDark });
   }, []);
+
+  const footers = Object.keys(contact).map((item: string) => {
+    return {
+      id: item,
+      name: contact[item].name,
+      icon: contact[item].icon,
+      url: contact[item].url,
+    };
+  });
 
   return (
     <div className="absolute flex left-0 right-0 bottom-0 top-0 flex-col">

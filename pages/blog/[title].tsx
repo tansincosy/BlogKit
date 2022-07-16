@@ -4,8 +4,6 @@ import { join } from "path";
 import matter from "gray-matter";
 import { Layout, Comment } from "@/components";
 import { renderMarkdown } from "@/utils/md";
-import YAML from "yaml";
-import { AppConfig } from "@/types/config";
 import { createHash } from "crypto";
 import { NextSeo } from "next-seo";
 import { getAllCategory, getCategoryPosts } from "@/utils/read_file";
@@ -16,7 +14,6 @@ const PostDetail: NextPage<{
   content: string;
   thumbnail: string;
   title: string;
-  appConfig: AppConfig;
   abstract: string;
   categories: Category[];
   themeColor: string;
@@ -68,8 +65,6 @@ export const getStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<any, any, any> = async ({
   params: { title },
 }) => {
-  const yamlFiles = readFileSync("app.yaml", "utf8");
-  const appConfig = YAML.parse(yamlFiles) as AppConfig;
   const filename = title + ".md";
   const fileContent = readFileSync(join("posts", filename));
   const contentStr = fileContent.toString("utf-8");
@@ -91,7 +86,6 @@ export const getStaticProps: GetStaticProps<any, any, any> = async ({
       abstract: data.abstract || "",
       tags: data.tags || [],
       emoji: data.emoji || "",
-      appConfig,
       categories: getAllCategory(allPostCategory),
       themeColor: await getThemeColor(data.thumbnail),
     },

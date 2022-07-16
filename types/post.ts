@@ -21,13 +21,24 @@ export type CateGoryPost = {
   [key: string]: Post[];
 };
 
-export type Tag = {};
-
-export type Theme = "light" | "dark";
+export type TagPost = {
+  [key: string]: Post[];
+};
 
 export type FootLink = {
   name: string;
-  id: string;
+  id?: string;
   url: string;
   icon: string;
 };
+
+export interface Contact {
+  [key: string]: FootLink;
+}
+
+export interface Profile {
+  title: string;
+  subtitle: string;
+  thumbnail: string;
+  themeColor?: string;
+}

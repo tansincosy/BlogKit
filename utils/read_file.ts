@@ -1,11 +1,45 @@
-import { isEmpty } from "./index";
+import { arrayIsEmpty, isEmpty } from "./index";
 import { readdir, readFileSync } from "fs";
 import { promisify } from "util";
-import { Category, CateGoryPost, Post } from "@/types/post";
+import { Category, CateGoryPost, Post, TagPost } from "@/types/post";
 import matter from "gray-matter";
 import Cache from "./cache";
-import { AppConfig } from "@/types/config";
-import { parse } from "yaml";
+
+export const getTagPost = async (): Promise<TagPost> => {
+  if (!isEmpty(Cache.get("tagPosts"))) {
+    return Cache.get("tagPosts");
+  }
+  const posts = await getAllPosts();
+  let tagPostCache = {};
+  if (posts.length > 0) {
+    tagPostCache = posts.reduce((total: Record<string, Post[]>, posts) => {
+      const fileContent = readFileSync(`posts/${posts}`).toString();
+      let pathName = posts.replace(".md", "");
+      const { data } = matter(fileContent) || {};
+      if (!arrayIsEmpty(data.tags)) {
+        const tags = data.tags;
+        if (!arrayIsEmpty(tags)) {
+          tags.forEach((tag: string) => {
+            if (!total[tag]) {
+              total[tag] = [];
+            }
+            total[tag].push({
+              title: data.title,
+              pathName: pathName,
+              abstract: data.abstract,
+              tags: data.tags,
+              thumbnail: data.thumbnail,
+            });
+          });
+        }
+      }
+      return total;
+    }, {});
+    Cache.set("tagPosts", {});
+    Cache.set("tagPosts", tagPostCache);
+  }
+  return tagPostCache;
+};
 
 const readDirAsync = promisify(readdir);
 export const getCategoryPosts = async (): Promise<CateGoryPost> => {
@@ -64,16 +98,4 @@ export const getAllPosts = async (): Promise<string[]> => {
     Cache.set("allPosts", allPostCache);
   }
   return allPostCache;
-};
-
-export const getAppConfig = (): AppConfig => {
-  if (!isEmpty(Cache.get("appConfig"))) {
-    return Cache.get("appConfig") as AppConfig;
-  }
-  const appConfigYaml = readFileSync("app.yaml", {
-    encoding: "utf-8",
-  });
-  const appConfig = parse(appConfigYaml) as AppConfig;
-  Cache.set("appConfig", appConfig);
-  return appConfig;
 };

@@ -9,6 +9,7 @@ interface ChipsProps {
   className?: string;
   icon?: string;
   children?: React.ReactNode;
+  onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
 const chipsClasses: Record<ChipType, string> = {
@@ -23,9 +24,11 @@ export const Chips: React.FC<ChipsProps> = ({
   children,
   className = "",
   icon,
+  onClick,
 }) => {
   return (
     <div
+      onClick={onClick}
       className={singleLineClass(
         chipsClasses[type],
         "border border-outline bg-surface text-on-surface label-large cursor-pointer z-10 box-border px-4 h-8 rounded-md inline-flex items-center",

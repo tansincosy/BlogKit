@@ -1,17 +1,17 @@
 import { Feed } from "feed";
 import { mkdirSync, readFileSync, writeFileSync } from "fs";
 import matter from "gray-matter";
-import { getAllPosts, getAppConfig } from "./read_file";
+import { getAllPosts } from "./read_file";
+import { config, profile } from "@/appConfig";
 export async function generateRss() {
   const allPosts = await getAllPosts();
-  const appConfig = getAppConfig();
-  const siteURL = appConfig.rss.path;
+  const siteURL = config.siteURL;
   const date = new Date();
   const feed = new Feed({
-    title: appConfig.profile.name,
-    description: appConfig.profile.description,
-    id: appConfig.rss.path,
-    link: appConfig.rss.path,
+    title: profile.title,
+    description: profile.subtitle,
+    id: config.siteURL,
+    link: config.siteURL,
     image: `${siteURL}/favicon.ico`,
     favicon: `${siteURL}/favicon.ico`,
     copyright: `All rights reserved ${date.getFullYear()}`,
