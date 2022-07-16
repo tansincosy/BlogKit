@@ -6,31 +6,48 @@ on:
     branches:
       - master
 jobs:
-  builds:
+  blog_build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [10.x]
-
     steps:
-      - uses: actions/checkout@v1
-      - name: begin setup node
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: "10.x"
+          node-version: "16.x"
+      - name: install depths
+        run: yarn
+      - name: build
+        run: yarn build
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.BLOG_TOKEN }}
+          publish_dir: ./out
 
-      - name: setup blog env
-        env:
-          ACTION_DEPLOY_KEY: ${{secrets.BLOG_ACTION}}
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          git config --global user.name 'tansincosy'
-          git config --global user.email '805841483@qq.com'
-          yarn
-          yarn run build
-      - name: blog publish
-        run: |
-          hexo g -d
+  #     - name: upload to artifact
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: blog
+  #         path: out/
+      
+  # blog_deploy:
+  #   needs: [blog_build]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: download from artifact
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: blog
+  #     - name: commit out file
+  #       run: |
+  #         git init
+  #         git config --local user.email "charlesmaxwellyoung@gmail.com"
+  #         git config --local user.name "tansincosy"
+  #         git add .
+  #         git commit -m "add pages by github bot" -a
+  #     - name: push_pages
+  #       uses: ad-m/github-push-action@master
+  #       with:
+  #         token: "${BLOG_TOKEN}"
+  #         owner: "tansincosy"
+  #         branch: "pages"
+  #         message: "add pages"

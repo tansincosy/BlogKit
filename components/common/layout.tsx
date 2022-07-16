@@ -24,7 +24,7 @@ export const Layout = ({
       "(prefers-color-scheme: dark)"
     ).matches;
     applyTheme(theme, { target: document.body, dark: systemDark });
-  }, []);
+  }, [themeColor]);
 
   const footers = Object.keys(contact).map((item: string) => {
     return {
