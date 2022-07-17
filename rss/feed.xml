@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>sample</title>
-        <link>http://localhost:3000</link>
+        <link>https://tansincosy.github.io/Blog/</link>
         <description>subtitle</description>
-        <lastBuildDate>Sun, 17 Jul 2022 15:32:15 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 17 Jul 2022 16:19:24 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for Node.js</generator>
         <image>
             <title>sample</title>
-            <url>http://localhost:3000/favicon.ico</url>
-            <link>http://localhost:3000</link>
+            <url>https://tansincosy.github.io/Blog//favicon.ico</url>
+            <link>https://tansincosy.github.io/Blog/</link>
         </image>
         <copyright>All rights reserved 2022</copyright>
         <item>
             <title><![CDATA[Sample]]></title>
-            <link>http://localhost:3000/blog/sample</link>
+            <link>https://tansincosy.github.io/Blog//blog/sample</link>
             <guid>Sample</guid>
             <pubDate>Wed, 13 Nov 2019 22:09:22 GMT</pubDate>
             <description><![CDATA[This is a sample post.]]></description>

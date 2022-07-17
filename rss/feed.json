@@ -1,10 +1,10 @@
 {
     "version": "https://jsonfeed.org/version/1",
     "title": "sample",
-    "home_page_url": "http://localhost:3000",
-    "feed_url": "http://localhost:3000/rss/feed.json",
+    "home_page_url": "https://tansincosy.github.io/Blog/",
+    "feed_url": "https://tansincosy.github.io/Blog//rss/feed.json",
     "description": "subtitle",
-    "icon": "http://localhost:3000/favicon.ico",
+    "icon": "https://tansincosy.github.io/Blog//favicon.ico",
     "author": {
         "name": "spd"
     },
@@ -12,7 +12,7 @@
         {
             "id": "Sample",
             "content_html": "This is a sample post.",
-            "url": "http://localhost:3000/blog/sample",
+            "url": "https://tansincosy.github.io/Blog//blog/sample",
             "title": "Sample",
             "summary": "This is a sample post.",
             "date_modified": "2019-11-13T22:09:22.000Z"
