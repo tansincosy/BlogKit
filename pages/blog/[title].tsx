@@ -9,6 +9,7 @@ import { NextSeo } from "next-seo";
 import { getAllCategory, getCategoryPosts } from "@/utils/read_file";
 import { Category } from "@/types/post";
 import { getThemeColor } from "@/utils/getThemeColor";
+import { getActuallyImagePath } from "@/utils/path";
 const PostDetail: NextPage<{
   id: string;
   content: string;
@@ -26,7 +27,7 @@ const PostDetail: NextPage<{
           <div
             className="w-full h-full bg-center bg-cover"
             style={{
-              backgroundImage: `url(${thumbnail})`,
+              backgroundImage: `url(${getActuallyImagePath(thumbnail)})`,
             }}
           ></div>
           <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center text-secondary">

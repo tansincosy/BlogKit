@@ -35,6 +35,7 @@ export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
   useEffect(() => {
     if (isReady) {
       const activePathname = new URL(asPath, location.href).pathname;
+      console.log("decodeURI(activePathname)", decodeURI(activePathname));
       setActiveClass(decodeURI(activePathname));
     }
   }, [asPath, isReady]);
@@ -86,10 +87,16 @@ export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
           <div className="flex space-x-2 justify-end mr-8">
             {mainNavs.length > 0 &&
               mainNavs.map((cate) => (
-                <Link href={`${cate.path}`} passHref key={cate.title}>
+                <Link href={`${cate.path}/`} key={cate.title}>
                   <Button
                     className="text-on-surface-variant title-medium"
-                    type={cate.path === activeClass ? "filled" : "text"}
+                    type={
+                      cate.path === "/" && activeClass === cate.path
+                        ? "filled"
+                        : cate.path + "/" === activeClass
+                        ? "filled"
+                        : "text"
+                    }
                   >
                     {cate.title}
                   </Button>

@@ -1,7 +1,7 @@
 import { Contact } from "./types/post";
 
 export const config = {
-  siteURL: "http://localhost:3000",
+  siteURL: "https://tansincosy.github.io/Blog/",
 };
 
 //个人全局配置
@@ -22,7 +22,7 @@ export const contact: Contact = {
   rss: {
     name: "RSS",
     icon: "rss",
-    url: "/rss/feed.xml",
+    url: config.siteURL + "/rss/feed.xml",
   },
   gmail: {
     name: "Gmail",

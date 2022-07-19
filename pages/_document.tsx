@@ -1,3 +1,4 @@
+import actuallyAssetsPrefix from "@/utils/path";
 import Document, {
   Html,
   Head,
@@ -40,6 +41,10 @@ class MyDocument extends Document {
           <meta name="msapplication-tap-highlight" content="no" />
           <meta name="theme-color" content="#000000" />
           <link
+            rel="shortcut icon"
+            href={actuallyAssetsPrefix("favicon.ico")}
+          />
+          <link
             href="https://fonts.font.im/css?family=Roboto:400,500"
             rel="stylesheet"
           />
@@ -48,7 +53,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           <link
-            href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/styles/default.min.css"
+            href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/styles/default.min.css"
             rel="stylesheet"
           />
         </Head>

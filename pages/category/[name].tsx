@@ -6,6 +6,7 @@ import { Category, Post } from "@/types/post";
 import { getAllCategory, getCategoryPosts } from "@/utils/read_file";
 import { arrayIsEmpty } from "@/utils";
 import { getThemeColor } from "@/utils/getThemeColor";
+import { getActuallyImagePath } from "@/utils/path";
 
 const Category: NextPage<{
   posts: Post[];
@@ -20,7 +21,7 @@ const Category: NextPage<{
           <div
             className="w-full h-full bg-center bg-cover"
             style={{
-              backgroundImage: `url(${"/imgs/work.jpg"})`,
+              backgroundImage: `url(${getActuallyImagePath("/imgs/work.jpg")})`,
             }}
           ></div>
           <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center text-primary">

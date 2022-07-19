@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import { GetStaticProps } from "next";
 import { readFileSync } from "fs";
 import matter from "gray-matter";
-import Link from "next/link";
 import { Card, Chips, Layout } from "@/components";
 import { Category, Post, Profile } from "@/types/post";
 import { NextSeo } from "next-seo";
@@ -14,6 +13,7 @@ import {
 import { generateRss } from "@/utils/generta_rss";
 import { profile } from "@/appConfig";
 import { useRouter } from "next/router";
+import { getActuallyImagePath } from "@/utils/path";
 
 const Home: NextPage<{
   posts: Post[];
@@ -29,7 +29,9 @@ const Home: NextPage<{
           <div
             className="w-full h-full bg-center bg-cover"
             style={{
-              backgroundImage: `url(${profile.thumbnail})`,
+              backgroundImage: `url(${getActuallyImagePath(
+                profile.thumbnail
+              )})`,
             }}
           ></div>
           <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center text-primary">
