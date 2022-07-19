@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import Link, { LinkProps } from "next/link";
 import React, { useState, useEffect, ReactElement, Children } from "react";
-import { Button } from "../ui/button";
 
 type ActiveLinkProps = LinkProps & {
   children: ReactElement;
@@ -22,14 +21,10 @@ const ActiveLink = ({
   useEffect(() => {
     // Check if the router fields are updated client-side
     if (isReady) {
-      // Dynamic route will be matched via props.as
-      // Static route will be matched via props.href
       const linkPathname = new URL(
         (props.as || props.href) as string,
         location.href
       ).pathname;
-
-      // Using URL().pathname to get rid of query and hash
       const activePathname = new URL(asPath, location.href).pathname;
 
       const newClassName =

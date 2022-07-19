@@ -1,7 +1,7 @@
 import { Contact } from "./types/post";
 
 export const config = {
-  siteURL: "https://tansincosy.github.io/Blog/",
+  siteURL: "https://tansincosy.github.io/BlogKit/",
 };
 
 //个人全局配置
@@ -13,6 +13,7 @@ export const profile = {
 };
 
 //链接配置
+//图标使用remixIcon: https://remixicon.com/
 export const contact: Contact = {
   github: {
     name: "GitHub",
@@ -27,6 +28,6 @@ export const contact: Contact = {
   gmail: {
     name: "Gmail",
     icon: "mail",
-    url: "mailto:charlesmaxwellyoung@gmail.com",
+    url: "mailto:xxxx@xxx.com",
   },
 };

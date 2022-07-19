@@ -81,7 +81,7 @@ export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
           className="text-on-surface title-large ml-6 mr-6 w-full md:w-auto text-center"
           onClick={targetHomePage}
         >
-          {appTitle || "InkanTV"}
+          {appTitle || "Blog"}
         </div>
         <div className="title-medium text-on-surface w-full hidden md:block">
           <div className="flex space-x-2 justify-end mr-8">
