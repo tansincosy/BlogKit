@@ -2,13 +2,12 @@ import type { NextPage } from "next";
 import { GetStaticProps } from "next";
 import { readFileSync } from "fs";
 import { Layout } from "@/components";
-import { Category, Post } from "@/types/post";
 import { NextSeo } from "next-seo";
 import { renderMarkdown } from "@/utils/md";
 import { existsSync } from "fs";
 import { getAllCategory, getCategoryPosts } from "@/utils/read_file";
 
-const Tag: NextPage<{ content: string; categories: Category[] }> = ({
+const Tag: NextPage<{ content: string; categories: Blog.Category[] }> = ({
   content,
   categories,
 }) => {
@@ -38,7 +37,11 @@ const Tag: NextPage<{ content: string; categories: Category[] }> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps<any, any, Post[]> = async () => {
+export const getStaticProps: GetStaticProps<
+  any,
+  any,
+  Blog.Post[]
+> = async () => {
   let aboutContentMd = "";
   if (existsSync("posts/_about.md")) {
     aboutContentMd = readFileSync("posts/_about.md", {

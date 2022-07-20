@@ -1,18 +1,17 @@
 import { arrayIsEmpty, isEmpty } from "./index";
 import { readdir, readFileSync } from "fs";
 import { promisify } from "util";
-import { Category, CateGoryPost, Post, TagPost } from "@/types/post";
 import matter from "gray-matter";
 import Cache from "./cache";
 
-export const getTagPost = async (): Promise<TagPost> => {
+export const getTagPost = async (): Promise<Blog.TagPost> => {
   if (!isEmpty(Cache.get("tagPosts"))) {
     return Cache.get("tagPosts");
   }
   const posts = await getAllPosts();
   let tagPostCache = {};
   if (posts.length > 0) {
-    tagPostCache = posts.reduce((total: Record<string, Post[]>, posts) => {
+    tagPostCache = posts.reduce((total: Record<string, Blog.Post[]>, posts) => {
       const fileContent = readFileSync(`posts/${posts}`).toString();
       let pathName = posts.replace(".md", "");
       const { data } = matter(fileContent) || {};
@@ -42,46 +41,51 @@ export const getTagPost = async (): Promise<TagPost> => {
 };
 
 const readDirAsync = promisify(readdir);
-export const getCategoryPosts = async (): Promise<CateGoryPost> => {
+export const getCategoryPosts = async (): Promise<Blog.CateGoryPost> => {
   if (!isEmpty(Cache.get("categoryPosts"))) {
     return Cache.get("categoryPosts");
   }
   const posts = await getAllPosts();
   let categoryPostCache = {};
   if (posts.length > 0) {
-    categoryPostCache = posts.reduce((total: Record<string, Post[]>, posts) => {
-      const fileContent = readFileSync(`posts/${posts}`).toString();
-      let pathName = posts.replace(".md", "");
-      const { data } = matter(fileContent) || {};
-      if (!isEmpty(data.category)) {
-        const category = data.category;
-        if (!total[category]) {
-          total[category] = [];
+    categoryPostCache = posts.reduce(
+      (total: Record<string, Blog.Post[]>, posts) => {
+        const fileContent = readFileSync(`posts/${posts}`).toString();
+        let pathName = posts.replace(".md", "");
+        const { data } = matter(fileContent) || {};
+        if (!isEmpty(data.category)) {
+          const category = data.category;
+          if (!total[category]) {
+            total[category] = [];
+          }
+          total[category].push({
+            title: data.title,
+            pathName: pathName,
+            abstract: data.abstract,
+            tags: data.tags,
+            thumbnail: data.thumbnail,
+          });
         }
-        total[category].push({
-          title: data.title,
-          pathName: pathName,
-          abstract: data.abstract,
-          tags: data.tags,
-          thumbnail: data.thumbnail,
-        });
-      }
-      return total;
-    }, {});
+        return total;
+      },
+      {}
+    );
     Cache.set("categoryPosts", {});
     Cache.set("categoryPosts", categoryPostCache);
   }
   return categoryPostCache;
 };
 
-export const getAllCategory = (cateGoryPost: CateGoryPost): Category[] => {
+export const getAllCategory = (
+  cateGoryPost: Blog.CateGoryPost
+): Blog.Category[] => {
   return Object.keys(cateGoryPost).map((key: string) => {
     return {
       title: key,
       path: `/category/${key}`,
       badge: cateGoryPost[key].length,
     };
-  }) as Category[];
+  }) as Blog.Category[];
 };
 
 export const getAllPosts = async (): Promise<string[]> => {

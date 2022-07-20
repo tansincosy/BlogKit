@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import { Layout } from "@/components";
-import { Category, Post } from "@/types/post";
 import { NextSeo } from "next-seo";
 import {
   getAllCategory,
@@ -12,8 +11,8 @@ import {
 import { arrayIsEmpty, isEmpty } from "@/utils";
 
 const Tag: NextPage<{
-  postTags: Post[];
-  categories: Category[];
+  postTags: Blog.Post[];
+  categories: Blog.Category[];
   title: string;
 }> = ({ postTags, categories, title }) => {
   return (
@@ -64,7 +63,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<any, any, Post[]> = async ({
+export const getStaticProps: GetStaticProps<any, any, Blog.Post[]> = async ({
   params: { id },
 }) => {
   const tagPostAll = await getTagPost();

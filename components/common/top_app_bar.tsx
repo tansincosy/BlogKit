@@ -1,4 +1,3 @@
-import { Category } from "@/types/post";
 import { singleLineClass } from "@/utils";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -8,10 +7,13 @@ import { SideMenu } from "./side_menu";
 
 export interface TopAppBarProps {
   appTitle?: string;
-  categories: Category[];
+  categories: Blog.Category[];
 }
 
-export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
+export const TopAppBar = ({
+  appTitle = "",
+  categories = [],
+}: TopAppBarProps) => {
   const [isShowSideBar, setShowSideBar] = useState<boolean>(false);
   const [activeClass, setActiveClass] = useState("active");
   const { asPath, isReady, push, query } = useRouter();
@@ -25,7 +27,7 @@ export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
   const closeSlideBar = () => setShowSideBar(false);
 
   const onRequestClose = () => {
-    push(`/genre/${query.genreId}`);
+    push(`genre/${query.genreId}`);
   };
 
   const targetHomePage = () => {
@@ -35,7 +37,6 @@ export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
   useEffect(() => {
     if (isReady) {
       const activePathname = new URL(asPath, location.href).pathname;
-      console.log("decodeURI(activePathname)", decodeURI(activePathname));
       setActiveClass(decodeURI(activePathname));
     }
   }, [asPath, isReady]);
@@ -78,7 +79,7 @@ export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
           className="w-12 h-12 text-[1.5rem] leading-[3rem] cursor-pointer text-on-surface md:hidden"
         ></Icon>
         <div
-          className="text-on-surface title-large ml-6 mr-6 w-full md:w-auto text-center"
+          className="text-on-surface title-large ml-6 mr-6 w-full md:w-auto text-center cursor-pointer"
           onClick={targetHomePage}
         >
           {appTitle || "Blog"}
@@ -87,7 +88,7 @@ export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
           <div className="flex space-x-2 justify-end mr-8">
             {mainNavs.length > 0 &&
               mainNavs.map((cate) => (
-                <Link href={`${cate.path}/`} key={cate.title}>
+                <Link href={`${cate.path}`} key={cate.title}>
                   <Button
                     className="text-on-surface-variant title-medium"
                     type={
@@ -104,16 +105,17 @@ export const TopAppBar = ({ appTitle, categories = [] }: TopAppBarProps) => {
               ))}
           </div>
         </div>
-        {/* <Icon
+        <Icon
           name="search"
           type="line"
-          className="w-12 h-12 text-[1.5rem] leading-[3rem] text-on-surface"
-        ></Icon> */}
+          className="w-12 h-12 text-[1.5rem] leading-[3rem] text-on-surface cursor-pointer"
+        ></Icon>
       </div>
       <SideMenu
         isVisible={isShowSideBar}
         onClose={closeSlideBar}
         categories={categories}
+        appTitle={appTitle}
       ></SideMenu>
     </div>
   );

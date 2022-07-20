@@ -4,12 +4,11 @@ import Drawer from "rc-drawer";
 import React, { forwardRef, useMemo } from "react";
 import { Icon } from "../ui/icon";
 import Link from "next/link";
-import { Category } from "@/types/post";
 interface SideMenuProps {
   isVisible: boolean;
   appTitle?: string;
   onClose: () => void;
-  categories: Category[];
+  categories: Blog.Category[];
 }
 
 interface MenuProps {

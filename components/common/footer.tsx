@@ -1,9 +1,8 @@
-import { FootLink } from "@/types/post";
 import { arrayIsEmpty } from "@/utils";
 import { Icon } from "../ui/icon";
 
-const Footer: React.FC<{ footers: FootLink[] }> = ({ footers }) => {
-  const clickHandle = (footerObj: FootLink) => {
+const Footer: React.FC<{ footers: Blog.FootLink[] }> = ({ footers }) => {
+  const clickHandle = (footerObj: Blog.FootLink) => {
     window.open(footerObj.url, "_blank");
   };
   return (

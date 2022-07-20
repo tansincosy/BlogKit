@@ -2,16 +2,15 @@ import { Feed } from "feed";
 import { mkdirSync, readFileSync, writeFileSync } from "fs";
 import matter from "gray-matter";
 import { getAllPosts } from "./read_file";
-import { config, profile } from "@/appConfig";
+import { siteURL, profile } from "@/config";
 export async function generateRss() {
   const allPosts = await getAllPosts();
-  const siteURL = config.siteURL;
   const date = new Date();
   const feed = new Feed({
     title: profile.title,
     description: profile.subtitle,
-    id: config.siteURL,
-    link: config.siteURL,
+    id: siteURL,
+    link: siteURL,
     image: `${siteURL}/favicon.ico`,
     favicon: `${siteURL}/favicon.ico`,
     copyright: `All rights reserved ${date.getFullYear()}`,

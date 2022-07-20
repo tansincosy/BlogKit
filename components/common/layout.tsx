@@ -1,5 +1,4 @@
-import { contact } from "@/appConfig";
-import { Category } from "@/types/post";
+import { contact } from "@/config";
 import {
   applyTheme,
   argbFromHex,
@@ -15,7 +14,7 @@ export const Layout = ({
   themeColor,
 }: {
   children: ReactNode;
-  categories: Category[];
+  categories: Blog.Category[];
   themeColor?: string;
 }) => {
   useEffect(() => {

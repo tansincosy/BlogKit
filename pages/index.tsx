@@ -3,7 +3,6 @@ import { GetStaticProps } from "next";
 import { readFileSync } from "fs";
 import matter from "gray-matter";
 import { Card, Chips, Layout } from "@/components";
-import { Category, Post, Profile } from "@/types/post";
 import { NextSeo } from "next-seo";
 import {
   getAllCategory,
@@ -11,14 +10,14 @@ import {
   getCategoryPosts,
 } from "@/utils/read_file";
 import { generateRss } from "@/utils/generta_rss";
-import { profile } from "@/appConfig";
+import { profile } from "@/config";
 import { useRouter } from "next/router";
 import { getActuallyImagePath } from "@/utils/path";
 
 const Home: NextPage<{
-  posts: Post[];
-  profile: Profile;
-  categories: Category[];
+  posts: Blog.Post[];
+  profile: Blog.Profile;
+  categories: Blog.Category[];
 }> = ({ posts, profile, categories }) => {
   const { push } = useRouter();
   return (
@@ -52,7 +51,7 @@ const Home: NextPage<{
                 <div
                   className="flex md:block"
                   onClick={() => {
-                    push(`/blog/${post.pathName}`);
+                    push(`blog/${post.pathName}`);
                   }}
                 >
                   {post.thumbnail && (
@@ -101,7 +100,11 @@ const Home: NextPage<{
   );
 };
 
-export const getStaticProps: GetStaticProps<any, any, Post[]> = async () => {
+export const getStaticProps: GetStaticProps<
+  any,
+  any,
+  Blog.Post[]
+> = async () => {
   const allPosts = await getAllPosts();
   const posts = allPosts.map((filename) => {
     const fileContent = readFileSync(`posts/${filename}`).toString();
@@ -114,7 +117,7 @@ export const getStaticProps: GetStaticProps<any, any, Post[]> = async () => {
       tags: data.tags || [],
       pathName,
     };
-  }) as Post[];
+  }) as Blog.Post[];
 
   const allPostCategory = await getCategoryPosts();
   await generateRss();

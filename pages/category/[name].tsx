@@ -2,15 +2,14 @@ import type { NextPage } from "next";
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import { Card, Chips, Layout } from "@/components";
-import { Category, Post } from "@/types/post";
 import { getAllCategory, getCategoryPosts } from "@/utils/read_file";
 import { arrayIsEmpty } from "@/utils";
 import { getThemeColor } from "@/utils/getThemeColor";
 import { getActuallyImagePath } from "@/utils/path";
 
 const Category: NextPage<{
-  posts: Post[];
-  categories: Category[];
+  posts: Blog.Post[];
+  categories: Blog.Category[];
   categoryTitle: string;
   themeColor: string;
 }> = ({ posts, categories, categoryTitle, themeColor }) => {
@@ -97,7 +96,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<any, any, Post[]> = async ({
+export const getStaticProps: GetStaticProps<any, any, Blog.Post[]> = async ({
   params: { name },
 }) => {
   const allPostCategory = await getCategoryPosts();

@@ -1,19 +1,14 @@
-const Package = require("./package.json");
-
-/** @type {import('next').NextConfig} */
+const { buildBasePath } = require("./config");
 const isProduction = "production" === `${process.env.NODE_ENV}`;
-const basePath = isProduction ? `/${Package.name}` : "";
-
+const basePath = isProduction ? buildBasePath : "";
+console.log("basePath", basePath);
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
-  swcMinify: true,
+  swcMinify: isProduction,
   //资源根路径
   basePath,
-  env: {
-    ASSETS_PREFIX: basePath,
-    BASE_PATH: basePath,
-  },
 };
 
 module.exports = nextConfig;

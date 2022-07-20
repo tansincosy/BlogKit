@@ -5,3 +5,7 @@
 *::selection {
   background-color: var(--md-sys-color-primary-container);
 }
+
+:root {
+  scrollbar-gutter: stable;
+}

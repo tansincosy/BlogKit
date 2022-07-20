@@ -4,14 +4,13 @@ import { readdirSync, readFileSync } from "fs";
 import matter from "gray-matter";
 import Link from "next/link";
 import { Chips, Layout } from "@/components";
-import { Category, Post } from "@/types/post";
 import { NextSeo } from "next-seo";
 import { getAllCategory, getCategoryPosts } from "@/utils/read_file";
 import { useRouter } from "next/router";
 
 const Tag: NextPage<{
-  postTags: Record<string, Post[]>;
-  categories: Category[];
+  postTags: Record<string, Blog.Post[]>;
+  categories: Blog.Category[];
 }> = ({ postTags, categories }) => {
   const { push } = useRouter();
   return (
@@ -33,7 +32,7 @@ const Tag: NextPage<{
                 <Chips
                   type={"input"}
                   onClick={() => {
-                    push(`/tags/${tag}`);
+                    push(`tags/${tag}`);
                   }}
                 >
                   {tag}
@@ -61,13 +60,17 @@ const Tag: NextPage<{
   );
 };
 
-export const getStaticProps: GetStaticProps<any, any, Post[]> = async () => {
+export const getStaticProps: GetStaticProps<
+  any,
+  any,
+  Blog.Post[]
+> = async () => {
   const fileNames = readdirSync("posts");
   const postTags = fileNames
     .filter((filename) => {
       return filename.includes(".md") && !filename.startsWith("_");
     })
-    .reduce((total: Record<string, Post[]>, filename) => {
+    .reduce((total: Record<string, Blog.Post[]>, filename) => {
       const fileContent = readFileSync(`posts/${filename}`).toString();
       let pathName = filename.replace(".md", "");
       const { data } = matter(fileContent) || {};

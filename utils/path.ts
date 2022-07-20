@@ -1,7 +1,7 @@
-import { config } from "@/appConfig";
+import { siteURL } from "@/config";
 
 export const actuallyAssetsPrefix = (path: string) =>
-  config.siteURL ? `${config.siteURL}/${path}` : `/${path}`;
+  siteURL ? `${siteURL}/${path}` : `${path}`;
 
 export const getActuallyImagePath = (imgPath?: string) => {
   if (!imgPath) {
