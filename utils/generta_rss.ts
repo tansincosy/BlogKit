@@ -1,10 +1,9 @@
 import { Feed } from "feed";
-import { mkdirSync, readFileSync, writeFileSync } from "fs";
-import matter from "gray-matter";
-import { getAllPosts } from "./read_file";
+import { mkdirSync, writeFileSync } from "fs";
 import { siteURL, profile } from "@/config";
+import { getBlogPosts } from "./read_file";
 export async function generateRss() {
-  const allPosts = await getAllPosts();
+  const allPosts = await getBlogPosts();
   const date = new Date();
   const feed = new Feed({
     title: profile.title,
@@ -26,17 +25,14 @@ export async function generateRss() {
     },
   });
 
-  allPosts.forEach((post) => {
-    const fileContent = readFileSync(`posts/${post}`).toString();
-    const { data } = matter(fileContent) || {};
+  allPosts.forEach(({ content: { title, abstract }, id }) => {
     feed.addItem({
-      title: data.title,
-      id: data.title,
-      link: `${siteURL}/blog/${post.replace(".md", "")}`,
-      date: data.date,
-      description: data.abstract,
-      content: data.abstract,
-      category: data.category,
+      title: title,
+      id: title,
+      link: `${siteURL}/blog/${id}`,
+      date: date,
+      description: abstract,
+      content: abstract,
     });
   });
   mkdirSync("./public/rss", { recursive: true });

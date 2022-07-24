@@ -6,7 +6,6 @@ tags:
   - Sample
   - java
 # date: 2019-11-13 22:09:22
-category: 例子
 ---
 
 **Advertisement :)**

@@ -40,11 +40,22 @@ declare module Blog {
   };
 
   export interface Post {
-    title: string;
-    thumbnail: string;
-    abstract: string;
-    tags: string[];
-    pathName: string;
+    id: string;
+    filename: string;
+    pathname: string;
+    content: {
+      title: string;
+      thumbnail: string;
+      abstract: string;
+      tags: string[];
+      date: Date;
+    };
+  }
+
+  interface ArticleBody extends Post {
+    articleBody: string;
+    category: CategoryPost;
+    themeColor: string;
   }
 
   export interface BasicInfo {
@@ -52,13 +63,7 @@ declare module Blog {
     introduce: string;
   }
 
-  export type Category = {
-    title: string;
-    path: string;
-    badge?: number;
-  };
-
-  export type CateGoryPost = {
+  export type CategoryPost = {
     [key: string]: Post[];
   };
 

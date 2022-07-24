@@ -33,20 +33,6 @@ export const isPhone = (userAgent: any): boolean => {
   return flag;
 };
 
-//lodash中isEmpty方法的实现
-export const isEmpty = (value: any): boolean => {
-  if (value === null || value === undefined) {
-    return true;
-  }
-  if (typeof value === "string") {
-    return value.trim().length === 0;
-  }
-  if (typeof value === "object") {
-    return Object.keys(value).length === 0;
-  }
-  return false;
-};
-
 export const arrayIsEmpty = (value: any): boolean => {
   if (value === null || value === undefined || !Array.isArray(value)) {
     return true;
@@ -57,4 +43,15 @@ export const arrayIsEmpty = (value: any): boolean => {
 //rgb to hex
 export const rgbToHex = ([r, g, b]: [r: number, g: number, g: number]) => {
   return `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`;
+};
+
+export const timeToString = (time: number): string => {
+  const date = new Date(time);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minute = date.getMinutes();
+  const second = date.getSeconds();
+  return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 };

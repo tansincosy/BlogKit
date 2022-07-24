@@ -10,11 +10,11 @@ import { TopAppBar } from "./top_app_bar";
 
 export const Layout = ({
   children,
-  categories,
+  category,
   themeColor,
 }: {
   children: ReactNode;
-  categories: Blog.Category[];
+  category: Blog.CategoryPost;
   themeColor?: string;
 }) => {
   useEffect(() => {
@@ -36,7 +36,7 @@ export const Layout = ({
 
   return (
     <div className="absolute flex left-0 right-0 bottom-0 top-0 flex-col">
-      <TopAppBar categories={categories} appTitle={"BlogKit"} />
+      <TopAppBar category={category} appTitle={"BlogKit"} />
       <section className="bg-background flex-1 pb-20 box-border">
         {children}
       </section>

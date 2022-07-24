@@ -1,22 +1,20 @@
 import type { NextPage } from "next";
 import { GetStaticProps } from "next";
-import { readdirSync, readFileSync } from "fs";
-import matter from "gray-matter";
 import Link from "next/link";
 import { Chips, Layout } from "@/components";
 import { NextSeo } from "next-seo";
-import { getAllCategory, getCategoryPosts } from "@/utils/read_file";
+import { getCategoryPosts, getTagPosts } from "@/utils/read_file";
 import { useRouter } from "next/router";
 
 const Tag: NextPage<{
-  postTags: Record<string, Blog.Post[]>;
-  categories: Blog.Category[];
-}> = ({ postTags, categories }) => {
+  tagPosts: Record<string, Blog.Post[]>;
+  category: Blog.CategoryPost;
+}> = ({ tagPosts, category }) => {
   const { push } = useRouter();
   return (
     <>
       <NextSeo title="标签" description="标签"></NextSeo>
-      <Layout categories={categories}>
+      <Layout category={category}>
         <div className="overflow-hidden w-full h-40 md:h-60 relative mt-16">
           <div className="w-full h-full bg-center bg-cover bg-inverse-on-surface"></div>
           <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center text-primary">
@@ -25,8 +23,8 @@ const Tag: NextPage<{
           </div>
         </div>
         <main className="container mx-auto flex space-y-10 flex-col items-stretch mt-8 md:md-16 prose lg:prose-xl px-4">
-          {Object.keys(postTags).map((tag) => {
-            const currentPosts = postTags[tag];
+          {Object.keys(tagPosts).map((tag) => {
+            const currentPosts = tagPosts[tag];
             return (
               <div key={tag}>
                 <Chips
@@ -38,14 +36,14 @@ const Tag: NextPage<{
                   {tag}
                 </Chips>
                 <div className="mt-4 md:mt-8">
-                  {currentPosts.map((post) => {
+                  {currentPosts.map(({ id, content: { title } }) => {
                     return (
                       <div
-                        key={post.pathName}
+                        key={id}
                         className="title-medium md:title-large mt-2"
                       >
-                        <Link href={post.pathName} passHref>
-                          <a>{post.title}</a>
+                        <Link href={`/blog/${id}`} passHref>
+                          <a>{title}</a>
                         </Link>
                       </div>
                     );
@@ -65,37 +63,12 @@ export const getStaticProps: GetStaticProps<
   any,
   Blog.Post[]
 > = async () => {
-  const fileNames = readdirSync("posts");
-  const postTags = fileNames
-    .filter((filename) => {
-      return filename.includes(".md") && !filename.startsWith("_");
-    })
-    .reduce((total: Record<string, Blog.Post[]>, filename) => {
-      const fileContent = readFileSync(`posts/${filename}`).toString();
-      let pathName = filename.replace(".md", "");
-      const { data } = matter(fileContent) || {};
-      if (data.tags) {
-        data.tags.forEach((tag: any) => {
-          if (!total[tag]) {
-            total[tag] = [];
-          }
-          total[tag].push({
-            title: data.title,
-            pathName: "blog/" + pathName,
-            abstract: data.abstract,
-            tags: data.tags,
-            thumbnail: data.thumbnail,
-          });
-        });
-      }
-      return total;
-    }, {});
-
+  const tagPosts = await getTagPosts();
   const allPostCategory = await getCategoryPosts();
   return {
     props: {
-      postTags,
-      categories: getAllCategory(allPostCategory),
+      tagPosts,
+      category: allPostCategory,
     },
   };
 };

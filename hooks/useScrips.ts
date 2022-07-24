@@ -30,34 +30,7 @@ const useScript = (params: any) => {
       ref.current.appendChild(script);
       booleanRef.current = true;
     }
-
-    // Add script to document body
-
-    // store status of the script
-
     const setAttributeStatus = (event: Event) => {
-      /**
-         * Console.log value from event
-            {
-                bubbles: false
-                cancelBubble: false
-                cancelable: false
-                composed: false
-                currentTarget: null
-                defaultPrevented: false
-                eventPhase: 0
-                isTrusted: true
-                path: [script]
-                returnValue: true
-                srcElement: null
-                target: null
-                timeStamp: 276483.5
-                type: "load"
-            }
-
-            based on the type property we will get know whether script is ready or errored out
-            */
-
       setStatus(event.type === "load" ? "ready" : "error");
     };
 

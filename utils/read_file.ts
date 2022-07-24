@@ -1,105 +1,103 @@
-import { arrayIsEmpty, isEmpty } from "./index";
-import { readdir, readFileSync } from "fs";
-import { promisify } from "util";
+import { arrayIsEmpty } from "./index";
 import matter from "gray-matter";
-import Cache from "./cache";
+import { cacheFunction } from "./cache";
+import { stat, readdir, readFile } from "fs/promises";
 
-export const getTagPost = async (): Promise<Blog.TagPost> => {
-  if (!isEmpty(Cache.get("tagPosts"))) {
-    return Cache.get("tagPosts");
-  }
-  const posts = await getAllPosts();
-  let tagPostCache = {};
-  if (posts.length > 0) {
-    tagPostCache = posts.reduce((total: Record<string, Blog.Post[]>, posts) => {
-      const fileContent = readFileSync(`posts/${posts}`).toString();
-      let pathName = posts.replace(".md", "");
-      const { data } = matter(fileContent) || {};
-      if (!arrayIsEmpty(data.tags)) {
-        const tags = data.tags;
-        if (!arrayIsEmpty(tags)) {
-          tags.forEach((tag: string) => {
-            if (!total[tag]) {
-              total[tag] = [];
-            }
-            total[tag].push({
+/**
+ * 结构目录所有文章
+ * @param dirName  目录名
+ * @param posts 文章
+ * @returns {Promise<Blog.Post[]>}
+ */
+const structurePostDir = async (dirName: string, posts: Blog.Post[]) => {
+  const files = await readdir(dirName);
+  const filePromiseSequence = files.map(async (file) => {
+    const fileStat = await stat(`${dirName}/${file}`);
+    if (fileStat.isDirectory()) {
+      return await structurePostDir(`${dirName}/${file}`, posts);
+    } else {
+      //不以下划线开头
+      if (!file.startsWith("_")) {
+        const fileContent = await readFile(`${dirName}/${file}`);
+
+        const { data } = matter(fileContent) || {};
+        if (data) {
+          posts.push({
+            id: file.replace(".md", ""),
+            filename: file,
+            pathname: dirName,
+            content: {
               title: data.title,
-              pathName: pathName,
+              thumbnail: data.thumbnail,
               abstract: data.abstract,
               tags: data.tags,
-              thumbnail: data.thumbnail,
-            });
+              date: data.date ? data.date.getTime() : "",
+            },
           });
         }
+        return posts;
       }
-      return total;
-    }, {});
-    Cache.set("tagPosts", {});
-    Cache.set("tagPosts", tagPostCache);
-  }
-  return tagPostCache;
+    }
+  });
+  // 确保async 执行顺序正确
+  await Promise.all(filePromiseSequence);
+  return posts;
 };
 
-const readDirAsync = promisify(readdir);
-export const getCategoryPosts = async (): Promise<Blog.CateGoryPost> => {
-  if (!isEmpty(Cache.get("categoryPosts"))) {
-    return Cache.get("categoryPosts");
+/**
+ * 获取所有文章的基本信息
+ */
+export const getBlogPosts = cacheFunction<string, Promise<Blog.Post[]>>(
+  "getBlogPosts",
+  async (dirName = "posts") => {
+    return await structurePostDir(dirName, []);
   }
-  const posts = await getAllPosts();
-  let categoryPostCache = {};
-  if (posts.length > 0) {
-    categoryPostCache = posts.reduce(
-      (total: Record<string, Blog.Post[]>, posts) => {
-        const fileContent = readFileSync(`posts/${posts}`).toString();
-        let pathName = posts.replace(".md", "");
-        const { data } = matter(fileContent) || {};
-        if (!isEmpty(data.category)) {
-          const category = data.category;
-          if (!total[category]) {
-            total[category] = [];
-          }
-          total[category].push({
-            title: data.title,
-            pathName: pathName,
-            abstract: data.abstract,
-            tags: data.tags,
-            thumbnail: data.thumbnail,
-          });
+);
+
+/**
+ * 安装类别进行分组
+ * @returns
+ */
+export const getCategoryPosts = cacheFunction<
+  number,
+  Promise<Record<string, Blog.Post[]>>
+>("getCategoryPosts", async (cateIndex = 1) => {
+  const blogPosts = await getBlogPosts();
+  return blogPosts.reduce(
+    (cateCollects: Record<string, Blog.Post[]>, blogPost) => {
+      //只提取地址第一位元素
+      const pathnames = blogPost.pathname.split("/");
+      if (pathnames[cateIndex]) {
+        if (!cateCollects[pathnames[cateIndex]]) {
+          cateCollects[pathnames[cateIndex]] = [];
         }
-        return total;
-      },
-      {}
-    );
-    Cache.set("categoryPosts", {});
-    Cache.set("categoryPosts", categoryPostCache);
-  }
-  return categoryPostCache;
-};
+        cateCollects[pathnames[cateIndex]].push(blogPost);
+      }
+      return cateCollects;
+    },
+    {}
+  );
+});
 
-export const getAllCategory = (
-  cateGoryPost: Blog.CateGoryPost
-): Blog.Category[] => {
-  return Object.keys(cateGoryPost).map((key: string) => {
-    return {
-      title: key,
-      path: `/category/${key}`,
-      badge: cateGoryPost[key].length,
-    };
-  }) as Blog.Category[];
-};
-
-export const getAllPosts = async (): Promise<string[]> => {
-  if (!isEmpty(Cache.get("allPosts"))) {
-    return Cache.get("allPosts");
-  }
-
-  let allPostCache: string[] = [];
-  const files = (await readDirAsync("posts", "utf8")) || [];
-  if (files.length > 0) {
-    allPostCache = files.filter((filename) => {
-      return filename.includes(".md") && !filename.startsWith("_");
-    });
-    Cache.set("allPosts", allPostCache);
-  }
-  return allPostCache;
-};
+/**
+ * 按照tag 进行分组
+ * @returns
+ */
+export const getTagPosts = cacheFunction("getTagPosts", async () => {
+  const blogPosts = await getBlogPosts();
+  return blogPosts.reduce(
+    (tagCollects: Record<string, Blog.Post[]>, blogPost: Blog.Post) => {
+      const tags = blogPost.content.tags;
+      if (!arrayIsEmpty(tags)) {
+        tags.forEach((tag: string) => {
+          if (!tagCollects[tag]) {
+            tagCollects[tag] = [];
+          }
+          tagCollects[tag].push(blogPost);
+        });
+      }
+      return tagCollects;
+    },
+    {}
+  );
+});

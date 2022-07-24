@@ -7,16 +7,53 @@ import { SideMenu } from "./side_menu";
 
 export interface TopAppBarProps {
   appTitle?: string;
-  categories: Blog.Category[];
+  category: Blog.CategoryPost;
 }
 
-export const TopAppBar = ({
-  appTitle = "",
-  categories = [],
-}: TopAppBarProps) => {
+/**
+ * 构建标签菜单
+ * @param navs
+ */
+const constructNavLink = (navs: Blog.CategoryPost) => {
+  return Object.keys(navs).map((item) => {
+    return {
+      title: item,
+      path: `/category/${item}`,
+    };
+  });
+};
+
+export const TopAppBar = ({ appTitle = "", category = {} }: TopAppBarProps) => {
   const [isShowSideBar, setShowSideBar] = useState<boolean>(false);
   const [activeClass, setActiveClass] = useState("active");
   const { asPath, isReady, push, query } = useRouter();
+
+  const mainNavs = useMemo(() => {
+    const staticMenu = [
+      {
+        title: "主页",
+        path: "/",
+      },
+      ...constructNavLink(category),
+      {
+        title: "所有标签",
+        path: "/tags",
+      },
+      {
+        title: "关于",
+        path: "/about",
+      },
+    ];
+    return staticMenu;
+  }, [category]);
+
+  useEffect(() => {
+    if (isReady) {
+      const activePathname = new URL(asPath, location.href).pathname;
+      setActiveClass(decodeURI(activePathname));
+    }
+  }, [asPath, isReady]);
+
   const onClickHandle = () => {
     if (query.source) {
       onRequestClose();
@@ -33,32 +70,6 @@ export const TopAppBar = ({
   const targetHomePage = () => {
     push("/");
   };
-
-  useEffect(() => {
-    if (isReady) {
-      const activePathname = new URL(asPath, location.href).pathname;
-      setActiveClass(decodeURI(activePathname));
-    }
-  }, [asPath, isReady]);
-
-  const mainNavs = useMemo(() => {
-    const staticMenu = [
-      {
-        title: "主页",
-        path: "/",
-      },
-      ...categories,
-      {
-        title: "所有标签",
-        path: "/tags",
-      },
-      {
-        title: "关于",
-        path: "/about",
-      },
-    ];
-    return staticMenu;
-  }, [categories]);
 
   return (
     <div
@@ -114,7 +125,7 @@ export const TopAppBar = ({
       <SideMenu
         isVisible={isShowSideBar}
         onClose={closeSlideBar}
-        categories={categories}
+        category={category}
         appTitle={appTitle}
       ></SideMenu>
     </div>

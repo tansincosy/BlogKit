@@ -8,7 +8,7 @@ interface SideMenuProps {
   isVisible: boolean;
   appTitle?: string;
   onClose: () => void;
-  categories: Blog.Category[];
+  category: Blog.CategoryPost;
 }
 
 interface MenuProps {
@@ -55,18 +55,21 @@ export const SideMenu: React.FC<SideMenuProps> = ({
   isVisible,
   onClose,
   appTitle,
-  categories,
+  category,
 }) => {
-  const newCates = categories.map((cate) => {
-    return {
-      title: cate.title,
-      icon: "home",
-      href: cate.path,
-      exact: true,
-      top: true,
-      badge: cate.badge || 0,
-    };
-  });
+  const getCategory = () => {
+    return Object.keys(category).map((cateKey) => {
+      const blogs = category[cateKey];
+      return {
+        title: cateKey,
+        icon: "home",
+        href: "/category/" + cateKey,
+        exact: true,
+        top: true,
+        badge: blogs.length || 0,
+      };
+    });
+  };
 
   const slideMenus = useMemo(() => {
     return [
@@ -77,7 +80,7 @@ export const SideMenu: React.FC<SideMenuProps> = ({
         exact: true,
         top: true,
       },
-      ...newCates,
+      ...getCategory(),
       {
         title: "所有标签",
         href: "/tags",
@@ -99,7 +102,8 @@ export const SideMenu: React.FC<SideMenuProps> = ({
         </Link>
       );
     });
-  }, [newCates]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category]);
 
   return (
     <Drawer

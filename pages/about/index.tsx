@@ -5,16 +5,16 @@ import { Layout } from "@/components";
 import { NextSeo } from "next-seo";
 import { renderMarkdown } from "@/utils/md";
 import { existsSync } from "fs";
-import { getAllCategory, getCategoryPosts } from "@/utils/read_file";
+import { getCategoryPosts } from "@/utils/read_file";
 
-const Tag: NextPage<{ content: string; categories: Blog.Category[] }> = ({
+const Tag: NextPage<{ content: string; category: Blog.CategoryPost }> = ({
   content,
-  categories,
+  category,
 }) => {
   return (
     <>
       <NextSeo title="关于" description="关于"></NextSeo>
-      <Layout categories={categories}>
+      <Layout category={category}>
         <div className="overflow-hidden w-full h-40 md:h-60 relative mt-16">
           <div className="w-full h-full bg-center bg-cover bg-inverse-on-surface"></div>
           <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center text-primary">
@@ -52,7 +52,7 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       content: aboutContentMd ? renderMarkdown(aboutContentMd) : "",
-      categories: getAllCategory(allPostCategory),
+      category: allPostCategory,
     },
   };
 };
