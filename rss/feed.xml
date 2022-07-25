@@ -4,7 +4,7 @@
         <title>sample</title>
         <link>https://tansincosy.github.io/BlogKit/</link>
         <description>subtitle</description>
-        <lastBuildDate>Sun, 24 Jul 2022 14:06:56 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 25 Jul 2022 15:16:58 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -17,15 +17,15 @@
             <title><![CDATA[Sample]]></title>
             <link>https://tansincosy.github.io/BlogKit//blog/sample</link>
             <guid>Sample</guid>
-            <pubDate>Sun, 24 Jul 2022 14:06:56 GMT</pubDate>
+            <pubDate>Mon, 25 Jul 2022 15:16:58 GMT</pubDate>
             <description><![CDATA[This is a sample post.]]></description>
             <content:encoded><![CDATA[This is a sample post.]]></content:encoded>
         </item>
         <item>
-            <title><![CDATA[Sample]]></title>
+            <title><![CDATA[tech]]></title>
             <link>https://tansincosy.github.io/BlogKit//blog/samplej</link>
-            <guid>Sample</guid>
-            <pubDate>Sun, 24 Jul 2022 14:06:56 GMT</pubDate>
+            <guid>tech</guid>
+            <pubDate>Mon, 25 Jul 2022 15:16:58 GMT</pubDate>
             <description><![CDATA[This is a sample post.]]></description>
             <content:encoded><![CDATA[This is a sample post.]]></content:encoded>
         </item>
@@ -33,7 +33,7 @@
             <title><![CDATA[Sample]]></title>
             <link>https://tansincosy.github.io/BlogKit//blog/samplej2</link>
             <guid>Sample</guid>
-            <pubDate>Sun, 24 Jul 2022 14:06:56 GMT</pubDate>
+            <pubDate>Mon, 25 Jul 2022 15:16:58 GMT</pubDate>
             <description><![CDATA[This is a sample post.]]></description>
             <content:encoded><![CDATA[This is a sample post.]]></content:encoded>
         </item>
@@ -41,7 +41,7 @@
             <title><![CDATA[Sample]]></title>
             <link>https://tansincosy.github.io/BlogKit//blog/samples</link>
             <guid>Sample</guid>
-            <pubDate>Sun, 24 Jul 2022 14:06:56 GMT</pubDate>
+            <pubDate>Mon, 25 Jul 2022 15:16:58 GMT</pubDate>
             <description><![CDATA[This is a sample post.]]></description>
             <content:encoded><![CDATA[This is a sample post.]]></content:encoded>
         </item>
