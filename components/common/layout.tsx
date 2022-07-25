@@ -5,6 +5,7 @@ import {
   themeFromSourceColor,
 } from "@material/material-color-utilities/dist";
 import React, { ReactNode, useEffect } from "react";
+import BackToTopBtn from "./back_to_top";
 import Footer from "./footer";
 import { TopAppBar } from "./top_app_bar";
 
@@ -22,7 +23,7 @@ export const Layout = ({
     const systemDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
-    applyTheme(theme, { target: document.body, dark: systemDark });
+    applyTheme(theme, { target: document.body, dark: false });
   }, [themeColor]);
 
   const footers = Object.keys(contact).map((item: string) => {
@@ -41,6 +42,7 @@ export const Layout = ({
         {children}
       </section>
       <Footer footers={footers}></Footer>
+      <BackToTopBtn />
     </div>
   );
 };

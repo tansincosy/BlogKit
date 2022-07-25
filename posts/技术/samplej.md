@@ -1,10 +1,9 @@
 ---
 thumbnail: https://images.unsplash.com/photo-1656425311485-3c10dbcc9758?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60
-title: "Sample"
+title: "tech"
 abstract: "This is a sample post."
 tags:
-  - Sample
-  - java
+  - tech
 # date: 2019-11-13 22:09:22
 ---
 

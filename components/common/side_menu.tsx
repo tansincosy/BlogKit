@@ -1,9 +1,9 @@
 import { singleLineClass } from "@/utils";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import Drawer from "rc-drawer";
 import React, { forwardRef, useMemo } from "react";
 import { Icon } from "../ui/icon";
-import Link from "next/link";
 interface SideMenuProps {
   isVisible: boolean;
   appTitle?: string;
@@ -84,7 +84,7 @@ export const SideMenu: React.FC<SideMenuProps> = ({
       {
         title: "所有标签",
         href: "/tags",
-        icon: "hashtag",
+        icon: "bookmark",
         exact: true,
         top: true,
       },

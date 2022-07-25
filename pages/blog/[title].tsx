@@ -32,7 +32,7 @@ const PostDetail: NextPage<Blog.ArticleBody> = ({
                   )})`,
                 }}
               ></div>
-              <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center text-secondary">
+              <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center text-inverse-primary">
                 <h1 className="display-small md:display-large">
                   {content.title}
                 </h1>
@@ -41,7 +41,7 @@ const PostDetail: NextPage<Blog.ArticleBody> = ({
                 </h4>
               </div>
             </div>
-            <div className="text-on-surface mx-auto prose lg:prose-xl px-4 md:px-0 relative mt-8">
+            <div className="text-on-surface mx-auto prose  px-4 md:px-0 relative mt-8">
               <article
                 dangerouslySetInnerHTML={{
                   __html: articleBody,

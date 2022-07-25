@@ -23,7 +23,7 @@ const Category: NextPage<{
               backgroundImage: `url(${getActuallyImagePath("/imgs/work.jpg")})`,
             }}
           ></div>
-          <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center text-primary">
+          <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center text-inverse-primary">
             <h1 className="display-small md:display-large">{categoryTitle}</h1>
           </div>
         </div>
