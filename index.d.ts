@@ -8,7 +8,6 @@ declare module "markdown-it-sub";
 declare module "markdown-it-sup";
 declare module "colorthief";
 declare module "markdown-it-anchor";
-declare module "markdown-it-table-of-contents";
 
 declare module Blog {
   export type FootLink = {

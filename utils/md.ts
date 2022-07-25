@@ -1,15 +1,17 @@
+import hljs from "highlight.js";
 import MarkdownIt from "markdown-it";
-import emoji from "markdown-it-emoji";
-import taskList from "markdown-it-task-lists";
-import footnote from "markdown-it-footnote";
 import abbr from "markdown-it-abbr";
 import container from "markdown-it-container";
 import deflist from "markdown-it-deflist";
+import emoji from "markdown-it-emoji";
+import footnote from "markdown-it-footnote";
 import ins from "markdown-it-ins";
 import mark from "markdown-it-mark";
 import sub from "markdown-it-sub";
 import sup from "markdown-it-sup";
-import hljs from "highlight.js";
+import taskList from "markdown-it-task-lists";
+import tdr from "markdown-it-toc-done-right";
+import anchor from "markdown-it-anchor";
 import { ReactNode } from "react";
 
 export const renderMarkdown = (content: string): ReactNode => {
@@ -34,6 +36,12 @@ export const renderMarkdown = (content: string): ReactNode => {
     .use(taskList)
     .use(footnote)
     .use(abbr)
+    .use(anchor)
+    .use(tdr, {
+      containerClass: "toc",
+      listClass: "text-slate-700 text-sm leading-6",
+      listType: "ul",
+    })
     .use(container, "warning", {
       validate: function (params: string) {
         return params.trim().match(/^warning/);

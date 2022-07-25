@@ -18,7 +18,7 @@ const Category: NextPage<{
       <Layout category={category} themeColor={themeColor}>
         <div className="overflow-hidden w-full h-80 md:h-96 relative mt-16">
           <div
-            className="w-full h-full bg-center bg-cover"
+            className="w-full h-full bg-center bg-cover dark:brightness-50"
             style={{
               backgroundImage: `url(${getActuallyImagePath("/imgs/work.jpg")})`,
             }}

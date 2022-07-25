@@ -24,14 +24,14 @@ const Home: NextPage<{
       <Layout category={category} themeColor={themeColor}>
         <div className="overflow-hidden w-full h-80 md:h-96 relative mt-16">
           <div
-            className="w-full h-full bg-center bg-cover"
+            className="w-full h-full bg-center bg-local dark:brightness-50"
             style={{
               backgroundImage: `url(${getActuallyImagePath(
                 profile.thumbnail
               )})`,
             }}
           ></div>
-          <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center">
+          <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center ">
             <h1 className="display-small md:display-large text-inverse-primary">
               {profile.title}
             </h1>

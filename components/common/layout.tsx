@@ -23,7 +23,8 @@ export const Layout = ({
     const systemDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
-    applyTheme(theme, { target: document.body, dark: false });
+
+    applyTheme(theme, { target: document.body, dark: systemDark });
   }, [themeColor]);
 
   const footers = Object.keys(contact).map((item: string) => {
