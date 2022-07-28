@@ -41,17 +41,6 @@ const fontUnit = (size) => {
 };
 const typography = plugin(({ addComponents, theme }) => {
   addComponents({
-    ".toc": {
-      // display: "fixed",
-      // backgroundColor: ,
-      // padding: theme("spacing.6"),
-      // boxShadow: theme("boxShadow.xl"),
-      // bottom: 0,
-      // zIndex: 20,
-      // padding: 10 8 10 8,
-      // overflowY: "auto",
-      // top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 px-8 overflow-y-auto xl:block
-    },
     ".display-large": {
       lineHeight: fontUnit(64),
       fontSize: fontUnit(57),
@@ -195,7 +184,9 @@ module.exports = {
                 },
               },
               mark: {
-                backgroundColor: theme("colors.on-primary-container:"),
+                backgroundColor: theme("colors.primary-container"),
+                color: theme("colors.on-surface"),
+                padding: theme("padding.1"),
               },
               a: {
                 color: theme("colors.on-secondary-container"),

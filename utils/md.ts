@@ -10,11 +10,9 @@ import mark from "markdown-it-mark";
 import sub from "markdown-it-sub";
 import sup from "markdown-it-sup";
 import taskList from "markdown-it-task-lists";
-import tdr from "markdown-it-toc-done-right";
 import anchor from "markdown-it-anchor";
-import { ReactNode } from "react";
-
-export const renderMarkdown = (content: string): ReactNode => {
+import toc from "markdown-it-table-of-contents";
+export const renderMarkdown = (content: string): string => {
   const md = new MarkdownIt();
   return md
     .set({
@@ -37,10 +35,10 @@ export const renderMarkdown = (content: string): ReactNode => {
     .use(footnote)
     .use(abbr)
     .use(anchor)
-    .use(tdr, {
-      containerClass: "toc",
-      listClass: "text-slate-700 text-sm leading-6",
-      listType: "ul",
+    .use(toc, {
+      includeLevel: [2, 3],
+      markerPattern: /^\[toc\]/im,
+      containerHeaderHtml: `<div class="display-title">目录</div>`,
     })
     .use(container, "warning", {
       validate: function (params: string) {

@@ -55,3 +55,18 @@ export const timeToString = (time: number): string => {
   const second = date.getSeconds();
   return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 };
+
+// fork from vue-router@3.0.2
+// src/util/scroll.js
+export function getElementPosition(el: Element): {
+  x: number;
+  y: number;
+} {
+  const docEl = document.documentElement;
+  const docRect = docEl.getBoundingClientRect();
+  const elRect = el.getBoundingClientRect();
+  return {
+    x: elRect.left - docRect.left,
+    y: elRect.top - docRect.top,
+  };
+}

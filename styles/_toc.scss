@@ -1,0 +1,27 @@
+.table-of-contents {
+  position: absolute;
+  right: max(50% - 45rem);
+  z-index: 20;
+  top: 0;
+  bottom: 0;
+  width: 19.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  overflow-y: auto;
+  display: none;
+}
+
+.table-of-contents-static {
+  position: fixed;
+
+  top: 3.8125rem;
+  right: max(0px, calc(50% - 45rem));
+}
+
+@media (min-width: 1280px) {
+  .table-of-contents {
+    display: block;
+  }
+}

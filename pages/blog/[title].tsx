@@ -7,6 +7,8 @@ import { getBlogPosts, getCategoryPosts } from "@/utils/read_file";
 import { getThemeColor } from "@/utils/getThemeColor";
 import { getActuallyImagePath } from "@/utils/path";
 import { readFile } from "fs/promises";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const PostDetail: NextPage<Blog.ArticleBody> = ({
   articleBody,
@@ -14,6 +16,17 @@ const PostDetail: NextPage<Blog.ArticleBody> = ({
   themeColor,
   content,
 }) => {
+  const router = useRouter();
+  useEffect(() => {
+    // Update the document title using the browser API
+    document.title = `You clicked 11 times`;
+    // document.querySelector();
+  }, []);
+
+  useEffect(() => {
+    console.log("router.query.slug>>>", router.query);
+  }, [router.query.title]);
+
   return (
     <>
       {content && (
@@ -101,18 +114,21 @@ export const getStaticProps: GetStaticProps<
       },
     };
   }
-  let articleBody = "";
+
   const fileContent = await readFile(
     curBlogPost.pathname + "/" + curBlogPost.filename,
     "utf8"
   );
   const contentStr = fileContent.toString();
-  articleBody = matter(contentStr).content;
+
+  const body = matter(contentStr).content;
+  let articleBody = body ? renderMarkdown(body) : ("" as string);
+  console.log("articleBody", articleBody.match(/<(h[1-6])>([\S\s]*?)<\/\1>/));
   const themeColor = await getThemeColor(curBlogPost.content.thumbnail);
   return {
     props: {
       ...curBlogPost,
-      articleBody: articleBody ? renderMarkdown(articleBody) : "",
+      articleBody,
       category: allPostCategory,
       themeColor,
     },
