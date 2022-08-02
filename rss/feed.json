@@ -10,36 +10,25 @@
     },
     "items": [
         {
-            "id": "Sample",
-            "content_html": "This is a sample post.",
-            "url": "https://tansincosy.github.io/BlogKit//blog/sample",
-            "title": "Sample",
-            "summary": "This is a sample post.",
-            "date_modified": "2022-07-25T15:16:58.876Z"
-        },
-        {
             "id": "tech",
             "content_html": "This is a sample post.",
             "url": "https://tansincosy.github.io/BlogKit//blog/samplej",
             "title": "tech",
-            "summary": "This is a sample post.",
-            "date_modified": "2022-07-25T15:16:58.876Z"
+            "summary": "This is a sample post."
         },
         {
             "id": "Sample",
             "content_html": "This is a sample post.",
             "url": "https://tansincosy.github.io/BlogKit//blog/samplej2",
             "title": "Sample",
-            "summary": "This is a sample post.",
-            "date_modified": "2022-07-25T15:16:58.876Z"
+            "summary": "This is a sample post."
         },
         {
-            "id": "Sample",
+            "id": "Sample with toc",
             "content_html": "This is a sample post.",
             "url": "https://tansincosy.github.io/BlogKit//blog/samples",
-            "title": "Sample",
-            "summary": "This is a sample post.",
-            "date_modified": "2022-07-25T15:16:58.876Z"
+            "title": "Sample with toc",
+            "summary": "This is a sample post."
         }
     ]
 }
