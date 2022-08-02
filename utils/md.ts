@@ -36,7 +36,7 @@ export const renderMarkdown = (content: string): string => {
     .use(abbr)
     .use(anchor)
     .use(toc, {
-      includeLevel: [2, 3],
+      includeLevel: [2],
       markerPattern: /^\[toc\]/im,
       containerHeaderHtml: `<div class="display-title">目录</div>`,
     })
@@ -51,7 +51,6 @@ export const renderMarkdown = (content: string): string => {
       },
       render: function (tokens: any, idx: any) {
         var m = tokens[idx].info.trim().match(/^spoiler\s+(.*)$/);
-
         if (tokens[idx].nesting === 1) {
           // opening tag
           return (

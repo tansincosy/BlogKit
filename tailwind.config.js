@@ -160,12 +160,16 @@ module.exports = {
                 borderRadius: "8px",
               },
               h1: {
+                marginTop: "-3.1rem",
+                paddingTop: "4.6rem",
                 color: theme("colors.on-surface"),
                 "&:hover": {
                   color: theme("colors.on-surface"),
                 },
               },
               h2: {
+                marginTop: "-3.1rem",
+                paddingTop: "4.6rem",
                 color: theme("colors.on-surface"),
                 "&:hover": {
                   color: theme("colors.on-surface"),
@@ -178,6 +182,8 @@ module.exports = {
                 },
               },
               h4: {
+                marginTop: "-3.1rem",
+                paddingTop: "4.6rem",
                 color: theme("colors.on-surface"),
                 "&:hover": {
                   color: theme("colors.on-surface"),

@@ -25,7 +25,7 @@ export async function generateRss() {
     },
   });
 
-  allPosts.forEach(({ content: { title, abstract }, id }) => {
+  allPosts.forEach(({ content: { title, abstract, date }, id }) => {
     feed.addItem({
       title: title,
       id: title,

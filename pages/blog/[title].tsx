@@ -7,8 +7,10 @@ import { getBlogPosts, getCategoryPosts } from "@/utils/read_file";
 import { getThemeColor } from "@/utils/getThemeColor";
 import { getActuallyImagePath } from "@/utils/path";
 import { readFile } from "fs/promises";
+import { getElementPosition } from "@/utils";
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRef } from "react";
+const PIN_DISTANCE = 400;
 
 const PostDetail: NextPage<Blog.ArticleBody> = ({
   articleBody,
@@ -16,16 +18,46 @@ const PostDetail: NextPage<Blog.ArticleBody> = ({
   themeColor,
   content,
 }) => {
-  const router = useRouter();
-  useEffect(() => {
-    // Update the document title using the browser API
-    document.title = `You clicked 11 times`;
-    // document.querySelector();
-  }, []);
+  const endMarkRef = useRef(null);
+  let tocDom: Element | null;
+  const showMaxTocDis = () => {
+    if (endMarkRef.current) {
+      return getElementPosition(endMarkRef.current).y;
+    }
+    return 0;
+  };
+
+  const getTocDom = () => {
+    if (!tocDom) {
+      tocDom = document.querySelector(".table-of-contents");
+    }
+    return tocDom;
+  };
+
+  const handleScroll = () => {
+    const scrollTop =
+      window.pageYOffset ||
+      document.body.scrollTop ||
+      document.documentElement.scrollTop ||
+      0;
+    const $tocDom = getTocDom();
+    if (scrollTop > PIN_DISTANCE) {
+      if ($tocDom) {
+        $tocDom.className = "table-of-contents table-of-contents-static";
+      }
+    } else {
+      if ($tocDom) {
+        $tocDom.className = "table-of-contents";
+      }
+    }
+  };
 
   useEffect(() => {
-    console.log("router.query.slug>>>", router.query);
-  }, [router.query.title]);
+    // 在 React 中使用 addEventListener 监听事件
+    document.addEventListener("scroll", handleScroll, true);
+    // 组件卸载时移除事件监听
+    return () => document.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
@@ -54,12 +86,15 @@ const PostDetail: NextPage<Blog.ArticleBody> = ({
                 </h4>
               </div>
             </div>
-            <div className="text-on-surface mx-auto prose  px-4 md:px-0 relative mt-8">
+            <div className="text-on-surface mx-auto prose px-4 md:px-0 relative mt-8">
               <article
                 dangerouslySetInnerHTML={{
                   __html: articleBody,
                 }}
               ></article>
+            </div>
+            <div className="prose mx-auto">
+              <hr id="end-mark" ref={endMarkRef}></hr>
             </div>
             <Comment />
           </Layout>

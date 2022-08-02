@@ -1,3 +1,7 @@
+@function unitRem($px) {
+  @return $px/16 * 1rem;
+}
+
 .table-of-contents {
   position: absolute;
   right: max(50% - 45rem);
@@ -11,13 +15,24 @@
   padding-bottom: 2.5rem;
   overflow-y: auto;
   display: none;
+  ul {
+    list-style: none;
+  }
+  a {
+    line-height: unitRem(16);
+    font-size: unitRem(12);
+    letter-spacing: unitRem(0.5);
+    font-family: "Roboto ,sans-serif";
+  }
 }
 
 .table-of-contents-static {
   position: fixed;
-
   top: 3.8125rem;
   right: max(0px, calc(50% - 45rem));
+  ul {
+    list-style: none;
+  }
 }
 
 @media (min-width: 1280px) {
