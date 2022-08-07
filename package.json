@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@material/material-color-utilities": "^0.1.2",
+    "algoliasearch": "^4.14.2",
     "colorthief": "^2.3.2",
     "feed": "^4.2.2",
     "gray-matter": "^4.0.3",
@@ -33,6 +34,7 @@
     "next": "12.2.0",
     "next-pwa": "^5.5.4",
     "next-seo": "^5.4.0",
+    "rc-dialog": "^8.9.0",
     "rc-drawer": "^4.4.3",
     "react": "18.2.0",
     "react-dom": "18.2.0"

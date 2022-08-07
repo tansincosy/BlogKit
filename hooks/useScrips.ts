@@ -25,7 +25,6 @@ const useScript = (params: any) => {
     script.setAttribute("theme", systemDark ? "github-dark" : "github-light");
     script.setAttribute("issue-term", issueTerm);
     script.setAttribute("repo", repo);
-
     if (!booleanRef.current) {
       ref.current.appendChild(script);
       booleanRef.current = true;

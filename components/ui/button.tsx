@@ -68,19 +68,24 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         onClick={onClick}
         className={singleLineClass(
-          className,
           icon ? "pl-4 pr-6" : "pl-6 pr-6",
+          !children ? "pl-2.5 pr-2.5" : "",
           `inline-flex justify-center items-center relative overflow-hidden cursor-pointer leading-none appearance-none box-border outline-none m-0 rounded-full h-10
        ${disableClass(disabled, type)} ${buttonStyleMap[type]}
-      `
+      `,
+          className
         )}
       >
         {icon && (
-          <span className="mr-2 text-[1.125rem] flex w-[1.125rem] h-[1.125rem]">
+          <span className="mx-1 text-[1.125rem] flex w-[1.125rem] h-[1.125rem]">
             <Icon name={icon}></Icon>
           </span>
         )}
-        {children}
+        {children && (
+          <span className={singleLineClass(!icon ? "" : "ml-1")}>
+            {children}
+          </span>
+        )}
       </button>
     );
   }
