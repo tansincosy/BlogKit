@@ -1,0 +1,39 @@
+@function unitRem($px) {
+  @return $px/16 * 1rem;
+}
+
+.table-of-contents {
+  @apply absolute z-20 top-0 bottom-0 w-72;
+  right: max(50% - 45rem);
+  z-index: 20;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  overflow-y: auto;
+  display: none;
+  ul {
+    list-style: none;
+  }
+  a {
+    line-height: unitRem(16);
+    font-size: unitRem(12);
+    letter-spacing: unitRem(0.5);
+    font-family: "Roboto ,sans-serif";
+  }
+}
+
+.table-of-contents-static {
+  position: fixed;
+  top: 3.8125rem;
+  right: max(0px, calc(50% - 45rem));
+  ul {
+    list-style: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .table-of-contents {
+    display: block;
+  }
+}
