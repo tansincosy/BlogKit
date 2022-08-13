@@ -30,6 +30,7 @@ const BackToTopBtn: React.FC = () => {
     document.addEventListener("scroll", handleScroll, true);
     // 组件卸载时移除事件监听
     return () => document.removeEventListener("scroll", handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const backToTopHandle = () => {

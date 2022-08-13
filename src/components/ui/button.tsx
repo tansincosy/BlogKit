@@ -10,6 +10,7 @@ interface ButtonProps {
   className?: string;
   onClick?: React.MouseEventHandler<HTMLElement>;
   children?: React.ReactNode;
+  nativeType?: "button" | "submit" | "reset";
 }
 
 const buttonStyleMap = {
@@ -61,11 +62,20 @@ const disableClass = (disabled?: boolean, type?: ButtonType): string => {
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { icon, children, type = "elevated", onClick, disabled, className = "" },
+    {
+      icon,
+      children,
+      type = "elevated",
+      onClick,
+      disabled,
+      className = "",
+      nativeType = "button",
+    },
     ref
   ) => {
     return (
       <button
+        type={nativeType}
         onClick={onClick}
         className={singleLineClass(
           icon ? "pl-4 pr-6" : "pl-6 pr-6",

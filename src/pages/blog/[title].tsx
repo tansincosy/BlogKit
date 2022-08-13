@@ -7,9 +7,9 @@ import { getBlogPosts, getCategoryPosts } from "@/utils/read_file";
 import { getThemeColor } from "@/utils/getThemeColor";
 import { getActuallyImagePath } from "@/utils/path";
 import { readFile } from "fs/promises";
-import { getElementPosition } from "@/utils";
 import { useEffect } from "react";
 import { useRef } from "react";
+import Head from "next/head";
 const PIN_DISTANCE = 400;
 
 const PostDetail: NextPage<Blog.ArticleBody> = ({
@@ -20,13 +20,6 @@ const PostDetail: NextPage<Blog.ArticleBody> = ({
 }) => {
   const endMarkRef = useRef(null);
   let tocDom: Element | null;
-  const showMaxTocDis = () => {
-    if (endMarkRef.current) {
-      return getElementPosition(endMarkRef.current).y;
-    }
-    return 0;
-  };
-
   const getTocDom = () => {
     if (!tocDom) {
       tocDom = document.querySelector(".table-of-contents");
@@ -57,6 +50,7 @@ const PostDetail: NextPage<Blog.ArticleBody> = ({
     document.addEventListener("scroll", handleScroll, true);
     // 组件卸载时移除事件监听
     return () => document.removeEventListener("scroll", handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -67,6 +61,9 @@ const PostDetail: NextPage<Blog.ArticleBody> = ({
             title={content.title}
             description={content.abstract}
           ></NextSeo>
+          <Head>
+            <meta name="theme-color" content={themeColor} />
+          </Head>
           <Layout category={category} themeColor={themeColor}>
             <div className="overflow-hidden w-full h-72 md:h-96 relative mt-16 before:contents">
               <div
@@ -158,7 +155,6 @@ export const getStaticProps: GetStaticProps<
 
   const body = matter(contentStr).content;
   let articleBody = body ? renderMarkdown(body) : ("" as string);
-  console.log("articleBody", articleBody.match(/<(h[1-6])>([\S\s]*?)<\/\1>/));
   const themeColor = await getThemeColor(curBlogPost.content.thumbnail);
   return {
     props: {

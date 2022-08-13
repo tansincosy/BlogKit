@@ -15,19 +15,11 @@ $drawer: drawer;
     transition: transform $duration $ease-in-out-circ;
   }
   &-mask {
-    background-color: rgba(49, 48, 52, 0.4);
-    opacity: 0;
-    width: 100%;
-    height: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
+    @apply bg-shadow opacity-70 w-full h-0 absolute top-0 left-0;
     transition: opacity $duration $ease-in-out-circ, height 0s ease $duration;
   }
   &-content-wrapper {
-    position: absolute;
-    background-color: var(--md-sys-color-surface);
-    border-radius: 1rem;
+    @apply absolute bg-surface rounded-2xl;
   }
   &-content {
     overflow: auto;

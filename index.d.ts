@@ -77,4 +77,12 @@ declare module Blog {
   export type TagPost = {
     [key: string]: Post[];
   };
+
+  export type Search = {
+    ObjectID: string;
+    title: string;
+    tags: string[];
+    abstract: string;
+    path: string;
+  };
 }

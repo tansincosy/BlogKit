@@ -6,6 +6,7 @@ import { getCategoryPosts } from "@/utils/read_file";
 import { arrayIsEmpty } from "@/utils";
 import { getThemeColor } from "@/utils/getThemeColor";
 import { getActuallyImagePath } from "@/utils/path";
+import Head from "next/head";
 
 const Category: NextPage<{
   posts: Blog.Post[];
@@ -15,6 +16,9 @@ const Category: NextPage<{
 }> = ({ posts, category, categoryTitle, themeColor }) => {
   return (
     <>
+      <Head>
+        <meta name="theme-color" content={themeColor} />
+      </Head>
       <Layout category={category} themeColor={themeColor}>
         <div className="overflow-hidden w-full h-80 md:h-96 relative mt-16">
           <div

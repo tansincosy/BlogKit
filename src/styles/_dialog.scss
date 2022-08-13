@@ -1,9 +1,5 @@
 .rc-dialog {
-  position: relative;
-  width: auto;
-  margin: 10px;
-  border-radius: 4px;
-  z-index: 40;
+  @apply max-w-xl min-w-max container mx-auto relative;
 }
 .rc-dialog-wrap {
   position: fixed;
@@ -17,56 +13,21 @@
   outline: 0;
 }
 .rc-dialog-content {
-  color: white;
-  position: relative;
-  background-color: #181818;
-  border: 1px solid #999;
-  border-radius: 6px;
-  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
-  background-clip: padding-box;
-  outline: 0;
+  @apply bg-surface rounded-3xl  mt-32 relative shadow-lg text-on-surface z-50 p-6;
 }
 .rc-dialog-header {
-  border-bottom: 1px solid #e5e5e5;
 }
 .rc-dialog-close {
-  cursor: pointer;
-  border: 0;
-  position: absolute;
-  right: 20px;
-  top: 12px;
-  line-height: 1;
-  text-shadow: 0 1px 0 #fff;
-  text-decoration: none;
-  z-index: 20;
-  background-color: #181818;
-  height: 36px;
-  width: 36px;
-  border-radius: 100%;
   display: none;
 }
-.rc-dialog-close-x:after {
-  content: "×";
-}
-.rc-dialog-close:hover {
-  opacity: 1;
-  text-decoration: none;
-}
-.rc-dialog-title {
-  margin: 0;
-  line-height: 1.42857143;
-}
+
 .rc-dialog-body {
-  position: relative;
+  @apply relative box-border;
 }
 .rc-dialog-footer {
-  text-align: right;
-  border-top: 1px solid #e5e5e5;
+  @apply flex justify-end mt-4;
 }
-.rc-dialog-footer .btn + .btn {
-  margin-left: 5px;
-  margin-bottom: 0;
-}
+
 .rc-dialog-footer .btn-group .btn + .btn {
   margin-left: -1px;
 }
@@ -111,15 +72,7 @@
   }
 }
 .rc-dialog-mask {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  height: 100%;
-  filter: alpha(opacity=50);
-  z-index: 1050;
+  @apply fixed top-0 left-0 right-0 bottom-0 h-full z-40 bg-shadow opacity-50;
 }
 .rc-dialog-mask-hidden {
   display: none;

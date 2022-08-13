@@ -1,13 +1,13 @@
-import { Feed } from "feed";
-import { mkdirSync, writeFileSync } from "fs";
-import { siteURL, profile } from "@/config";
-import { getBlogPosts } from "./read_file";
-export async function generateRss() {
-  const allPosts = await getBlogPosts();
+const { Feed } = require("feed");
+const { mkdirSync, writeFileSync } = require("fs");
+const { structurePostDir } = require("./all_post");
+
+async function generateRss({ title = "", subtitle = "", siteURL = "" }) {
+  const allPosts = await structurePostDir("posts", []);
   const date = new Date();
   const feed = new Feed({
-    title: profile.title,
-    description: profile.subtitle,
+    title: title,
+    description: subtitle,
     id: siteURL,
     link: siteURL,
     image: `${siteURL}/favicon.ico`,
@@ -39,3 +39,7 @@ export async function generateRss() {
   writeFileSync("./public/rss/feed.xml", feed.rss2());
   writeFileSync("./public/rss/feed.json", feed.json1());
 }
+
+module.exports = {
+  generateRss,
+};

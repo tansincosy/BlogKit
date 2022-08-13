@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import { GetStaticProps } from "next";
 import { Card, Chips, Layout } from "@/components";
 import { NextSeo } from "next-seo";
-import { generateRss } from "@/utils/generta_rss";
 import { profile } from "@/config";
 import { useRouter } from "next/router";
 import { getActuallyImagePath } from "@/utils/path";
@@ -10,6 +9,7 @@ import { getBlogPosts, getCategoryPosts } from "@/utils/read_file";
 import sortBy from "lodash/sortBy";
 import { arrayIsEmpty } from "@/utils";
 import { getThemeColor } from "@/utils/getThemeColor";
+import Head from "next/head";
 
 const Home: NextPage<{
   posts: Blog.Post[];
@@ -21,10 +21,13 @@ const Home: NextPage<{
   return (
     <>
       <NextSeo title={profile.title} description={profile.subtitle}></NextSeo>
+      <Head>
+        <meta name="theme-color" content={themeColor} />
+      </Head>
       <Layout category={category} themeColor={themeColor}>
         <div className="overflow-hidden w-full h-80 md:h-96 relative mt-16">
           <div
-            className="w-full h-full bg-center bg-local dark:brightness-50"
+            className="w-full h-full bg-center bg-cover dark:brightness-50"
             style={{
               backgroundImage: `url(${getActuallyImagePath(
                 profile.thumbnail
@@ -118,8 +121,7 @@ export const getStaticProps: GetStaticProps<
   const imagePath = getActuallyImagePath(profile.thumbnail);
   const colorImg = imagePath.startsWith("/") ? `public${imagePath}` : imagePath;
   const themeColor = await getThemeColor(colorImg);
-  // rss 订阅
-  await generateRss();
+
   return {
     props: {
       posts: showBlogPosts,

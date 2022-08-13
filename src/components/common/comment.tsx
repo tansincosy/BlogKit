@@ -1,12 +1,11 @@
 import useScript from "@/hooks/useScrips";
 import { useRef } from "react";
-import { comment } from "@/config";
 export const Comment = () => {
   const commentBoxRef = useRef<HTMLDivElement>(null);
   useScript({
     url: "https://utteranc.es/client.js",
     issueTerm: "url",
-    repo: comment.repo,
+    repo: process.env.COMMENT_REPO_NAME || "",
     ref: commentBoxRef,
   });
 
