@@ -1,7 +1,7 @@
-import { siteURL } from "@/config";
-
 export const actuallyAssetsPrefix = (path: string) =>
-  siteURL ? `${siteURL}/${path}` : `${path}`;
+  process.env.NEXT_PUBLIC_BLOG_SITE_URL
+    ? `${process.env.NEXT_PUBLIC_BLOG_SITE_URL}/${path}`
+    : `${path}`;
 
 export const getActuallyImagePath = (imgPath?: string) => {
   if (!imgPath) {

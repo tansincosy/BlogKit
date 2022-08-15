@@ -1,15 +1,16 @@
 const algoliasearch = require("algoliasearch");
 const { structurePostDir } = require("./all_post");
+
 async function generateSearchResult({
-  appKey = "",
-  adminKey = "",
-  searchNameSpace = "",
+  NEXT_PUBLIC_ALGOLIA_APP_ID = "",
+  NEXT_PUBLIC_ALGOLIA_ADMIN_KEY = "",
+  NEXT_PUBLIC_ALGOLIA_INDEX_NAME = "",
 }) {
   const client = algoliasearch(
-    appKey,
-    adminKey //admin key 执行自己运行部署时，其他情况使用search key,
+    NEXT_PUBLIC_ALGOLIA_APP_ID,
+    NEXT_PUBLIC_ALGOLIA_ADMIN_KEY //admin key 执行自己运行部署时，其他情况使用search key,
   );
-  const index = client.initIndex(searchNameSpace);
+  const index = client.initIndex(NEXT_PUBLIC_ALGOLIA_INDEX_NAME);
   const allPosts = await structurePostDir("posts", []);
   index.replaceAllObjects(
     allPosts.map((item) => {

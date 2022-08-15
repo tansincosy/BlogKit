@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import { GetStaticProps } from "next";
 import { Card, Chips, Layout } from "@/components";
 import { NextSeo } from "next-seo";
-import { profile } from "@/config";
 import { useRouter } from "next/router";
 import { getActuallyImagePath } from "@/utils/path";
 import { getBlogPosts, getCategoryPosts } from "@/utils/read_file";
@@ -117,6 +116,11 @@ export const getStaticProps: GetStaticProps<
       return index < 20;
     }
   );
+  const profile = {
+    title: process.env.BLOG_TITLE || "",
+    subtitle: process.env.BLOG_SUBTITLE || "",
+    thumbnail: process.env.BLOG_THUMBNAIL || "",
+  };
   const category = await getCategoryPosts();
   const imagePath = getActuallyImagePath(profile.thumbnail);
   const colorImg = imagePath.startsWith("/") ? `public${imagePath}` : imagePath;
