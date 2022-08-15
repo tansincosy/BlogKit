@@ -23,7 +23,7 @@ const structurePostDir = async (dirName, posts) => {
               thumbnail: data.thumbnail,
               abstract: data.abstract,
               tags: data.tags,
-              date: data.date ? data.date.getTime() : "",
+              date: data.date ? data.date : new Date(fileStat.mtime),
             },
           });
         }
