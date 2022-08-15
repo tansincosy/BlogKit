@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import { Button, Icon } from "../index";
 import { SideMenu } from "./side_menu";
+import SearchDialog from "./search_dialog";
 
 export interface TopAppBarProps {
   appTitle?: string;
@@ -25,6 +26,7 @@ const constructNavLink = (navs: Blog.CategoryPost) => {
 
 export const TopAppBar = ({ appTitle = "", category = {} }: TopAppBarProps) => {
   const [isShowSideBar, setShowSideBar] = useState<boolean>(false);
+  const [searchVisible, setSearchVisible] = useState<boolean>(false);
   const [activeClass, setActiveClass] = useState("active");
   const { asPath, isReady, push, query } = useRouter();
 
@@ -44,8 +46,23 @@ export const TopAppBar = ({ appTitle = "", category = {} }: TopAppBarProps) => {
         path: "/about",
       },
     ];
-    return staticMenu;
-  }, [category]);
+    return staticMenu.map((cate) => (
+      <Link href={`${cate.path}`} key={cate.title}>
+        <Button
+          className="text-on-surface-variant title-medium"
+          type={
+            cate.path === "/" && activeClass === cate.path
+              ? "filled"
+              : cate.path + "/" === activeClass
+              ? "filled"
+              : "text"
+          }
+        >
+          {cate.title}
+        </Button>
+      </Link>
+    ));
+  }, [activeClass, category]);
 
   useEffect(() => {
     if (isReady) {
@@ -69,6 +86,14 @@ export const TopAppBar = ({ appTitle = "", category = {} }: TopAppBarProps) => {
 
   const targetHomePage = () => {
     push("/");
+  };
+
+  const openSearchDialog = () => {
+    setSearchVisible(true);
+  };
+
+  const onCloseHandle = (url?: string) => {
+    setSearchVisible(false);
   };
 
   return (
@@ -96,32 +121,16 @@ export const TopAppBar = ({ appTitle = "", category = {} }: TopAppBarProps) => {
           {appTitle || "Blog"}
         </div>
         <div className="title-medium text-on-surface w-full hidden md:block">
-          <div className="flex space-x-2 justify-end mr-8">
-            {mainNavs.length > 0 &&
-              mainNavs.map((cate) => (
-                <Link href={`${cate.path}`} key={cate.title}>
-                  <Button
-                    className="text-on-surface-variant title-medium"
-                    type={
-                      cate.path === "/" && activeClass === cate.path
-                        ? "filled"
-                        : cate.path + "/" === activeClass
-                        ? "filled"
-                        : "text"
-                    }
-                  >
-                    {cate.title}
-                  </Button>
-                </Link>
-              ))}
-          </div>
+          <div className="flex space-x-2 justify-end mr-8">{mainNavs}</div>
         </div>
         <Icon
+          onClick={openSearchDialog}
           name="search"
           type="line"
           className="w-12 h-12 text-[1.5rem] leading-[3rem] text-on-surface cursor-pointer"
         ></Icon>
       </div>
+      <SearchDialog visible={searchVisible} onCloseHandle={onCloseHandle} />
       <SideMenu
         isVisible={isShowSideBar}
         onClose={closeSlideBar}

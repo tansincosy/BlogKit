@@ -39,6 +39,11 @@ declare module Blog {
     contact: Contact;
     comment: Comment;
     buildBasePath?: string;
+    algolia: {
+      appId: string;
+      adminKey: string;
+      searchNameSpace: string;
+    };
   };
 
   export interface Post {
@@ -71,5 +76,13 @@ declare module Blog {
 
   export type TagPost = {
     [key: string]: Post[];
+  };
+
+  export type Search = {
+    ObjectID: string;
+    title: string;
+    tags: string[];
+    abstract: string;
+    path: string;
   };
 }

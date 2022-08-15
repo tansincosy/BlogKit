@@ -8,14 +8,19 @@
     "build": "next build && next export",
     "start": "next start",
     "lint": "next lint",
-    "deploy:gh-pages": "gh-pages -d out --dotfiles"
+    "build:search": "ts-node src/scripts/save_search_key",
+    "build:rss": "ts-node src/scripts/generate_rss.ts",
+    "deploy:gh-pages": "gh-pages -d out --dotfiles",
+    "tsnode": "node --loader ts-node/esm --no-warnings"
   },
   "dependencies": {
     "@material/material-color-utilities": "^0.1.2",
+    "algoliasearch": "^4.14.2",
     "colorthief": "^2.3.2",
     "feed": "^4.2.2",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.5.1",
+    "instantsearch.css": "^7.4.5",
     "lodash": "^4.17.21",
     "markdown-it": "^13.0.1",
     "markdown-it-abbr": "^1.0.4",
@@ -33,9 +38,12 @@
     "next": "12.2.0",
     "next-pwa": "^5.5.4",
     "next-seo": "^5.4.0",
+    "rc-dialog": "^8.9.0",
     "rc-drawer": "^4.4.3",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-instantsearch-dom": "^6.31.1",
+    "react-instantsearch-hooks-web": "^6.31.1"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.2",
@@ -44,9 +52,10 @@
     "@types/markdown-it-container": "^2.0.5",
     "@types/markdown-it-emoji": "^2.0.2",
     "@types/marked": "^4.0.3",
-    "@types/node": "18.0.0",
+    "@types/node": "^18.7.2",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
+    "@types/react-instantsearch-dom": "^6.12.3",
     "autoprefixer": "^10.4.7",
     "eslint": "8.18.0",
     "eslint-config-next": "12.2.0",
@@ -54,6 +63,7 @@
     "postcss": "^8.4.14",
     "sass": "^1.53.0",
     "tailwindcss": "^3.1.4",
-    "typescript": "4.7.4"
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
   }
 }

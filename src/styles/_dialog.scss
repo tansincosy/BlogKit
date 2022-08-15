@@ -1,0 +1,124 @@
+.rc-dialog {
+  @apply max-w-xl min-w-max container mx-auto relative;
+}
+.rc-dialog-wrap {
+  position: fixed;
+  overflow: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+}
+.rc-dialog-content {
+  @apply bg-surface rounded-3xl  mt-32 relative shadow-lg text-on-surface z-50 p-6;
+}
+.rc-dialog-header {
+}
+.rc-dialog-close {
+  display: none;
+}
+
+.rc-dialog-body {
+  @apply relative box-border;
+}
+.rc-dialog-footer {
+  @apply flex justify-end mt-4;
+}
+
+.rc-dialog-footer .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+.rc-dialog-footer .btn-block + .btn-block {
+  margin-left: 0;
+}
+.rc-dialog-slide-fade-enter,
+.rc-dialog-slide-fade-appear {
+  transform: translate(0, -25%);
+}
+.rc-dialog-slide-fade-enter,
+.rc-dialog-slide-fade-appear,
+.rc-dialog-slide-fade-leave {
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  animation-timing-function: ease-out;
+  animation-play-state: paused;
+}
+.rc-dialog-slide-fade-enter.rc-dialog-slide-fade-enter-active,
+.rc-dialog-slide-fade-appear.rc-dialog-slide-fade-appear-active {
+  animation-name: rcDialogSlideFadeIn;
+  animation-play-state: running;
+}
+.rc-dialog-slide-fade-leave.rc-dialog-slide-fade-leave-active {
+  animation-name: rcDialogSlideFadeOut;
+  animation-play-state: running;
+}
+@keyframes rcDialogSlideFadeIn {
+  0% {
+    transform: translate(0, -25%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes rcDialogSlideFadeOut {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0, -25%);
+  }
+}
+.rc-dialog-mask {
+  @apply fixed top-0 left-0 right-0 bottom-0 h-full z-40 bg-shadow opacity-50;
+}
+.rc-dialog-mask-hidden {
+  display: none;
+}
+.rc-dialog-fade-enter,
+.rc-dialog-fade-appear {
+  opacity: 0;
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
+  animation-play-state: paused;
+}
+.rc-dialog-fade-leave {
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
+  animation-play-state: paused;
+}
+.rc-dialog-fade-enter.rc-dialog-fade-enter-active,
+.rc-dialog-fade-appear.rc-dialog-fade-appear-active {
+  animation-name: rcDialogFadeIn;
+  animation-play-state: running;
+}
+.rc-dialog-fade-leave.rc-dialog-fade-leave-active {
+  animation-name: rcDialogFadeOut;
+  animation-play-state: running;
+}
+@keyframes rcDialogFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes rcDialogFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.input-focus {
+  &::after {
+    transform: scaleX(1) translateX(0);
+  }
+}

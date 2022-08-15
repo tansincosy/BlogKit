@@ -1,19 +1,18 @@
-import { Feed } from "feed";
-import { mkdirSync, writeFileSync } from "fs";
-import { siteURL, profile } from "@/config";
-import { getBlogPosts } from "./read_file";
-export async function generateRss() {
-  const allPosts = await getBlogPosts();
-  const date = new Date();
+const { Feed } = require("feed");
+const { mkdirSync, writeFileSync } = require("fs");
+const { structurePostDir } = require("./all_post");
+
+async function generateRss({ title = "", subtitle = "", siteURL = "" }) {
+  const allPosts = await structurePostDir("posts", []);
   const feed = new Feed({
-    title: profile.title,
-    description: profile.subtitle,
+    title: title,
+    description: subtitle,
     id: siteURL,
     link: siteURL,
     image: `${siteURL}/favicon.ico`,
     favicon: `${siteURL}/favicon.ico`,
     copyright: `All rights reserved ${date.getFullYear()}`,
-    updated: date, // today's date
+    updated: new Date(), // today's date
     generator: "Feed for Node.js",
     feedLinks: {
       rss2: `${siteURL}/rss/feed.xml`, // xml format
@@ -39,3 +38,7 @@ export async function generateRss() {
   writeFileSync("./public/rss/feed.xml", feed.rss2());
   writeFileSync("./public/rss/feed.json", feed.json1());
 }
+
+module.exports = {
+  generateRss,
+};

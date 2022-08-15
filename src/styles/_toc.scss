@@ -3,12 +3,9 @@
 }
 
 .table-of-contents {
-  position: absolute;
+  @apply absolute z-20 top-0 bottom-0 w-72;
   right: max(50% - 45rem);
   z-index: 20;
-  top: 0;
-  bottom: 0;
-  width: 19.5rem;
   padding-left: 2rem;
   padding-right: 2rem;
   padding-top: 2.5rem;

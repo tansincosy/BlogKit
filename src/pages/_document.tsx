@@ -7,7 +7,6 @@ import Document, {
   DocumentContext,
   DocumentInitialProps,
 } from "next/document";
-import { profile } from "@/config";
 
 class MyDocument extends Document {
   static async getInitialProps(
@@ -24,23 +23,19 @@ class MyDocument extends Document {
     return (
       <Html data-theme-light>
         <Head>
-          <meta name="application-name" content={profile.title} />
+          <meta name="application-name" content={process.env.BLOG_TITLE} />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta
             name="apple-mobile-web-app-status-bar-style"
             content="default"
           />
-          <meta name="apple-mobile-web-app-title" content={profile.title} />
-          <meta name="description" content={profile.subtitle} />
+          <meta
+            name="apple-mobile-web-app-title"
+            content={process.env.BLOG_TITLE}
+          />
+          <meta name="description" content={process.env.BLOG_SUBTITLE} />
           <meta name="format-detection" content="telephone=no" />
           <meta name="mobile-web-app-capable" content="yes" />
-          <meta
-            name="msapplication-config"
-            content="/icons/browserconfig.xml"
-          />
-          <meta name="msapplication-TileColor" content="#2B5797" />
-          <meta name="msapplication-tap-highlight" content="no" />
-          <meta name="theme-color" content="#000000" />
           <link
             rel="shortcut icon"
             href={actuallyAssetsPrefix("favicon.ico")}
