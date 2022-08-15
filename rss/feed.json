@@ -1,10 +1,9 @@
 {
     "version": "https://jsonfeed.org/version/1",
     "title": "sample",
-    "home_page_url": "https://tansincosy.github.io/BlogKit/",
-    "feed_url": "https://tansincosy.github.io/BlogKit//rss/feed.json",
+    "feed_url": "/rss/feed.json",
     "description": "subtitle",
-    "icon": "https://tansincosy.github.io/BlogKit//favicon.ico",
+    "icon": "/favicon.ico",
     "author": {
         "name": "spd"
     },
@@ -12,23 +11,26 @@
         {
             "id": "tech",
             "content_html": "This is a sample post.",
-            "url": "https://tansincosy.github.io/BlogKit//blog/samplej",
+            "url": "/blog/samplej",
             "title": "tech",
-            "summary": "This is a sample post."
+            "summary": "This is a sample post.",
+            "date_modified": "2022-08-15T16:21:23.764Z"
         },
         {
             "id": "Sample",
             "content_html": "This is a sample post.",
-            "url": "https://tansincosy.github.io/BlogKit//blog/samplej2",
+            "url": "/blog/samplej2",
             "title": "Sample",
-            "summary": "This is a sample post."
+            "summary": "This is a sample post.",
+            "date_modified": "2022-08-15T16:21:23.764Z"
         },
         {
             "id": "Sample with toc",
             "content_html": "This is a sample post.",
-            "url": "https://tansincosy.github.io/BlogKit//blog/samples",
+            "url": "/blog/samples",
             "title": "Sample with toc",
-            "summary": "This is a sample post."
+            "summary": "This is a sample post.",
+            "date_modified": "2022-08-15T16:21:23.764Z"
         }
     ]
 }
