@@ -4,7 +4,6 @@ const { structurePostDir } = require("./all_post");
 
 async function generateRss({ title = "", subtitle = "", siteURL = "" }) {
   const allPosts = await structurePostDir("posts", []);
-  const date = new Date();
   const feed = new Feed({
     title: title,
     description: subtitle,
@@ -13,7 +12,7 @@ async function generateRss({ title = "", subtitle = "", siteURL = "" }) {
     image: `${siteURL}/favicon.ico`,
     favicon: `${siteURL}/favicon.ico`,
     copyright: `All rights reserved ${date.getFullYear()}`,
-    updated: date, // today's date
+    updated: new Date(), // today's date
     generator: "Feed for Node.js",
     feedLinks: {
       rss2: `${siteURL}/rss/feed.xml`, // xml format
