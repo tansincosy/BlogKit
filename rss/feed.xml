@@ -4,7 +4,7 @@
         <title>sample</title>
         <link></link>
         <description>subtitle</description>
-        <lastBuildDate>Tue, 16 Aug 2022 15:39:08 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 16 Aug 2022 15:41:32 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <image>
@@ -17,7 +17,7 @@
             <title><![CDATA[tech]]></title>
             <link>/blog/samplej</link>
             <guid>tech</guid>
-            <pubDate>Tue, 16 Aug 2022 15:37:44 GMT</pubDate>
+            <pubDate>Tue, 16 Aug 2022 15:40:12 GMT</pubDate>
             <description><![CDATA[This is a sample post.]]></description>
             <content:encoded><![CDATA[This is a sample post.]]></content:encoded>
         </item>
@@ -25,7 +25,7 @@
             <title><![CDATA[Sample]]></title>
             <link>/blog/samplej2</link>
             <guid>Sample</guid>
-            <pubDate>Tue, 16 Aug 2022 15:37:44 GMT</pubDate>
+            <pubDate>Tue, 16 Aug 2022 15:40:12 GMT</pubDate>
             <description><![CDATA[This is a sample post.]]></description>
             <content:encoded><![CDATA[This is a sample post.]]></content:encoded>
         </item>
@@ -33,7 +33,7 @@
             <title><![CDATA[Sample with toc]]></title>
             <link>/blog/samples</link>
             <guid>Sample with toc</guid>
-            <pubDate>Tue, 16 Aug 2022 15:37:44 GMT</pubDate>
+            <pubDate>Tue, 16 Aug 2022 15:40:12 GMT</pubDate>
             <description><![CDATA[This is a sample post.]]></description>
             <content:encoded><![CDATA[This is a sample post.]]></content:encoded>
         </item>
