@@ -30,7 +30,7 @@ const Footer: React.FC<{ footers: Blog.FootLink[] }> = ({ footers }) => {
           })}
       </div>
       <div className="title-medium w-full h-16 flex items-center justify-center">
-        &copy; 2022 All rights reserved
+        &copy; 2022 tansincosy
       </div>
     </footer>
   );
