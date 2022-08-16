@@ -14,7 +14,7 @@
             "url": "/blog/samplej",
             "title": "tech",
             "summary": "This is a sample post.",
-            "date_modified": "2022-08-15T16:21:23.764Z"
+            "date_modified": "2022-08-16T15:36:07.572Z"
         },
         {
             "id": "Sample",
@@ -22,7 +22,7 @@
             "url": "/blog/samplej2",
             "title": "Sample",
             "summary": "This is a sample post.",
-            "date_modified": "2022-08-15T16:21:23.764Z"
+            "date_modified": "2022-08-16T15:36:07.572Z"
         },
         {
             "id": "Sample with toc",
@@ -30,7 +30,7 @@
             "url": "/blog/samples",
             "title": "Sample with toc",
             "summary": "This is a sample post.",
-            "date_modified": "2022-08-15T16:21:23.764Z"
+            "date_modified": "2022-08-16T15:36:07.572Z"
         }
     ]
 }
