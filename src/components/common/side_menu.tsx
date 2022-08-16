@@ -21,7 +21,7 @@ interface MenuProps {
   onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
-const MenuItem = forwardRef<HTMLAnchorElement, MenuProps>(
+export const MenuItem = forwardRef<HTMLAnchorElement, MenuProps>(
   ({ title, icon, href, onClick, badge, exact }, ref) => {
     const { asPath } = useRouter();
     const isActive = exact ? asPath === href : asPath.startsWith(href);

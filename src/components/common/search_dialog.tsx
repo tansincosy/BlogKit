@@ -11,6 +11,7 @@ import {
 
 import { useRouter } from "next/router";
 import { SearchBox } from "./seachBox";
+import { singleLineClass } from "@/utils";
 
 export interface SearchDialogProps {
   visible: boolean;
@@ -52,14 +53,18 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
           <Hits
             hitComponent={({ hit }: any) => {
               return (
-                <div
+                <Highlight
+                  className={singleLineClass(`h-14 box-border pl-4 pr-6 flex items-center rounded-[1.75rem] w-full relative overflow-hidden cursor-pointer
+                  hover:after:w-[200%] hover:after:h-[200%] hover:after:bg-on-surface hover:after:opacity-[.16] hover:after:absolute hover:after:top-[-50%] hover:after:left-[-50%]
+                active:after:w-[200%] active:after:h-[200%] active:after:bg-on-surface active:after:opacity-[.24] active:after:absolute active:after:top-[-50%] active:after:left-[-50%]`)}
+                  id={hit.path}
+                  attribute="title"
+                  hit={hit}
                   onClick={() => {
                     router.push(hit.path);
                     onCloseHandle();
                   }}
-                >
-                  <Highlight attribute="title" hit={hit} />
-                </div>
+                />
               );
             }}
           />
