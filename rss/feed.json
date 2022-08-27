@@ -1,8 +1,7 @@
 {
     "version": "https://jsonfeed.org/version/1",
-    "title": "sample",
+    "title": "",
     "feed_url": "/rss/feed.json",
-    "description": "subtitle",
     "icon": "/favicon.ico",
     "author": {
         "name": "spd"
@@ -14,7 +13,7 @@
             "url": "/blog/samplej",
             "title": "tech",
             "summary": "This is a sample post.",
-            "date_modified": "2022-08-16T15:40:12.154Z"
+            "date_modified": "2022-08-27T06:10:51.516Z"
         },
         {
             "id": "Sample",
@@ -22,7 +21,7 @@
             "url": "/blog/samplej2",
             "title": "Sample",
             "summary": "This is a sample post.",
-            "date_modified": "2022-08-16T15:40:12.154Z"
+            "date_modified": "2022-08-27T06:10:51.516Z"
         },
         {
             "id": "Sample with toc",
@@ -30,7 +29,7 @@
             "url": "/blog/samples",
             "title": "Sample with toc",
             "summary": "This is a sample post.",
-            "date_modified": "2022-08-16T15:40:12.154Z"
+            "date_modified": "2022-08-27T06:10:51.516Z"
         }
     ]
 }
