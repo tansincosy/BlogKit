@@ -117,9 +117,9 @@ export const getStaticProps: GetStaticProps<
     }
   );
   const profile = {
-    title: process.env.BLOG_TITLE || "",
-    subtitle: process.env.BLOG_SUBTITLE || "",
-    thumbnail: process.env.BLOG_THUMBNAIL || "",
+    title: process.env.NEXT_PUBLIC_BLOG_TITLE || "",
+    subtitle: process.env.NEXT_PUBLIC_BLOG_SUBTITLE || "",
+    thumbnail: process.env.NEXT_PUBLIC_BLOG_THUMBNAIL || "",
   };
   const category = await getCategoryPosts();
   const imagePath = getActuallyImagePath(profile.thumbnail);

@@ -38,7 +38,10 @@ export const Layout = ({
 
   return (
     <div className="absolute flex left-0 right-0 bottom-0 top-0 flex-col">
-      <TopAppBar category={category} appTitle={"BlogKit"} />
+      <TopAppBar
+        category={category}
+        appTitle={process.env.NEXT_PUBLIC_BLOG_TITLE}
+      />
       <section className="bg-background flex-1 pb-20 box-border">
         {children}
       </section>
