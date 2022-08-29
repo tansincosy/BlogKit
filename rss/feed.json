@@ -1,8 +1,10 @@
 {
     "version": "https://jsonfeed.org/version/1",
-    "title": "",
-    "feed_url": "/rss/feed.json",
-    "icon": "/favicon.ico",
+    "title": "sample",
+    "home_page_url": "/imgs/index.jpg",
+    "feed_url": "/imgs/index.jpg/rss/feed.json",
+    "description": "subtitle",
+    "icon": "/imgs/index.jpg/favicon.ico",
     "author": {
         "name": "spd"
     },
@@ -10,26 +12,26 @@
         {
             "id": "tech",
             "content_html": "This is a sample post.",
-            "url": "/blog/samplej",
+            "url": "/imgs/index.jpg/blog/samplej",
             "title": "tech",
             "summary": "This is a sample post.",
-            "date_modified": "2022-08-28T15:51:04.809Z"
+            "date_modified": "2022-08-29T15:28:34.160Z"
         },
         {
             "id": "Sample",
             "content_html": "This is a sample post.",
-            "url": "/blog/samplej2",
+            "url": "/imgs/index.jpg/blog/samplej2",
             "title": "Sample",
             "summary": "This is a sample post.",
-            "date_modified": "2022-08-28T15:51:04.809Z"
+            "date_modified": "2022-08-29T15:28:34.160Z"
         },
         {
             "id": "Sample with toc",
             "content_html": "This is a sample post.",
-            "url": "/blog/samples",
+            "url": "/imgs/index.jpg/blog/samples",
             "title": "Sample with toc",
             "summary": "This is a sample post.",
-            "date_modified": "2022-08-28T15:51:04.809Z"
+            "date_modified": "2022-08-29T15:28:34.160Z"
         }
     ]
 }

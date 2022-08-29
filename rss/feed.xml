@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
-        <title></title>
-        <link></link>
-        <description></description>
-        <lastBuildDate>Sun, 28 Aug 2022 15:52:31 GMT</lastBuildDate>
+        <title>sample</title>
+        <link>/imgs/index.jpg</link>
+        <description>subtitle</description>
+        <lastBuildDate>Mon, 29 Aug 2022 15:30:25 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <image>
-            <title></title>
-            <url>/favicon.ico</url>
-            <link></link>
+            <title>sample</title>
+            <url>/imgs/index.jpg/favicon.ico</url>
+            <link>/imgs/index.jpg</link>
         </image>
         <copyright>All rights reserved 2022</copyright>
         <item>
             <title><![CDATA[tech]]></title>
-            <link>/blog/samplej</link>
+            <link>/imgs/index.jpg/blog/samplej</link>
             <guid>tech</guid>
-            <pubDate>Sun, 28 Aug 2022 15:51:04 GMT</pubDate>
+            <pubDate>Mon, 29 Aug 2022 15:28:34 GMT</pubDate>
             <description><![CDATA[This is a sample post.]]></description>
             <content:encoded><![CDATA[This is a sample post.]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Sample]]></title>
-            <link>/blog/samplej2</link>
+            <link>/imgs/index.jpg/blog/samplej2</link>
             <guid>Sample</guid>
-            <pubDate>Sun, 28 Aug 2022 15:51:04 GMT</pubDate>
+            <pubDate>Mon, 29 Aug 2022 15:28:34 GMT</pubDate>
             <description><![CDATA[This is a sample post.]]></description>
             <content:encoded><![CDATA[This is a sample post.]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Sample with toc]]></title>
-            <link>/blog/samples</link>
+            <link>/imgs/index.jpg/blog/samples</link>
             <guid>Sample with toc</guid>
-            <pubDate>Sun, 28 Aug 2022 15:51:04 GMT</pubDate>
+            <pubDate>Mon, 29 Aug 2022 15:28:34 GMT</pubDate>
             <description><![CDATA[This is a sample post.]]></description>
             <content:encoded><![CDATA[This is a sample post.]]></content:encoded>
         </item>
