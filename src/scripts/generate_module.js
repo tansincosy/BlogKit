@@ -21,15 +21,15 @@ const generateModule = async () => {
   if (isProduction) {
     LOG_INFO("begin generate rss");
     const blogConfig = getAppConfig(
-      "BLOG_TITLE",
-      "BLOG_SUBTITLE",
-      "BLOG_SITE_URL"
+      "NEXT_PUBLIC_BLOG_TITLE",
+      "NEXT_PUBLIC_BLOG_SUBTITLE",
+      "NEXT_PUBLIC_BLOG_THUMBNAIL"
     );
 
     await generateRss({
-      title: blogConfig.BLOG_TITLE,
-      subtitle: blogConfig.BLOG_SUBTITLE,
-      siteURL: blogConfig.BLOG_SITE_URL,
+      title: blogConfig.NEXT_PUBLIC_BLOG_TITLE,
+      subtitle: blogConfig.NEXT_PUBLIC_BLOG_SUBTITLE,
+      siteURL: blogConfig.NEXT_PUBLIC_BLOG_THUMBNAIL,
     });
     LOG_INFO("begin generate rss successfully");
     LOG_INFO("begin generate search");
