@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>sample</title>
-        <link>/imgs/index.jpg</link>
+        <link>https://blog.cyatime.com</link>
         <description>subtitle</description>
-        <lastBuildDate>Mon, 29 Aug 2022 15:30:25 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 31 Aug 2022 15:02:02 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <image>
             <title>sample</title>
-            <url>/imgs/index.jpg/favicon.ico</url>
-            <link>/imgs/index.jpg</link>
+            <url>https://blog.cyatime.com/favicon.ico</url>
+            <link>https://blog.cyatime.com</link>
         </image>
         <copyright>All rights reserved 2022</copyright>
         <item>
             <title><![CDATA[tech]]></title>
-            <link>/imgs/index.jpg/blog/samplej</link>
+            <link>https://blog.cyatime.com/blog/samplej</link>
             <guid>tech</guid>
-            <pubDate>Mon, 29 Aug 2022 15:28:34 GMT</pubDate>
+            <pubDate>Wed, 31 Aug 2022 15:00:44 GMT</pubDate>
             <description><![CDATA[This is a sample post.]]></description>
             <content:encoded><![CDATA[This is a sample post.]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Sample]]></title>
-            <link>/imgs/index.jpg/blog/samplej2</link>
+            <link>https://blog.cyatime.com/blog/samplej2</link>
             <guid>Sample</guid>
-            <pubDate>Mon, 29 Aug 2022 15:28:34 GMT</pubDate>
+            <pubDate>Wed, 31 Aug 2022 15:00:44 GMT</pubDate>
             <description><![CDATA[This is a sample post.]]></description>
             <content:encoded><![CDATA[This is a sample post.]]></content:encoded>
         </item>
         <item>
             <title><![CDATA[Sample with toc]]></title>
-            <link>/imgs/index.jpg/blog/samples</link>
+            <link>https://blog.cyatime.com/blog/samples</link>
             <guid>Sample with toc</guid>
-            <pubDate>Mon, 29 Aug 2022 15:28:34 GMT</pubDate>
+            <pubDate>Wed, 31 Aug 2022 15:00:44 GMT</pubDate>
             <description><![CDATA[This is a sample post.]]></description>
             <content:encoded><![CDATA[This is a sample post.]]></content:encoded>
         </item>

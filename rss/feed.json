@@ -1,10 +1,10 @@
 {
     "version": "https://jsonfeed.org/version/1",
     "title": "sample",
-    "home_page_url": "/imgs/index.jpg",
-    "feed_url": "/imgs/index.jpg/rss/feed.json",
+    "home_page_url": "https://blog.cyatime.com",
+    "feed_url": "https://blog.cyatime.com/rss/feed.json",
     "description": "subtitle",
-    "icon": "/imgs/index.jpg/favicon.ico",
+    "icon": "https://blog.cyatime.com/favicon.ico",
     "author": {
         "name": "spd"
     },
@@ -12,26 +12,26 @@
         {
             "id": "tech",
             "content_html": "This is a sample post.",
-            "url": "/imgs/index.jpg/blog/samplej",
+            "url": "https://blog.cyatime.com/blog/samplej",
             "title": "tech",
             "summary": "This is a sample post.",
-            "date_modified": "2022-08-29T15:28:34.160Z"
+            "date_modified": "2022-08-31T15:00:44.159Z"
         },
         {
             "id": "Sample",
             "content_html": "This is a sample post.",
-            "url": "/imgs/index.jpg/blog/samplej2",
+            "url": "https://blog.cyatime.com/blog/samplej2",
             "title": "Sample",
             "summary": "This is a sample post.",
-            "date_modified": "2022-08-29T15:28:34.160Z"
+            "date_modified": "2022-08-31T15:00:44.159Z"
         },
         {
             "id": "Sample with toc",
             "content_html": "This is a sample post.",
-            "url": "/imgs/index.jpg/blog/samples",
+            "url": "https://blog.cyatime.com/blog/samples",
             "title": "Sample with toc",
             "summary": "This is a sample post.",
-            "date_modified": "2022-08-29T15:28:34.160Z"
+            "date_modified": "2022-08-31T15:00:44.159Z"
         }
     ]
 }
