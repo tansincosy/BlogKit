@@ -55,7 +55,7 @@ const Home: NextPage<{
                     title={post.content.title}
                     className="flex md:block"
                     onClick={() => {
-                      push(`blog/${post.id}.html`);
+                      push(`blog/${post.id}`);
                     }}
                   >
                     {post.content.thumbnail && (
