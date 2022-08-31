@@ -13,7 +13,7 @@ async function generateRss({ title = "", subtitle = "", siteURL = "" }) {
     image: `${siteURL}/favicon.ico`,
     favicon: `${siteURL}/favicon.ico`,
     copyright: `All rights reserved ${date.getFullYear()}`,
-    updated: date, // today's date
+    updated: date,
     feedLinks: {
       rss2: `${siteURL}/rss/feed.xml`, // xml format
       json: `${siteURL}/rss/feed.json`, // json fromat

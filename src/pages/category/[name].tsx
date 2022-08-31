@@ -45,11 +45,12 @@ const Category: NextPage<{
                       <a className="flex md:block">
                         {thumbnail && (
                           <div className="h-24 w-24 overflow-hidden rounded-xl md:w-full md:h-48">
-                            <img
-                              src={thumbnail}
-                              alt={title}
-                              className="w-full "
-                            ></img>
+                            <div
+                              style={{
+                                backgroundImage: `url(${thumbnail})`,
+                              }}
+                              className="w-full bg-center h-full bg-no-repeat bg-cover"
+                            ></div>
                           </div>
                         )}
                         <div className="box-border px-6 flex flex-col justify-center">

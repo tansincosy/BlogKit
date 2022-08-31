@@ -52,18 +52,20 @@ const Home: NextPage<{
                   className="flex w-full md:w-auto md:basis-80 m-4 z-10 overflow-hidden flex-col shrink md:pb-5 cursor-pointer"
                 >
                   <div
+                    title={post.content.title}
                     className="flex md:block"
                     onClick={() => {
-                      push(`blog/${post.id}`);
+                      push(`blog/${post.id}.html`);
                     }}
                   >
                     {post.content.thumbnail && (
                       <div className="h-24 w-24 overflow-hidden rounded-xl md:w-full md:h-48">
-                        <img
-                          src={post.content.thumbnail}
-                          alt={post.content.title}
-                          className="w-full "
-                        ></img>
+                        <div
+                          style={{
+                            backgroundImage: `url(${post.content.thumbnail})`,
+                          }}
+                          className="w-full bg-center h-full bg-no-repeat bg-cover"
+                        ></div>
                       </div>
                     )}
                     <div className="box-border px-6 flex flex-col justify-center">
