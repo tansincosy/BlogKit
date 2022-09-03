@@ -4,7 +4,7 @@
         <title>sample</title>
         <link>https://blog.cyatime.com</link>
         <description>subtitle</description>
-        <lastBuildDate>Wed, 31 Aug 2022 15:12:34 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 03 Sep 2022 07:10:29 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <image>
@@ -17,7 +17,7 @@
             <title><![CDATA[tech]]></title>
             <link>https://blog.cyatime.com/blog/samplej</link>
             <guid>tech</guid>
-            <pubDate>Wed, 31 Aug 2022 15:11:14 GMT</pubDate>
+            <pubDate>Sat, 03 Sep 2022 07:08:57 GMT</pubDate>
             <description><![CDATA[This is a sample post.]]></description>
             <content:encoded><![CDATA[This is a sample post.]]></content:encoded>
         </item>
@@ -25,7 +25,7 @@
             <title><![CDATA[Sample]]></title>
             <link>https://blog.cyatime.com/blog/samplej2</link>
             <guid>Sample</guid>
-            <pubDate>Wed, 31 Aug 2022 15:11:14 GMT</pubDate>
+            <pubDate>Sat, 03 Sep 2022 07:08:57 GMT</pubDate>
             <description><![CDATA[This is a sample post.]]></description>
             <content:encoded><![CDATA[This is a sample post.]]></content:encoded>
         </item>
@@ -33,7 +33,7 @@
             <title><![CDATA[Sample with toc]]></title>
             <link>https://blog.cyatime.com/blog/samples</link>
             <guid>Sample with toc</guid>
-            <pubDate>Wed, 31 Aug 2022 15:11:14 GMT</pubDate>
+            <pubDate>Sat, 03 Sep 2022 07:08:57 GMT</pubDate>
             <description><![CDATA[This is a sample post.]]></description>
             <content:encoded><![CDATA[This is a sample post.]]></content:encoded>
         </item>
