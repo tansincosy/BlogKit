@@ -69,9 +69,7 @@ const PostDetail: NextPage<Blog.ArticleBody> = ({
               <div
                 className="w-full h-full bg-center bg-cover dark:brightness-50"
                 style={{
-                  backgroundImage: `url(${getActuallyImagePath(
-                    content.thumbnail
-                  )})`,
+                  backgroundImage: `url(${content.thumbnail})`,
                 }}
               ></div>
               <div className="absolute z-10 w-full h-full top-0 flex flex-col justify-center items-center text-inverse-primary">
@@ -155,7 +153,15 @@ export const getStaticProps: GetStaticProps<
 
   const body = matter(contentStr).content;
   let articleBody = body ? renderMarkdown(body) : ("" as string);
-  const themeColor = await getThemeColor(curBlogPost.content.thumbnail);
+  let themeColor = "";
+  if (curBlogPost.content.thumbnail) {
+    let colorUrl = curBlogPost.content.thumbnail;
+    if (curBlogPost.content.thumbnail.startsWith("/")) {
+      colorUrl = "public" + curBlogPost.content.thumbnail;
+    }
+    themeColor = await getThemeColor(colorUrl);
+  }
+
   return {
     props: {
       ...curBlogPost,
