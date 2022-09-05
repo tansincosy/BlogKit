@@ -40,9 +40,14 @@ export const arrayIsEmpty = (value: any): boolean => {
   return Array.isArray(value) && value.length === 0;
 };
 
+const colorToHex = (color: number) => {
+  var hexadecimal = color.toString(16);
+  return hexadecimal.length == 1 ? "0" + hexadecimal : hexadecimal;
+};
+
 //rgb to hex
 export const rgbToHex = ([r, g, b]: [r: number, g: number, g: number]) => {
-  return `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`;
+  return `#${colorToHex(r)}${colorToHex(g)}${colorToHex(b)}`;
 };
 
 export const timeToString = (time: number): string => {

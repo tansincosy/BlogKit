@@ -81,7 +81,7 @@ const PostDetail: NextPage<Blog.ArticleBody> = ({
                 </h4>
               </div>
             </div>
-            <div className="text-on-surface mx-auto prose px-4 md:px-0 relative mt-8">
+            <div className="text-on-surface mx-auto prose px-4 md:px-0 relative mt-8 md:prose-xl">
               <article
                 dangerouslySetInnerHTML={{
                   __html: articleBody,

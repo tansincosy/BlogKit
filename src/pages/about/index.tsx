@@ -21,7 +21,7 @@ const Tag: NextPage<{ content: string; category: Blog.CategoryPost }> = ({
             <h1 className="display-small md:display-large">关于</h1>
           </div>
         </div>
-        <main className="container mx-auto flex flex-wrap items-stretch mt-8 md:md-16 text-on-surface prose lg:prose-xl px-4 md:px-0">
+        <main className="container mx-auto flex flex-wrap items-stretch mt-8 md:md-16 text-on-surface prose lg:prose-xl px-4 md:px-0 justify-center">
           {content ? (
             <article
               dangerouslySetInnerHTML={{

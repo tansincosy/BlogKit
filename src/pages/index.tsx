@@ -42,7 +42,7 @@ const Home: NextPage<{
             </h4>
           </div>
         </div>
-        <main className="container mx-auto flex flex-wrap items-stretch mt-8">
+        <main className="container mx-auto flex flex-wrap items-stretch mt-8 justify-around">
           {!arrayIsEmpty(posts) &&
             posts.map((post) => {
               return (
